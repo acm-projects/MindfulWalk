@@ -27,16 +27,16 @@ MindfulWalk is your companion for mindful exploration. This app encourages users
 * Share videos regarding tech stack to help guide team members
 * Assign tasks to each team:
 * Frontend:
-    -Design initial wireframes, get feedback from outside opinions, and fix wireframes accordingly 
-    -Code each page and fix accordingly 
-    -Integrate depending on backend progress
-    -Stretch goals
+    *Design initial wireframes, get feedback from outside opinions, and fix wireframes accordingly 
+    *Code each page and fix accordingly 
+    *Integrate depending on backend progress
+    *Stretch goals
 * Backend:
-    -Learn user authentication and database
-    -Code a dummy user account to store test information
-    -Integrate map and fitness APIs to find a way to pull locations and steps
-    -Integrate with frontend
-    -Stretch goals
+    *Learn user authentication and database
+    *Code a dummy user account to store test information
+    *Integrate map and fitness APIs to find a way to pull locations and steps
+    *Integrate with frontend
+    *Stretch goals
 * Test app to see if live demo works
 * Prepare for presentation night :)
 
