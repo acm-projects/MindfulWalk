@@ -1,4 +1,4 @@
-<img src="https://images.contentstack.io/v3/assets/blt00454ccee8f8fe6b/blt29cd08982ddf0750/605c0d055d7a7e0ef01aaf57/UK_NewYork_US_Header.jpg" width="5036" height="3022">
+<img src="https://images.halfhalftravel.com/united-states/newyork/live-in-new-york-city-on-a-budget/DSC04688.jpg?width=1200&height=630&aspect_ratio=1200:630" width="1200" height="630">
 
 
 # MindfulWalk ⭐
