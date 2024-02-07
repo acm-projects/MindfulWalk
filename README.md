@@ -1,4 +1,4 @@
-<img src="https://www.welcome-to-times-square.com/wp-content/uploads/2022/07/The-world-before-your-feet-New-York-City-Photo-credit-garin-chadwick-1280692-unsplash-1180x787-1.jpg" width="200" height="400">
+<img src="https://www.welcome-to-times-square.com/wp-content/uploads/2022/07/The-world-before-your-feet-New-York-City-Photo-credit-garin-chadwick-1280692-unsplash-1180x787-1.jpg" width="1180" height="770">
 
 
 # MindfulWalk ⭐
