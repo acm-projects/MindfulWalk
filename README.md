@@ -1,8 +1,11 @@
-# MindfulWalk
+<img src="https://www.welcome-to-times-square.com/wp-content/uploads/2022/07/The-world-before-your-feet-New-York-City-Photo-credit-garin-chadwick-1280692-unsplash-1180x787-1.jpg" width="200" height="400">
+
+
+# MindfulWalk ⭐
 
 MindfulWalk is your companion for mindful exploration. This app encourages users to disconnect from the digital noise, step outside, and engage in a mindful walk through their city. It combines the benefits of walking, mindfulness, and discovery to promote mental well-being.
 
-# MVP
+# MVP 🏆
 
 * User authentication: username, email, password
 * Urban discovery map: integrate a map API to display points of interest; identify and curate locations for exploration such as parks, landmarks, etc.; implement interactive markers for points of interest 
@@ -10,12 +13,12 @@ MindfulWalk is your companion for mindful exploration. This app encourages users
 * Games: integrate achievements or rewards for completing challenges
 * Photo diary: implement a feature to capture moments during walks; create a visual diary where users can store and review moments
 
-# Stretch Goals
+# Stretch Goals ⏳
 
 * Guided walks: plan audio content and randomized mindfulness prompts; select audio based on theme (rain, waterfalls, etc.)
 * Community challenges: create leaderboards to encourage friendly competition and engagement
 
-# Milestones
+# Milestones 🚀
 
 * Decide on tech stack
 * Allow members to add and move the MVP/Stretch Goals as they like
@@ -38,7 +41,7 @@ MindfulWalk is your companion for mindful exploration. This app encourages users
 * Prepare for presentation night :)
 
 
-# Tech Stack
+# Tech Stack 💻
 
 * Wireframing: Figma
 * IDE: Android Studio
@@ -49,7 +52,7 @@ MindfulWalk is your companion for mindful exploration. This app encourages users
   * Dart is the programming language developed by Google, and it is the language used for Flutter development
 
 
-# Software to Install
+# Software to Install 📱
 
   - [Figma](https://www.figma.com/downloads/)
   - [Android Studio](https://developer.android.com/studio/install)
@@ -58,7 +61,7 @@ MindfulWalk is your companion for mindful exploration. This app encourages users
   - [Git](https://git-scm.com/downloads)
 
 
-# Tutorials and Resources  
+# Tutorials and Resources 🔎 
 
   **General**
   - [Success in ACM Projects](https://docs.google.com/document/d/18Zi3DrKG5e6g5Bojr8iqxIu6VIGl86YBSFlsnJnlM88/edit#heading=h.ky82xv3vtbpi)
@@ -78,7 +81,7 @@ MindfulWalk is your companion for mindful exploration. This app encourages users
   - [Add Firebase to Android](https://firebase.google.com/docs/android/setup)
   - [Flutter & Firebase](https://www.youtube.com/watch?v=sfA3NWDBPZ4&list=PL4cUxeGkcC9j--TKIdkb3ISfRbJeJYQwC)
   
-  # Meet the Team
+  # Meet the Team 😄
   * Developers: Veer Shah, Tamanna Khurana, Sojung Shin, Huy Nong, Ninad Sudarsanam
   * Project Manager: Avanthi Reddy
   * Industry Mentor: Anjelica Avorque
