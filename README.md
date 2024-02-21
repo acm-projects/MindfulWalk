@@ -44,10 +44,11 @@ MindfulWalk is your companion for mindful exploration. This app encourages users
     * Stretch goals
 * Test app to see if live demo works
 * Prepare for presentation night :)
-| Syntax | Description |
-| --- | ----------- |
-| Header | Title |
-| Paragraph | Text |
+  
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
 
 
 # Tech Stack 💻
