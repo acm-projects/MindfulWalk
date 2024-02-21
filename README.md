@@ -11,12 +11,17 @@ MindfulWalk is your companion for mindful exploration. This app encourages users
 * Urban discovery map: integrate a map API to display points of interest; identify and curate locations for exploration such as parks, landmarks, etc.; implement interactive markers for points of interest 
 * Step counter: utilize device sensors or integrate with fitness APIs for step counting; implement a distance tracker to show users how far they've walked
 * Games: integrate achievements or rewards for completing challenges
-* Photo diary: implement a feature to capture moments during walks; create a visual diary where users can store and review moments
+* Photo diary: implement a feature to capture moments after walks; create a visual diary where users can store and review moments
 
 # Stretch Goals ⏳
 
 * Guided walks: plan audio content and randomized mindfulness prompts; select audio based on theme (rain, waterfalls, etc.)
 * Community challenges: create leaderboards to encourage friendly competition and engagement
+* Calorie counter (how many is being burned) 
+* Trivia about the places that were visited 
+* Journal prompt after their walk 
+* Warning signs when walking 
+* Being able to add friends 
 
 # Milestones 🚀
 
@@ -39,6 +44,10 @@ MindfulWalk is your companion for mindful exploration. This app encourages users
     * Stretch goals
 * Test app to see if live demo works
 * Prepare for presentation night :)
+| Syntax | Description |
+| --- | ----------- |
+| Header | Title |
+| Paragraph | Text |
 
 
 # Tech Stack 💻
