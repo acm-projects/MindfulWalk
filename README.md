@@ -44,11 +44,67 @@ MindfulWalk is your companion for mindful exploration. This app encourages users
     * Stretch goals
 * Test app to see if live demo works
 * Prepare for presentation night :)
+
+**Week 1** 
+* Meet team
+* Decide frontend/backend teams
+* Finalize tech stack
+* Set up environment
+
+**Week 2** 
+* User flow/figure out creative vision for MindfulWalk
+* Frontend:
+    * Create wireframes for UI
+    * Design logo
+    * Decide on color palette 
+    * Get feedback from outside opinions, and fix wireframes accordingly
+* Backend:
+    * Set up user authentication for login and registration pages
+
+**Week 3**
+* Frontend:
+    * Receive feedback for UI and finalize it
+    * Start coding the following pages: home, login, registration
+* Backend:
+    * Plan out database design
+    * Get familiar with the APIs that we will need for tracking the walks
+
+**Week 4**
+* Frontend:
+    * Code the profile page, the map page, etc. 
+    * Aim to finish about 75% of the pages
+* Backend:
+    * Fully integrate login functionality
+    * Learn about real-time data syncronization with Firebase and start this
+
+**Week 5**
+* Frontend:
+    * Finish coding the pages
+* Backend:
+    * Integrate the map pages by implementing the map API
+    * Handle photo uploads and integration with Firebase
+
+**Week 6/7**
+* Frontend:
+    * MVP should be complete
+    * Help backend with integration
+    * Start planning on stretch goals
+* Backend:
+    * Fully finish integrating
   
-| First Header  | Second Header |
-| ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
+**Week 8**
+* Frontend:
+    * Clean up frontend
+    * Presentation slides and script
+* Backend:
+    * Complete integration
+    * Presentation script
+
+**Week 9/10**
+* Frontend/Backend:
+    * Finishing touches on everything!
+    * Presentation prep :)
+    * Y'ALL GOT THIS !!!! WOOHOO
 
 
 # Tech Stack 💻
