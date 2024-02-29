@@ -83,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: GoogleFonts.raleway(
                   textStyle: TextStyle(
                     color: Color(0xFF406440),
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w800,
                     fontSize: 45,
                   ),
                 ),
@@ -119,7 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         Container(
                           height: 200.0,
                           decoration: BoxDecoration(
-                            color: Color(0xFFD8D8D8),
+                            color: Color(0xFFEDE9D7),
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           child: Column(
@@ -146,7 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     'Walking Trails',
                                     style: GoogleFonts.raleway(
                                       textStyle: TextStyle(
-                                        color: Color(0xFF5C1D45),
+                                        color: Color(0xFF4B5563),
                                         fontWeight: FontWeight.bold,
                                         fontSize: 25,
                                       ),
@@ -161,7 +161,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         Container(
                           height: 200.0,
                           decoration: BoxDecoration(
-                            color: Color(0xFFD8D8D8),
+                            color: Color(0xFFEDE9D7),
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           child: Column(
@@ -188,7 +188,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     'Lakeside Strolls',
                                     style: GoogleFonts.raleway(
                                       textStyle: TextStyle(
-                                        color: Color(0xFF5C1D45),
+                                        color: Color(0xFF4B5563),
                                         fontWeight: FontWeight.bold,
                                         fontSize: 25,
                                       ),
@@ -203,7 +203,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         Container(
                           height: 200.0,
                           decoration: BoxDecoration(
-                            color: Color(0xFFD8D8D8),
+                            color: Color(0xFFEDE9D7),
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           child: Column(
@@ -230,7 +230,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     'Urban Ventures',
                                     style: GoogleFonts.raleway(
                                       textStyle: TextStyle(
-                                        color: Color(0xFF5C1D45),
+                                        color: Color(0xFF4B5563),
                                         fontWeight: FontWeight.bold,
                                         fontSize: 25,
                                       ),
@@ -257,11 +257,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
-          canvasColor: Color(0xFF87677B),
+          canvasColor: Color(0xFFFFA9A8),
         ),
         child: BottomNavigationBar(
           currentIndex: 0,
-          selectedItemColor: Color(0xFFA9A8), // we can change this if we want text under each icon
+          selectedItemColor: Colors.white, // we can change this if we want text under each icon
           unselectedItemColor: Colors.grey,
           items: [
             BottomNavigationBarItem(

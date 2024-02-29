@@ -97,9 +97,9 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
 
               // Validate credentials (this is a simple example, do not use in production)
               if (username == 'user' && password == 'password') {
-                print('Login successful');
+                print('Sign Up successful');
               } else {
-                print('Login failed');
+                print('Sign Up failed');
               }
             },
             style: ElevatedButton.styleFrom(

@@ -7,6 +7,6 @@ import 'package:mindfulwalk/pages/SignUp.dart';
 void main() => runApp(MaterialApp(
   initialRoute: '/',
   routes: {
-    '/': (context) => Login(),
+    '/': (context) => Explore(),
   },
 ));

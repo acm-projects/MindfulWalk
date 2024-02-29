@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:mindfulwalk/pages/SignUp.dart';
 
@@ -36,7 +38,10 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
           SizedBox(height: 100),
           Container(
             height: 100,
+            color: const Color(0x7fDAD5B5),
+            alignment: Alignment.center,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   'MindfulWalk',
@@ -47,12 +52,9 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                Image.asset('assets/logo.png', width: 70.0, height: 70.0,),
+                Image.asset('assets/logo.png', width: 50.0, height: 50.0,),
               ],
-              mainAxisAlignment: MainAxisAlignment.center,
             ),
-            color: const Color(0x7fDAD5B5),
-            alignment: Alignment.center,
           ),
           SizedBox(height: 40),
           Text(
