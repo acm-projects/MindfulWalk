@@ -1,6 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:mindfulwalk/pages/Explore.dart';
 import 'package:mindfulwalk/pages/Login.dart';
 
 void main() {
@@ -91,19 +94,52 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
           ),
           SizedBox(height: 40),
           ElevatedButton(
-            onPressed: () {
-              String username = _usernameController.text;
-              String password = _passwordController.text;
+            onPressed: () async {
+              String username = _usernameController.text.trim();
+              String password = _passwordController.text.trim();
+              String confirmPassword = _confirmPasswordController.text.trim();
 
-              // Validate credentials (this is a simple example, do not use in production)
-              if (username == 'user' && password == 'password') {
-                print('Sign Up successful');
+              if (password == confirmPassword && password.isNotEmpty) {
+                try {
+
+                  UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                    email: username,
+                    password: password,
+                  );
+
+                  print('Sign Up successful');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Explore()),
+                  );
+                }
+                 catch (e) {
+                   Fluttertoast.showToast(
+                       msg: e.toString(),
+                       toastLength: Toast.LENGTH_LONG,
+                       gravity: ToastGravity.CENTER,
+                       timeInSecForIosWeb: 1,
+                       backgroundColor: Colors.red,
+                       textColor: Colors.white,
+                       fontSize: 16.0
+                   );
+                   return;
+                }
               } else {
-                print('Sign Up failed');
+                Fluttertoast.showToast(
+                    msg: 'Passwords do not match or fields are empty',
+                    toastLength: Toast.LENGTH_LONG,
+                    gravity: ToastGravity.CENTER,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0
+                );
+                print('Passwords do not match or fields are empty');
               }
             },
             style: ElevatedButton.styleFrom(
-              primary: const Color(0xffADC178),
+              backgroundColor: const Color(0xffADC178),
               padding: EdgeInsets.symmetric(
                 vertical: 20,
                 horizontal: 145, // Adjust the width as needed
@@ -127,7 +163,7 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
             ),
           ),
           SizedBox(height: 7),
-        GestureDetector(
+          GestureDetector(
             onTap: () {
               // Navigate to the desired page here
               Navigator.push(
@@ -135,17 +171,17 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
                 MaterialPageRoute(builder: (context) => Login()),
               );
             },
-          child: Text(
-                "Login here",
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w500,
-                  fontStyle: FontStyle.italic,
-                  decoration: TextDecoration. underline,
-                ),
+            child: Text(
+              "Login here",
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.black,
+                fontWeight: FontWeight.w500,
+                fontStyle: FontStyle.italic,
+                decoration: TextDecoration. underline,
               ),
-        ),
+            ),
+          ),
         ],
       ),
     );

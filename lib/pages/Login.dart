@@ -1,7 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:mindfulwalk/pages/Explore.dart';
 import 'package:mindfulwalk/pages/SignUp.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() {
   runApp(Login());
@@ -81,19 +84,38 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
           ),
           SizedBox(height: 55),
           ElevatedButton(
-            onPressed: () {
+            onPressed: () async{
+              final FirebaseAuth _auth = FirebaseAuth.instance;
               String username = _usernameController.text;
               String password = _passwordController.text;
+              try {
+                UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+                  email: username,
+                  password: password,
+                );
 
-              // Validate credentials (this is a simple example, do not use in production)
-              if (username == 'user' && password == 'password') {
-                print('Login successful');
-              } else {
-                print('Login failed');
+
+                if (userCredential.user != null) {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => Explore()),
+                  );
+                }
+              } catch (e) {
+                // Handle login errors
+                Fluttertoast.showToast(
+                    msg: e.toString(),
+                    toastLength: Toast.LENGTH_LONG,
+                    gravity: ToastGravity.CENTER,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0
+                );
               }
             },
             style: ElevatedButton.styleFrom(
-              primary: const Color(0xffFFA9A8),
+              backgroundColor: const Color(0xffFFA9A8),
               padding: EdgeInsets.symmetric(
                 vertical: 20,
                 horizontal: 145, // Adjust the width as needed
