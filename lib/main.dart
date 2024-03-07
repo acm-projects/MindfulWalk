@@ -4,6 +4,7 @@ import 'package:mindfulwalk/pages/Explore.dart';
 import 'package:mindfulwalk/pages/Login.dart';
 import 'package:mindfulwalk/pages/SignUp.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:mindfulwalk/pages/MapPage.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -15,7 +16,7 @@ Future<void> main() async {
   runApp(MaterialApp(
     initialRoute: '/',
     routes: {
-      '/': (context) => Login(),
+      '/': (context) => MapPage(),
     },
   ));
 }
