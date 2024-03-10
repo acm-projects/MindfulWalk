@@ -4,6 +4,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'dart:math';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -178,7 +179,7 @@ class _DirectionsState extends State<Directions> {
                   SizedBox(height: 16),
                   Row(children: [
                     Text(
-                      'Continue?',
+                      'Continue',
                       style: GoogleFonts.jost(
                         textStyle: TextStyle(
                           color: Colors.white,
@@ -238,7 +239,7 @@ class _ETAState extends State<ETA> {
                   SizedBox(height: 16),
                   Row(children: [
                     Text(
-                      'Start Walk?',
+                      'Start Walk',
                       style: GoogleFonts.jost(
                         textStyle: TextStyle(
                           color: Colors.white,
@@ -399,12 +400,37 @@ class mindfulGoal extends StatefulWidget {
 
 class _mindfulGoalState extends State<mindfulGoal> {
   bool navigationStarted = false;
+  List<String> mindfulnessPrompts = [
+    'Notice the sensation of each step connecting with the ground beneath you.',
+    'Pay attention to the rhythm of your breath as it synchronizes with your pace.',
+    'Observe the various sounds around you, from rustling leaves to distant traffic.',
+    'Feel the warmth of the sunlight or the coolness of the breeze on your skin.',
+    'Take note of the subtle smells in the air, identifying different scents as you walk.',
+    'Engage your senses by focusing on the colors and shapes of the scenery around you.',
+    'Be aware of the movement of your body – the swing of your arms, the flexing of muscles.',
+    'Practice gratitude by acknowledging the things you appreciate in your surroundings.',
+    'Let go of tension with each exhale, allowing your body to relax as you move forward.',
+    'Connect with nature by observing plants, trees, and any wildlife you encounter.',
+    'Feel the texture of the ground beneath your feet, whether it\'s pavement, grass, or gravel.',
+    'Express kindness by smiling at others you pass, fostering a sense of community.'
+  ];
+
+  // Create a Random instance
+  Random random = Random();
+
+  // Get a random index
+  int randomIndex = random.nextInt(mindfulnessPrompts.length);
+
+  // Retrieve the randomly chosen string
+  String randomString = '';
+  randomString = mindfulnessPrompts[randomIndex];
+
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: navigationStarted
-          ? showArrow()
+          ? showArrow0()
           : Container(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               decoration: BoxDecoration(
@@ -450,7 +476,7 @@ class _mindfulGoalState extends State<mindfulGoal> {
                   SizedBox(height: 16),
                   Row(children: [
                     Text(
-                      'Begin Navigation?',
+                      'Begin Navigation',
                       style: GoogleFonts.jost(
                         textStyle: TextStyle(
                           color: Colors.white,
@@ -475,14 +501,97 @@ class _mindfulGoalState extends State<mindfulGoal> {
   }
 }
 
-class showArrow extends StatefulWidget {
-  const showArrow({super.key});
+class showArrow0 extends StatefulWidget {
+  const showArrow0({super.key});
 
   @override
-  State<showArrow> createState() => _showArrowState();
+  State<showArrow0> createState() => _showArrow0State();
 }
 
-class _showArrowState extends State<showArrow> {
+class _showArrow0State extends State<showArrow0> {
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Transform.translate(
+        offset: Offset(0, -100),
+        child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            decoration: BoxDecoration(
+              color: Color(0xFFADC178), // Set the background color
+              borderRadius: BorderRadius.circular(15.0), // Add curved corners
+            ),
+            child: Column(
+              children: [
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Image.asset('assets/dropDownArrow.png',
+                      height: 30, width: 30),
+                ),
+                SizedBox(height: 16),
+                SizedBox(height: 16),
+                Container(
+                    width: double.infinity,
+                    height: 180,
+                    padding: EdgeInsets.fromLTRB(8, 10, 8, 10),
+                    decoration: BoxDecoration(
+                      color: Color(0xFFEDE9D7), // Set the background color
+                      borderRadius:
+                          BorderRadius.circular(15.0), // Add curved corners
+                    ),
+                    child: Container(
+                      width: 300,
+                      height: 200,
+                      padding: EdgeInsets.fromLTRB(25, 16, 5, 10),
+                      decoration: BoxDecoration(
+                          color: Color(0xFFFFFFFF), // Set the background color
+                          borderRadius: BorderRadius.circular(30.0),
+                          border: Border.all(
+                              color: Color(0xFFADC178),
+                              width: 5) // Add curved corners
+                          ),
+                      child: Center(
+                        child: Text(
+                          'Be mindful of your breathing during your walk.',
+                          style: GoogleFonts.jost(
+                            textStyle: TextStyle(
+                              color: Color(0xFF8B6B55),
+                              fontWeight: FontWeight.w600,
+                              fontSize: 24,
+                            ),
+                          ),
+                        ),
+                      ),
+                    )),
+                SizedBox(height: 16),
+                Row(children: [
+                  Text(
+                    'Start Walk',
+                    style: GoogleFonts.jost(
+                      textStyle: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 24,
+                      ),
+                    ),
+                  ),
+                  Spacer(),
+                  Image.asset('assets/walkingMan.png', height: 35, width: 35)
+                ])
+              ],
+            )),
+      ),
+    );
+  }
+}
+
+class pauseWalk extends StatefulWidget {
+  const pauseWalk({super.key});
+
+  @override
+  State<pauseWalk> createState() => _pauseWalkState();
+}
+
+class _pauseWalkState extends State<pauseWalk> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -563,7 +672,7 @@ class _showArrowState extends State<showArrow> {
                 SizedBox(height: 16),
                 Row(children: [
                   Text(
-                    'Begin Navisdfgation?',
+                    'Start Walk',
                     style: GoogleFonts.jost(
                       textStyle: TextStyle(
                         color: Colors.white,
