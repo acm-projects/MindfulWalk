@@ -16,7 +16,7 @@ Future<void> main() async {
   runApp(MaterialApp(
     initialRoute: '/',
     routes: {
-      '/': (context) => MapPage(),
+      '/': (context) => Login(),
     },
   ));
 }
