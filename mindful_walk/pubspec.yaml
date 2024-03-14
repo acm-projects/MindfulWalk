@@ -1,0 +1,48 @@
+name: mindful_walk
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.6 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  percent_indicator: ^3.4.0
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - C:\MindfulWalk\mindful_walk\build\app\intermediates\flutter\debug\flutter_assets\images\Mindful Walk.png
+    - C:\MindfulWalk\mindful_walk\build\app\intermediates\flutter\debug\flutter_assets\images\logo.png
+    - C:\MindfulWalk\mindful_walk\build\app\intermediates\flutter\debug\flutter_assets\images\background image.png
+    - C:\MindfulWalk\mindful_walk\build\app\intermediates\flutter\debug\flutter_assets\images\bg image.png
+    - C:\MindfulWalk\mindful_walk\build\app\intermediates\flutter\debug\flutter_assets\images\overlay.png
+    - C:\MindfulWalk\mindful_walk\build\app\intermediates\flutter\debug\flutter_assets\images\full logo.png
+    - C:\MindfulWalk\mindful_walk\build\app\intermediates\flutter\debug\flutter_assets\images\background flowers.jpg
+    - C:\MindfulWalk\mindful_walk\build\app\intermediates\flutter\debug\flutter_assets\images\editprofile.png
+    - C:\MindfulWalk\mindful_walk\build\app\intermediates\flutter\debug\flutter_assets\images\dogpfp.jpg
+    - C:\MindfulWalk\mindful_walk\build\app\intermediates\flutter\debug\flutter_assets\images\editprofile2.png
+    - C:\MindfulWalk\mindful_walk\build\app\intermediates\flutter\debug\flutter_assets\images\Bookmark.png
+    - C:\MindfulWalk\mindful_walk\build\app\intermediates\flutter\debug\flutter_assets\images\Home.svg
+    - C:\MindfulWalk\mindful_walk\build\app\intermediates\flutter\debug\flutter_assets\images\Home.svg.png
+    - C:\MindfulWalk\mindful_walk\build\app\intermediates\flutter\debug\flutter_assets\images\Photo.png
+    - C:\MindfulWalk\mindful_walk\build\app\intermediates\flutter\debug\flutter_assets\images\Maps.png
+    - C:\MindfulWalk\mindful_walk\build\app\intermediates\flutter\debug\flutter_assets\images\Health.png
+    - C:\MindfulWalk\mindful_walk\build\app\intermediates\flutter\debug\flutter_assets\images\Profile.png
+    - C:\MindfulWalk\mindful_walk\build\app\intermediates\flutter\debug\flutter_assets\images\chest.png
+    - C:\MindfulWalk\mindful_walk\build\app\intermediates\flutter\debug\flutter_assets\images\notesicon.png
+    - C:\MindfulWalk\mindful_walk\build\app\intermediates\flutter\debug\flutter_assets\images\bookmarksicon.png
+    - C:\MindfulWalk\mindful_walk\build\app\intermediates\flutter\debug\flutter_assets\images\achievementsicon.png
+    - C:\MindfulWalk\mindful_walk\build\app\intermediates\flutter\debug\flutter_assets\images\trees.jpg
+    # Assuming this is the correct path, adjust as needed
+    # Add other image assets if needed
