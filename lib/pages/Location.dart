@@ -100,9 +100,7 @@ class _LocationState extends State<LocationPage> {
                                     print('Button pressed!');
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    primary:
-                                        Color(0xFFADC178), // Background color
-                                    onPrimary: Colors.white, // Text color
+                                    foregroundColor: Colors.white, backgroundColor: Color(0xFFADC178), // Text color
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(
                                           15.0), // Rounded corners
@@ -187,8 +185,7 @@ class _LocationState extends State<LocationPage> {
                                 print('Button pressed!');
                               },
                               style: ElevatedButton.styleFrom(
-                                primary: Color(0xFFFFA9A8), // Background color
-                                onPrimary: Colors.white, // Text color
+                                foregroundColor: Colors.white, backgroundColor: Color(0xFFFFA9A8), // Text color
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(
                                       12.0), // Rounded corners

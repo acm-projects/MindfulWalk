@@ -34,7 +34,7 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
   bool _isUsernameFocused = false;
   bool _isPasswordFocused = false;
   bool _isConfirmPasswordFocused = false;
-
+  String _errorMessage = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,7 +92,15 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
             isFocused: _isConfirmPasswordFocused,
 
           ),
-          SizedBox(height: 40),
+          SizedBox(height: 10),
+          if (_errorMessage.isNotEmpty) // Step 2: Display the error message if it exists
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Text(
+                _errorMessage,
+                style: TextStyle(color: Colors.red, fontSize: 16),
+              ),
+            ),
           ElevatedButton(
             onPressed: () async {
               String username = _usernameController.text.trim();
@@ -114,27 +122,17 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
                   );
                 }
                  catch (e) {
-                   Fluttertoast.showToast(
-                       msg: e.toString(),
-                       toastLength: Toast.LENGTH_LONG,
-                       gravity: ToastGravity.CENTER,
-                       timeInSecForIosWeb: 1,
-                       backgroundColor: Colors.red,
-                       textColor: Colors.white,
-                       fontSize: 16.0
-                   );
-                   return;
+                  setState(() {
+                  _errorMessage = e.toString(); // Step 3: Update the error message using setState
+                  });
+                  return;
                 }
+
+
               } else {
-                Fluttertoast.showToast(
-                    msg: 'Passwords do not match or fields are empty',
-                    toastLength: Toast.LENGTH_LONG,
-                    gravity: ToastGravity.CENTER,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.red,
-                    textColor: Colors.white,
-                    fontSize: 16.0
-                );
+                setState(() {
+                  _errorMessage = 'Passwords do not match or fields are empty'; // Update the error message
+                });
                 print('Passwords do not match or fields are empty');
               }
             },

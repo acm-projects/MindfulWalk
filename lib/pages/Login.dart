@@ -31,7 +31,7 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
 
   bool _isUsernameFocused = false;
   bool _isPasswordFocused = false;
-
+  String _errorMessage = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +82,15 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
             isFocused: _isPasswordFocused,
             isPassword: true,
           ),
-          SizedBox(height: 55),
+          SizedBox(height: 10),
+          if (_errorMessage.isNotEmpty) // Step 2: Display the error message if it exists
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Text(
+                _errorMessage,
+                style: TextStyle(color: Colors.red, fontSize: 16),
+              ),
+            ),
           ElevatedButton(
             onPressed: () async{
               final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -103,15 +111,10 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
                 }
               } catch (e) {
                 // Handle login errors
-                Fluttertoast.showToast(
-                    msg: e.toString(),
-                    toastLength: Toast.LENGTH_LONG,
-                    gravity: ToastGravity.CENTER,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.red,
-                    textColor: Colors.white,
-                    fontSize: 16.0
-                );
+                setState(() {
+                  _errorMessage = 'Username of password is invalid'; // Step 3: Update the error message using setState
+                });
+                return;
               }
             },
             style: ElevatedButton.styleFrom(
