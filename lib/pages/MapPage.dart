@@ -284,6 +284,8 @@ class _MapPageState extends State<MapPage> {
                 setState(() {
                   if (isSearchClicked == true) {
                     isSearchClicked = false;
+                  } else {
+                    Navigator.pop(context);
                   }
                 });
               },

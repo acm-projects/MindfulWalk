@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mindfulwalk/main.dart';
+import 'package:mindfulwalk/pages/MapPage.dart';
 
 void main() {
   runApp(Explore());
@@ -248,6 +250,134 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     SizedBox(height: 16.0),
+                    Container(
+                      height: 200.0,
+                      decoration: BoxDecoration(
+                        color: Color(0xFFEDE9D7),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 1.0, top: 5.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20.0),
+                              child: Image.asset(
+                                'assets/walking-trail.jpg',
+                                width: 340.0,
+                                height: 120.0,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(
+                                  16.0, 8, 16.0, 16.0),
+                              child: Text(
+                                'Parks and Preserves',
+                                style: GoogleFonts.raleway(
+                                  textStyle: TextStyle(
+                                    color: Color(0xFF4B5563),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 16.0),
+                    Container(
+                      height: 200.0,
+                      decoration: BoxDecoration(
+                        color: Color(0xFFEDE9D7),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 1.0, top: 5.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20.0),
+                              child: Image.asset(
+                                'assets/walking-trail.jpg',
+                                width: 340.0,
+                                height: 120.0,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(
+                                  16.0, 8, 16.0, 16.0),
+                              child: Text(
+                                'Indoor Oasis',
+                                style: GoogleFonts.raleway(
+                                  textStyle: TextStyle(
+                                    color: Color(0xFF4B5563),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 16.0),
+                    Container(
+                      height: 200.0,
+                      decoration: BoxDecoration(
+                        color: Color(0xFFEDE9D7),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 1.0, top: 5.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20.0),
+                              child: Image.asset(
+                                'assets/walking-trail.jpg',
+                                width: 340.0,
+                                height: 120.0,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(
+                                  16.0, 8, 16.0, 16.0),
+                              child: Text(
+                                'Street Restaurants',
+                                style: GoogleFonts.raleway(
+                                  textStyle: TextStyle(
+                                    color: Color(0xFF4B5563),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 )),
               )
@@ -283,7 +413,13 @@ class _MyHomePageState extends State<MyHomePage> {
             BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.fromLTRB(0, 0, 35, 0),
-                child: Image.asset('assets/map.png', width: 50, height: 50),
+                child: GestureDetector(
+                    onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => MapPage()),
+                        ),
+                    child:
+                        Image.asset('assets/map.png', width: 50, height: 50)),
               ),
               label: '',
             ),
