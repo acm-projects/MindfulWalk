@@ -7,6 +7,7 @@ class Stats extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Row(

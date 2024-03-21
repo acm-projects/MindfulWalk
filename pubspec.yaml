@@ -28,6 +28,8 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+
+  carousel_slider: ^4.0.0
   google_fonts: 6.1.0
   http: ^1.0.0
   flutter:
@@ -43,6 +45,7 @@ dependencies:
   geocoding: ^2.0.2
   intl: ^0.17.0
 
+
   flutter_map: ^6.1.0
   location: ^5.0.0
   url_launcher: ^6.0.9
@@ -53,6 +56,8 @@ dependencies:
   firebase_auth: ^4.6.3
   firebase_storage: ^11.2.4
   fluttertoast: ^8.0.9
+  flutter_advanced_segment: ^3.0.2
+  custom_sliding_segmented_control: ^1.8.1
 
 
 dev_dependencies:

@@ -40,7 +40,7 @@ class DateBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 50,
-      height: 70,
+      height: 100,
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
       decoration: BoxDecoration(
         gradient: active

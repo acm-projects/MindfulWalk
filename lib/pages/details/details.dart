@@ -15,17 +15,33 @@ class DetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffFFFEF6),
-      appBar: MainAppBar(appBar: AppBar()),
+
+      //appBar: MainAppBar(appBar: AppBar()),
+
       body: Column(
-        children:  [
+        children:  <Widget>[
+          Align(
+            alignment: Alignment.centerLeft,
+
+              child: IconButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: Padding(
+                  padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
+                  child: Image.asset("assets/backArrow.png", width: 31, height: 31),
+                ),
+                /*ImageIcon(
+                  AssetImage("assets/backArrow.png"),
+                  color: Colors.black,
+                  size: 31,
+                ),*/
+              )
+
+          ),
 
           Text(
-            /*String name = intent.getStringExtra("name");
-                  //int number = Integer.valueOf(intent.getStringExtra("number"));
-
-                  data.setText("Name is " + name );*/
-
-            '  Walk',
+            'Steps',
             style: GoogleFonts.raleway(
               textStyle: TextStyle(
                 color: Color(0xFF406440),
@@ -34,12 +50,31 @@ class DetailsPage extends StatelessWidget {
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.only(
+              //bottom: 8,
+              left: 32,
+              right: 16,
+            ),
+
+          ),
+
+          Container(
+              width: 400,
+              height: 100,
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 10.0),
+                child: Dates(),
+              )
+
+          ),
 
 
 
 
 
-          Dates(),
+
+
 
           Padding(
             padding: const EdgeInsets.only(
@@ -49,13 +84,32 @@ class DetailsPage extends StatelessWidget {
             ),
 
           ),
-          Graph(),
-          Steps(),
+          Container(
+              width: 300,
+              height: 250,
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 15.0),
+                child: Graph(graphType: 'Weekly',key: UniqueKey()),
+              )
+
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              bottom: 25,
+              left: 32,
+              right: 16,
+            ),
+
+          ),
+
+
+
+
 
           Info(),
-          Divider(height: 30),
+          Divider(height: 16),
           //Stats(),
-          SizedBox(height: 30),
+          Steps(),
 
           //BottomNavigation(),
         ],

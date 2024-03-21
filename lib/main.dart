@@ -12,6 +12,13 @@ import 'package:mindfulwalk/pages/ProfilePage.dart';
 import 'package:mindfulwalk/pages/StartingPage.dart';
 import 'package:mindfulwalk/pages/Location.dart';
 import 'package:mindfulwalk/pages/MapPage.dart';
+
+import 'package:mindfulwalk/pages/Hi_name.dart';
+import 'package:mindfulwalk/pages/Your_Reviews.dart';
+import 'package:mindfulwalk/pages/Health.dart';
+import 'package:mindfulwalk/pages/details/details.dart';
+import 'package:mindfulwalk/pages/Badges.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
@@ -25,8 +32,14 @@ Future<void> main() async {
     debugShowCheckedModeBanner: false,
     initialRoute: '/',
     routes: {
-      '/': (context) => Explore(),
-      '/map': (context) => MapPage(),
+      //'/': (context) => Explore(),
+      //'/map': (context) => MapPage(),
+      //'/': (context) => Hi_name(),
+      //'/': (context) => Your_Reviews(),
+      '/': (context) => LoadingPage(),
+      //'/details': (context) => const DetailsPage(),
+      //'/': (context) => const DetailsPage(),
+      //'/': (context) => Badges(),
     },
   ));
 }

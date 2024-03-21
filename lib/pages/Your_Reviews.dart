@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mindfulwalk/pages/meal.dart';
+import 'package:mindfulwalk/pages/locationinfo.dart';
 
 void main() {
   runApp(Your_Reviews());

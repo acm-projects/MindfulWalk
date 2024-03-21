@@ -34,6 +34,7 @@ class Stats extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
+        SizedBox(height: 16.0),
         Text.rich(
           TextSpan(
               text: value,
@@ -52,7 +53,7 @@ class Stats extends StatelessWidget {
                 ),
               ]),
         ),
-        const SizedBox(height: 6),
+        //const SizedBox(height: 6),
         Text(
           label,
           style: const TextStyle(

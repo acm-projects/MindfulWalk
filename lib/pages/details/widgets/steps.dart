@@ -11,6 +11,7 @@ class Steps extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: Column(
         children: [
+
           Container(
             width: 325,
             height: 134,
@@ -25,7 +26,7 @@ class Steps extends StatelessWidget {
                     decoration: ShapeDecoration(
                       color: Color(0xFF5B8C5A),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(30),
                       ),
                     ),
                   ),
@@ -65,14 +66,28 @@ class Steps extends StatelessWidget {
                   ),
                 ),
 
-                Align(
-                  alignment: Alignment.bottomRight,
+                Positioned(
+                    left: 200,
+                    top: 30,
                   child: SizedBox(
+
                     width: 96,
                     height: 99,
-                    child: Image.asset(
-                      "assets/stat.png",
-                      fit: BoxFit.contain,
+                    child: new Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+
+
+                        new Container(
+                          //padding: new EdgeInsets.all(2.0),
+                          child: Image.asset(
+
+                            "assets/stat.png",
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+
+                      ],
                     ),
 
                   )
@@ -86,6 +101,7 @@ class Steps extends StatelessWidget {
                   left: 13,
                   top: 9,
                   child: SizedBox(
+
                     width: 250,
                     child: Text(
                       '  Steps',

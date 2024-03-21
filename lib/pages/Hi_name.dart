@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:mindfulwalk/pages/meal.dart';
+import 'package:mindfulwalk/pages/locationinfo.dart';
 
 void main() {
   runApp(Hi_name());
@@ -100,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ),
-                  Image.asset('assets/waving-hand.png')
+                  Image.asset('assets/waving-hand.jpg')
               ] // children
               ),
 
@@ -129,10 +129,30 @@ class _MyHomePageState extends State<MyHomePage> {
                   left: 16,
                   right: 16,
                 ),
-                child: Text(
-                  "Where To Next?",
-                  style: const TextStyle(color: Color(0xFF4B5563), fontSize: 24, fontWeight: FontWeight.w500),
-                ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+
+                      Text(
+                        "Where to next?",
+                        style: const TextStyle(color: Color(0xFF4B5563), fontSize: 24, fontWeight: FontWeight.w500),
+                      ),
+                      TextButton(
+                        child: Text("See more"),
+                        style: TextButton.styleFrom(
+                          primary: Color(0xFF7B9E87),
+
+                        ),
+                        onPressed: () {
+                          /*Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => SecondScreen()),
+                        );*/
+                        },
+                      ),
+                    ],
+
+                  )
               ),
               Expanded(
                 //height: height*0.6,
@@ -144,7 +164,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         width: 16,
                       ),
                       for (int i = 0; i < locations.length; i++)
-                        _MealCard(
+                        _LocationCard(
                           location: locations[i],
                         ),
                     ],
@@ -162,10 +182,29 @@ class _MyHomePageState extends State<MyHomePage> {
                   left: 16,
                   right: 16,
                 ),
-                child: Text(
-                  "Your Record",
-                  style: const TextStyle(color: Color(0xFF4B5563), fontSize: 24, fontWeight: FontWeight.w500),
-                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+
+                    Text(
+                      "Your Record",
+                      style: const TextStyle(color: Color(0xFF4B5563), fontSize: 24, fontWeight: FontWeight.w500),
+                    ),
+                    TextButton(
+                      child: Text("See more"),
+                      style: TextButton.styleFrom(
+                        primary: Color(0xFF7B9E87),
+                      ),
+                      onPressed: () {
+                        /*Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => SecondScreen()),
+                        );*/
+                      },
+                    ),
+                  ],
+
+                )
               ),
               Expanded(
                 //height: height*0.6,
@@ -177,7 +216,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         width: 16,
                       ),
                       for (int i = 0; i < locations.length; i++)
-                        _MealCard(
+                        _LocationCard(
                           location: locations[i],
                         ),
                     ],
@@ -639,10 +678,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
 
-class _MealCard extends StatelessWidget {
+class _LocationCard extends StatelessWidget {
   final Location location;
 
-  const _MealCard({ Key? key, required this.location}) : super(key: key);
+  const _LocationCard({ Key? key, required this.location}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -720,9 +759,10 @@ class _MealCard extends StatelessWidget {
                         color: Colors.blueGrey,
                       ),
                     ),*/
+
                     Text(
                       location.name,
-                      style: const TextStyle(
+                      style: GoogleFonts.raleway(
                         fontWeight: FontWeight.w700,
                         fontSize: 18,
                         color: Colors.black,
@@ -739,7 +779,7 @@ class _MealCard extends StatelessWidget {
                     Row(
                       children: <Widget>[
                         Icon(
-                          Icons.access_time,
+                          Icons.location_on,
                           size: 15,
                           color: Colors.black12,
                         ),
@@ -756,7 +796,7 @@ class _MealCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 16),
+                    SizedBox(height: 5),
                   ],
                 ),
               ),

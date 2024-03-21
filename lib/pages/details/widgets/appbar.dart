@@ -17,10 +17,10 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
         onPressed: () {
           Navigator.of(context).pop();
         },
-        icon: const Icon(
-          Icons.arrow_back_ios,
+        icon: ImageIcon(
+          AssetImage("assets/backArrow.png"),
           color: Colors.black,
-          size: 16,
+          size: 31,
         ),
       ),
 
@@ -46,5 +46,5 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(appBar.preferredSize.height);
+  Size get preferredSize => Size.fromHeight(31);
 }
