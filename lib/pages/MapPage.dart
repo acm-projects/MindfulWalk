@@ -216,6 +216,7 @@ class _MapPageState extends State<MapPage> {
     }
   }
 
+  // Getting placeId, Name, Address, and Photo
   Future<List<PlacePrediction>> textSearch(String query) async {
     final apiKey = GOOGLE_MAPS_API_KEY;
     final url =
@@ -414,13 +415,27 @@ class _DirectionsState extends State<Directions> {
                       ),
                       SizedBox(height: 5),
                       ClipRRect(
-                          borderRadius: BorderRadius.circular(20.0),
-                          child: Image.network(
-                            photoUrl,
-                            height: 124,
-                            width: 400,
-                            fit: BoxFit.fitWidth,
-                          )),
+                        borderRadius: BorderRadius.circular(20.0),
+                        child: photoUrl.isNotEmpty
+                            ? Image.network(
+                                photoUrl,
+                                height: 124,
+                                width: 400,
+                                fit: BoxFit.cover,
+                              )
+                            : Center(
+                                child: Text(
+                                  'Loading',
+                                  style: GoogleFonts.jost(
+                                    textStyle: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 24,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                      ),
                       SizedBox(height: 8),
                       GestureDetector(
                         onTap: () {
