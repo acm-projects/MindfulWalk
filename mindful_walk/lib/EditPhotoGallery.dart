@@ -1,24 +1,11 @@
 import 'package:flutter/material.dart';
-import 'EditPhotoGallery.dart';
 
-class PhotoGallery extends StatelessWidget {
-  const PhotoGallery({Key? key}) : super(key: key);
+class EditPhotoGallery extends StatelessWidget {
+  const EditPhotoGallery({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final double verticalPadding = 10.0;
-
-    void navigateToNextPage() {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => EditPhotoGallery(),
-        ),
-      );
-    }
-
-    // Use a Future.delayed to wait for 5 seconds before navigating to the next page
-    Future.delayed(Duration(seconds: 5), navigateToNextPage);
-
     return Scaffold(
       backgroundColor: Color(0xFFFFFEF6),
       body: Stack(
@@ -27,7 +14,7 @@ class PhotoGallery extends StatelessWidget {
             top: 70,
             left: 30,
             child: Text(
-              'Photo Gallery',
+              'Photo Collection',
               textAlign: TextAlign.left,
               style: TextStyle(
                 color: Color(0xFF406440),
@@ -37,16 +24,56 @@ class PhotoGallery extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 50,
-            right: 30,
-            child: Image.asset( // Positioned image
-              'assets/images/Trash.png',
-              width: 40,
-              height: 40,
+            top: 180 + verticalPadding,
+            left: (MediaQuery.of(context).size.width - 300) / 2,
+            child: Container(
+              width: 300,
+              height: 80,
+              decoration: BoxDecoration(
+                color: Color(0xFFFFFFFF),
+                borderRadius: BorderRadius.circular(15),
+                border: Border.all(
+                  color: Color(0xFF5B8C5A), // Border color
+                  width: 2.0, // Border width
+                ),
+              ),
+              padding: EdgeInsets.all(8.0), // Padding around the text
+              child: SingleChildScrollView(
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0), // Inner padding for the text
+                    child: Text(
+                      'Are you sure you want to delete this photo?',
+                      textAlign: TextAlign.center, // Align text to the center
+                      style: TextStyle(
+                        fontSize: 16, // Font size
+                        color: Color(0xFF8B6B55), // Text color
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ),
           ),
           Positioned(
-            top: 130,
+            top: 300 + verticalPadding,
+            left: (MediaQuery.of(context).size.width - 300) / 2,
+            child: Container(
+              width: 300,
+              height: 200,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                    'assets/images/photogalleryimage.jpg',
+                  ),
+                  fit: BoxFit.cover,
+                ),
+                borderRadius: BorderRadius.circular(15),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 470 + verticalPadding,
             left: 0,
             right: 0,
             child: Column(
@@ -57,8 +84,8 @@ class PhotoGallery extends StatelessWidget {
                     // Add your button press logic here
                   },
                   style: ButtonStyle(
-                    fixedSize: MaterialStateProperty.all(Size(270, 70)),
-                    backgroundColor: MaterialStateProperty.all(Color(0xFF5B8C5A)),
+                    fixedSize: MaterialStateProperty.all(Size(300, 70)),
+                    backgroundColor: MaterialStateProperty.all(Color(0xFFADC178)),
                     foregroundColor: MaterialStateProperty.all(Colors.white),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
@@ -67,7 +94,7 @@ class PhotoGallery extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    'Upload Photo',
+                    'Cancel',
                     style: TextStyle(
                       fontSize: 24,
                     ),
@@ -77,44 +104,34 @@ class PhotoGallery extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 250,
+            top: 560 + verticalPadding,
             left: 0,
             right: 0,
-            child: ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: 5, // Change the number of items as per your requirement
-              itemBuilder: (BuildContext context, int index) {
-                return Center( // Wrap the Column with Center
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center, // Align items to the center
-                    children: [
-                      Container(
-                        width: 300,
-                        height: 200,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(
-                              'assets/images/photogalleryimage.jpg',
-                            ),
-                            fit: BoxFit.cover,
-                          ),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
+            child: Column(
+              children: [
+                const SizedBox(height: 50),
+                ElevatedButton(
+                  onPressed: () {
+                    // Add your button press logic here
+                  },
+                  style: ButtonStyle(
+                    fixedSize: MaterialStateProperty.all(Size(300, 70)),
+                    backgroundColor: MaterialStateProperty.all(Color(0xFFFFA9A8)),
+                    foregroundColor: MaterialStateProperty.all(Colors.white),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
                       ),
-                      SizedBox(height: 10),
-                      Text(
-                        '00/00/00',
-                        textAlign: TextAlign.right,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                );
-              },
+                  child: Text(
+                    'Delete',
+                    style: TextStyle(
+                      fontSize: 24,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],

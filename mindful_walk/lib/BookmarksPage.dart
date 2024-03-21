@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mindful_walk/ProfilePage.dart';
+import 'ProfilePage.dart';
 
 class BookmarksPage extends StatelessWidget {
   const BookmarksPage({Key? key}) : super(key: key);
@@ -16,7 +16,7 @@ class BookmarksPage extends StatelessWidget {
     }
 
     // Use a Future.delayed to wait for 5 seconds before navigating to the next page
-    Future.delayed(Duration(seconds: 1), navigateToNextPage);
+    Future.delayed(Duration(seconds: 7), navigateToNextPage);
 
 
     return Scaffold(
@@ -24,7 +24,7 @@ class BookmarksPage extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('build/app/intermediates/flutter/debug/flutter_assets/images/background flowers.jpg'), // Replace 'assets/background_image.jpg' with your image path
+            image: AssetImage('assets/images/background flowers.png'),
             fit: BoxFit.cover,
           ),
         ),
@@ -47,9 +47,18 @@ class BookmarksPage extends StatelessWidget {
               top: 70,
               left: 275,
               child: Image.asset(
-                'build/app/intermediates/flutter/debug/flutter_assets/images/Bookmark.png',
+                'assets/images/Bookmark.png',
                 width: 55,
                 height: 65,
+              ),
+            ),
+            Positioned(
+              top: 30,
+              left: 30,
+              child: Image.asset( // Positioned image
+                'assets/images/backArrow.png',
+                width: 40,
+                height: 40,
               ),
             ),
             Positioned(
@@ -153,35 +162,35 @@ class BookmarksPage extends StatelessWidget {
             BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                child: Image.asset('build/app/intermediates/flutter/debug/flutter_assets/images/Home.svg.png', width: 45, height: 45),
+                child: Image.asset('assets/images/home.png', width: 45, height: 45),
               ),
               label: '',
             ),
             BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.fromLTRB(0, 8, 30, 0),
-                child: Image.asset('build/app/intermediates/flutter/debug/flutter_assets/images/Photo.png', width: 50, height: 50),
+                child: Image.asset('assets/images/diary.png', width: 50, height: 50),
               ),
               label: '',
             ),
             BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.fromLTRB(0, 0, 35, 0),
-                child: Image.asset('build/app/intermediates/flutter/debug/flutter_assets/images/Maps.png', width: 50, height: 50),
+                child: Image.asset('assets/images/maps.png', width: 50, height: 50),
               ),
               label: '',
             ),
             BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.fromLTRB(0, 5, 30, 0),
-                child: Image.asset('build/app/intermediates/flutter/debug/flutter_assets/images/Health.png', width: 50, height: 50),
+                child: Image.asset('assets/images/health.png', width: 50, height: 50),
               ),
               label: '',
             ),
             BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.fromLTRB(0, 0, 30, 0),
-                child: Image.asset('build/app/intermediates/flutter/debug/flutter_assets/images/Profile.png', width: 40, height: 40),
+                child: Image.asset('assets/images/filled profile.png', width: 40, height: 40),
               ),
               label: '',
             ),

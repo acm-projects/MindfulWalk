@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mindful_walk/EditProfile.dart';
+import 'EditProfile.dart';
 
 class CreateProfile extends StatelessWidget {
   const CreateProfile({Key? key}) : super(key: key);

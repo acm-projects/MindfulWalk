@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mindful_walk/CreateProfile.dart';
+import 'CreateProfile.dart';
 
 class StartingPage extends StatelessWidget {
   const StartingPage({Key? key}) : super(key: key);
@@ -27,16 +27,7 @@ class StartingPage extends StatelessWidget {
             heightFactor: .5,
             alignment: Alignment.topCenter,
             child: Image.asset(
-              'build/app/intermediates/flutter/debug/flutter_assets/images/bg image.png', // Replace with your actual image path
-              fit: BoxFit.cover,
-            ),
-          ),
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: Image.asset(
-              'build/app/intermediates/flutter/debug/flutter_assets/images/overlay.png',
+              'assets/images/Component 4.png', // Replace with your actual image path
               fit: BoxFit.cover,
             ),
           ),
@@ -67,7 +58,7 @@ class StartingPage extends StatelessWidget {
             left: 0,
             right: 0,
             child: Image.asset(
-              'build/app/intermediates/flutter/debug/flutter_assets/images/full logo.png',
+              'assets/images/mindful walk logo.png',
               height: 200,
               width: 300,
             ),

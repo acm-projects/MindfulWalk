@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mindful_walk/PhotoGallery.dart';
+import 'PhotoGallery.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -25,6 +25,15 @@ class ProfilePage extends StatelessWidget {
       body: Stack(
         alignment: Alignment.center,
         children: [
+          Positioned(
+            top: 50,
+            right: 30,
+            child: Image.asset( // Positioned image
+              'assets/images/SettingsButton.png',
+              width: 40,
+              height: 40,
+            ),
+          ),
           Positioned(
             top: 100,
             left: 30,
@@ -59,7 +68,7 @@ class ProfilePage extends StatelessWidget {
               ),
               child: CircleAvatar(
                 radius: 50,
-                backgroundImage: AssetImage('build/app/intermediates/flutter/debug/flutter_assets/images/dogpfp.jpg'),
+                backgroundImage: AssetImage('assets/images/dog.jpg'),
               ),
             ),
           ),
@@ -69,7 +78,7 @@ class ProfilePage extends StatelessWidget {
             child: GestureDetector(
               onTap: () {},
               child: Image.asset(
-                'build/app/intermediates/flutter/debug/flutter_assets/images/editprofile.png',
+                'assets/images/edit icon.png',
                 width: 40,
                 height: 40,
               ),
@@ -159,7 +168,7 @@ class ProfilePage extends StatelessWidget {
                   top: 0,
                   bottom: 0,
                   child: Image.asset(
-                    'build/app/intermediates/flutter/debug/flutter_assets/images/chest.png', // Replace 'your_image.png' with your image path
+                    'assets/images/Chest.png', // Replace 'your_image.png' with your image path
                     width: 50, // Adjusted width of the image
                     height: 50, // Adjusted height of the image
                     fit: BoxFit.cover, // Adjusted fit of the image
@@ -322,7 +331,7 @@ class ProfilePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'build/app/intermediates/flutter/debug/flutter_assets/images/notesicon.png', // Replace with your image path
+                    'assets/images/NotesButton.png', // Replace with your image path
                     width: 50, // Adjust the width of the image
                     height: 50, // Adjust the height of the image
                   ),
@@ -357,7 +366,7 @@ class ProfilePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'build/app/intermediates/flutter/debug/flutter_assets/images/achievementsicon.png', // Replace with your image path
+                    'assets/images/AchievementsButton.png', // Replace with your image path
                     width: 50, // Adjust the width of the image
                     height: 50, // Adjust the height of the image
                   ),
@@ -392,7 +401,7 @@ class ProfilePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'build/app/intermediates/flutter/debug/flutter_assets/images/achievementsicon.png', // Replace with your image path
+                    'assets/images/BookmarksButton.png', // Replace with your image path
                     width: 50, // Adjust the width of the image
                     height: 50, // Adjust the height of the image
                   ),
@@ -455,35 +464,35 @@ class ProfilePage extends StatelessWidget {
             BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                child: Image.asset('build/app/intermediates/flutter/debug/flutter_assets/images/Home.svg.png', width: 45, height: 45),
+                child: Image.asset('assets/images/home.png', width: 45, height: 45),
               ),
               label: '',
             ),
             BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.fromLTRB(0, 8, 30, 0),
-                child: Image.asset('build/app/intermediates/flutter/debug/flutter_assets/images/Photo.png', width: 50, height: 50),
+                child: Image.asset('assets/images/diary.png', width: 50, height: 50),
               ),
               label: '',
             ),
             BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.fromLTRB(0, 0, 35, 0),
-                child: Image.asset('build/app/intermediates/flutter/debug/flutter_assets/images/Maps.png', width: 50, height: 50),
+                child: Image.asset('assets/images/maps.png', width: 50, height: 50),
               ),
               label: '',
             ),
             BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.fromLTRB(0, 5, 30, 0),
-                child: Image.asset('build/app/intermediates/flutter/debug/flutter_assets/images/Health.png', width: 50, height: 50),
+                child: Image.asset('assets/images/health.png', width: 50, height: 50),
               ),
               label: '',
             ),
             BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.fromLTRB(0, 0, 30, 0),
-                child: Image.asset('build/app/intermediates/flutter/debug/flutter_assets/images/Profile.png', width: 40, height: 40),
+                child: Image.asset('assets/images/filled profile.png', width: 40, height: 40),
               ),
               label: '',
             ),

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:mindful_walk/StartingPage.dart';
+import 'StartingPage.dart';
 
 class LoadingPage extends StatefulWidget {
   const LoadingPage({Key? key}) : super(key: key);
@@ -55,7 +55,7 @@ class _LoadingPageState extends State<LoadingPage> {
                 width: 600,
                 height: 250,
                 child: Image.asset(
-                  'build/app/intermediates/flutter/debug/flutter_assets/images/logo.png',
+                  'assets/images/logo.png',
                   width: 400,
                   height: 300,
                 ),
@@ -65,7 +65,7 @@ class _LoadingPageState extends State<LoadingPage> {
                 width: 400,
                 height: 100,
                 child: Image.asset(
-                  'build/app/intermediates/flutter/debug/flutter_assets/images/Mindful Walk.png',
+                  'assets/images/Mindful Walk.png',
                   width: 200,
                   height: 100,
                 ),
