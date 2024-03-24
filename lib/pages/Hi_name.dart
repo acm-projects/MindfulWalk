@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:mindfulwalk/pages/locationinfo.dart';
 
+import 'PhotoGallery.dart';
+
 void main() {
   runApp(Hi_name());
 }
@@ -140,7 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       TextButton(
                         child: Text("See more"),
                         style: TextButton.styleFrom(
-                          primary: Color(0xFF7B9E87),
+                          foregroundColor: Color(0xFF7B9E87),
 
                         ),
                         onPressed: () {
@@ -193,7 +195,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     TextButton(
                       child: Text("See more"),
                       style: TextButton.styleFrom(
-                        primary: Color(0xFF7B9E87),
+                        foregroundColor: Color(0xFF7B9E87),
                       ),
                       onPressed: () {
                         /*Navigator.push(
@@ -669,6 +671,12 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
           onTap: (index) {
             // Handle button tap
+            if (index == 1) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PhotoGallery()),
+              );
+            }
           },
         ),
       ),

@@ -3,9 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mindfulwalk/pages/Explore.dart';
+import 'package:mindfulwalk/pages/Hi_name.dart';
+import 'package:mindfulwalk/pages/PhotoGallery.dart';
 import 'package:mindfulwalk/pages/SignUp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+String userID = "";
 void main() {
   runApp(Login());
 }
@@ -32,6 +34,7 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
   bool _isUsernameFocused = false;
   bool _isPasswordFocused = false;
   String _errorMessage = '';
+  String _userID = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,9 +107,10 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
 
 
                 if (userCredential.user != null) {
+                  userID = userCredential.user!.uid;
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => Explore()),
+                    MaterialPageRoute(builder: (context) => Hi_name()),
                   );
                 }
               } catch (e) {
