@@ -1,0 +1,1 @@
+ /Users/huynong/Documents/MindfulWalk/mindful_walk/.dart_tool/flutter_build/34adc5f500dfacf431ad39793e237bf4/native_assets.yaml: 

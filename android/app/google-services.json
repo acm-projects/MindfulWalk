@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "962367968659",
+    "project_id": "fir-test-53e7a",
+    "storage_bucket": "fir-test-53e7a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:962367968659:android:d6a87f82e3b3ab2883c466",
+        "android_client_info": {
+          "package_name": "com.example.mindfulwalk"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCc2ThXX3Jzoi8W4qhi37qR1FcTDbIKL9c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
