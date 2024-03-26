@@ -71,11 +71,12 @@ class _LoadingPageState extends State<LoadingPage> {
                 ),
               ),
               SizedBox(height: 5),
-              const Text(
+              Text(
                 "Step into peace,\nExplore your city's grace.",
                 style: TextStyle(
                   color: Color(0xFF8B6B55),
                   fontSize: 20,
+                  decoration: TextDecoration.none,
                 ),
                 textAlign: TextAlign.center,
               ),

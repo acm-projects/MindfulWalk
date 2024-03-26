@@ -17,7 +17,7 @@ class ProfilePage extends StatelessWidget {
     }
 
     // Use a Future.delayed to wait for 5 seconds before navigating to the next page
-    Future.delayed(Duration(seconds: 5), navigateToNextPage);
+    Future.delayed(Duration(seconds: 10), navigateToNextPage);
 
 
     return Scaffold(
@@ -314,106 +314,92 @@ class ProfilePage extends StatelessWidget {
           ),
           Positioned(
             top: 540,
-            left: 30,
-            child: Container(
-              width: 80,
-              height: 140, // Adjusted height to accommodate both image and text
-              decoration: BoxDecoration(
-                color: Color(0xFFFFFFFF),
-                borderRadius: BorderRadius.circular(15),
-                border: Border.all(
-                  color: Color(0xFFEDE9D7), // Border color
-                  width: 2.0, // Border width
+            left: 40,
+            child: ElevatedButton(
+              onPressed: () {
+                // Add your button press logic here
+              },
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  side: BorderSide(
+                    color: Color(0xFFEDE9D7),
+                    width: 2.0,
+                  ),
                 ),
               ),
-              padding: EdgeInsets.all(10.0), // Padding around the text
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/images/NotesButton.png', // Replace with your image path
-                    width: 50, // Adjust the width of the image
-                    height: 50, // Adjust the height of the image
-                  ),
-                  SizedBox(height: 10), // Add some space between the image and the text
-                  Text(
-                    'Notes',
-                    style: TextStyle(
-                      fontSize: 16, // Font size
-                      color: Color(0xFF8B6B55), // Text color
+              child: Container(
+                width: 150,
+                height: 140,
+                decoration: BoxDecoration(
+                  color: Color(0xFFFFFFFF),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                padding: EdgeInsets.all(10.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/NotesButton.png',
+                      width: 50,
+                      height: 50,
                     ),
-                  ),
-                ],
+                    SizedBox(height: 10),
+                    Text(
+                      'Notes',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color(0xFF8B6B55),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
           Positioned(
             top: 540,
-            left: 130,
-            child: Container(
-              width: 130,
-              height: 140, // Adjusted height to accommodate both image and text
-              decoration: BoxDecoration(
-                color: Color(0xFFFFFFFF),
-                borderRadius: BorderRadius.circular(15),
-                border: Border.all(
-                  color: Color(0xFFEDE9D7), // Border color
-                  width: 2.0, // Border width
+            left: 220,
+            child: ElevatedButton(
+              onPressed: () {
+
+              },
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  side: BorderSide(
+                    color: Color(0xFFEDE9D7),
+                    width: 2.0,
+                  ),
                 ),
               ),
-              padding: EdgeInsets.all(10.0), // Padding around the text
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/images/AchievementsButton.png', // Replace with your image path
-                    width: 50, // Adjust the width of the image
-                    height: 50, // Adjust the height of the image
-                  ),
-                  SizedBox(height: 10), // Add some space between the image and the text
-                  Text(
-                    'Achievements',
-                    style: TextStyle(
-                      fontSize: 16, // Font size
-                      color: Color(0xFF8B6B55), // Text color
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-            top: 540,
-            left: 280,
-            child: Container(
-              width: 110,
-              height: 140, // Adjusted height to accommodate both image and text
-              decoration: BoxDecoration(
-                color: Color(0xFFFFFFFF),
-                borderRadius: BorderRadius.circular(15),
-                border: Border.all(
-                  color: Color(0xFFEDE9D7), // Border color
-                  width: 2.0, // Border width
+              child: Container(
+                width: 150,
+                height: 140,
+                decoration: BoxDecoration(
+                  color: Color(0xFFFFFFFF),
+                  borderRadius: BorderRadius.circular(15),
                 ),
-              ),
-              padding: EdgeInsets.all(10.0), // Padding around the text
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/images/BookmarksButton.png', // Replace with your image path
-                    width: 50, // Adjust the width of the image
-                    height: 50, // Adjust the height of the image
-                  ),
-                  SizedBox(height: 10), // Add some space between the image and the text
-                  Text(
-                    'Bookmarks',
-                    style: TextStyle(
-                      fontSize: 16, // Font size
-                      color: Color(0xFF8B6B55), // Text color
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/BookmarksButton.png',
+                      width: 50,
+                      height: 50,
                     ),
-                  ),
-                ],
+                    SizedBox(height: 10),
+                    Text(
+                      'Bookmarks',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color(0xFF8B6B55),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

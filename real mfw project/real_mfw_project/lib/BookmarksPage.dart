@@ -78,46 +78,16 @@ class BookmarksPage extends StatelessWidget {
               left: (MediaQuery.of(context).size.width - 300) / 2,
               child: Container(
                 width: 300,
-                height: 225,
+                height: 140,
                 decoration: BoxDecoration(
                   color: Color(0xFFEDE9D7),
                   borderRadius: BorderRadius.circular(15),
                 ),
               ),
             ),
+
             Positioned(
-              top: 225,
-              left: 0,
-              right: 0,
-              child: Column(
-                children: [
-                  const SizedBox(height: 50),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Add your button press logic here
-                    },
-                    style: ButtonStyle(
-                      fixedSize: MaterialStateProperty.all(Size(270, 70)),
-                      backgroundColor: MaterialStateProperty.all(Color(0xFF5B8C5A)),
-                      foregroundColor: MaterialStateProperty.all(Colors.white),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                      ),
-                    ),
-                    child: Text(
-                      'Notes',
-                      style: TextStyle(
-                        fontSize: 24,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Positioned(
-              top: 325,
+              top: 235,
               left: 0,
               right: 0,
               child: Column(
