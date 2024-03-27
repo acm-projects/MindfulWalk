@@ -13,9 +13,21 @@ import 'package:mindfulwalk/pages/StartingPage.dart';
 import 'package:mindfulwalk/pages/Location.dart';
 import 'package:mindfulwalk/pages/MapPage.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:mindfulwalk/pages/cameraScreen.dart';
 import 'firebase_options.dart';
+import 'package:mindfulwalk/pages/PhotoGallery1.dart';
+import 'package:camera/camera.dart';
+
+List<CameraDescription> cameras = [];
 
 Future<void> main() async {
+  try {
+    WidgetsFlutterBinding.ensureInitialized();
+    cameras = await availableCameras();
+  } on CameraException catch (e) {
+    print('Error in fetching the cameras: $e');
+  }
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

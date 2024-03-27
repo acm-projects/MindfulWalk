@@ -6,6 +6,23 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mindfulwalk/consts.dart';
 import 'package:mindfulwalk/pages/MapPage.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
+
+var geminiDescription;
+
+Future<String?> gemini(String locationName) async {
+  // Access your API key as an environment variable (see "Set up your API key" above)
+  const apiKey = 'AIzaSyBh4EzZRZR7rCY7nFVsl94EY1xhA77cywE';
+  // For text-only input, use the gemini-pro model
+  final model = GenerativeModel(model: 'gemini-pro', apiKey: apiKey);
+  final content = [
+    Content.text('What is the $locationName place? 50-200 words.')
+  ];
+  final response = await model.generateContent(content);
+  print("Name: $locationName");
+  print("Gemini: ${response.text}");
+  return response.text;
+}
 
 class LocationPage extends StatefulWidget {
   final String searchText;
@@ -29,7 +46,6 @@ class _LocationState extends State<LocationPage> {
     super.initState();
     // Call the textSearch function when the page is first built
     textSearch(widget.searchText);
-    //getPlaceDescription(placeId);
   }
 
   // Getting placeId, Name, Address, and Photo
@@ -52,14 +68,14 @@ class _LocationState extends State<LocationPage> {
             'https://maps.googleapis.com/maps/api/place/photo?maxwidth=${maxWidth}&maxheight=${maxHeight}&photoreference=${photoReference}&key=${apiKey}';
       });
       print("Name: ${name} \n ID: ${placeId} \n PhotoUrl: ${photoUrl}");
+      geminiDescription = gemini(name);
 
       final urlDescription = Uri.https(
         'maps.googleapis.com',
         '/maps/api/place/details/json',
         {
           'placeid': placeId,
-          'fields':
-              'formatted_address,name,editorialSummary', // Specify desired fields
+          'fields': 'formatted_address,name', // Specify desired fields
           'key': apiKey,
         },
       );
@@ -181,33 +197,58 @@ class _LocationState extends State<LocationPage> {
                           ),
                         ),
                         Container(
-                          height: 500.0,
+                          height: 400.0,
                           width: 340,
                           decoration: BoxDecoration(
                             color: Color(0xFFEDE9D7),
                             borderRadius: BorderRadius.circular(20.0),
                           ),
-                          child: Column(
-                            children: [
-                              SizedBox(height: 16),
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: Padding(
-                                  padding: const EdgeInsets.fromLTRB(
-                                      16.0, 0, 16.0, 16.0),
-                                  child: Text(
-                                    'Description of the locations         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed viverra augue ut justo fermentum, vel dapibus arcu fermentum. Integer a purus ut mauris consequat aliquet. Vivamus vehicula vestibulum odio, ut laoreet tortor vehicula sit amet. Quisque vel malesuada urna. Nulla facilisi.',
-                                    style: GoogleFonts.jost(
-                                      textStyle: TextStyle(
-                                        color: Color(0xFF4B5563),
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 20,
-                                      ),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                SizedBox(height: 16),
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        16.0, 0, 16.0, 16.0),
+                                    child: FutureBuilder<String?>(
+                                      future: geminiDescription,
+                                      builder: (BuildContext context,
+                                          AsyncSnapshot<String?> snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          // Display a loading indicator while waiting for the future to complete
+                                          return CircularProgressIndicator();
+                                        } else {
+                                          if (snapshot.hasData) {
+                                            // If the future completed successfully, display the data
+                                            return Text(
+                                              snapshot.data ??
+                                                  '', // Display the data or a default value if null
+                                              style: GoogleFonts.jost(
+                                                textStyle: TextStyle(
+                                                  color: Color(0xFF4B5563),
+                                                  fontWeight: FontWeight.normal,
+                                                  fontSize: 20,
+                                                ),
+                                              ),
+                                            );
+                                          } else if (snapshot.hasError) {
+                                            // If there was an error in fetching the data, display an error message
+                                            return Text(
+                                                'Error: ${snapshot.error}');
+                                          } else {
+                                            // Handle other states, such as ConnectionState.done
+                                            return Text('No data');
+                                          }
+                                        }
+                                      },
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                         SizedBox(height: 16),
