@@ -181,46 +181,49 @@ class _ExploreState extends State<Explore> {
                       ),
                     ),
                     SizedBox(height: 16.0),
-                    Container(
-                      height: 200.0,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFEDE9D7),
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 1.0, top: 5.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20.0),
-                              child: Image.asset(
-                                'assets/urban-ventures.jpg',
-                                width: 340.0,
-                                height: 120.0,
-                                fit: BoxFit.cover,
+                    GestureDetector(
+                      onTap: ,
+                      child: Container(
+                        height: 200.0,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFEDE9D7),
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 1.0, top: 5.0),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20.0),
+                                child: Image.asset(
+                                  'assets/urban-ventures.jpg',
+                                  width: 340.0,
+                                  height: 120.0,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(
-                                  16.0, 8, 16.0, 16.0),
-                              child: Text(
-                                'Urban Ventures',
-                                style: GoogleFonts.raleway(
-                                  textStyle: TextStyle(
-                                    color: Color(0xFF4B5563),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25,
+                            Align(
+                              alignment: Alignment.bottomLeft,
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(
+                                    16.0, 8, 16.0, 16.0),
+                                child: Text(
+                                  'Urban Ventures',
+                                  style: GoogleFonts.raleway(
+                                    textStyle: TextStyle(
+                                      color: Color(0xFF4B5563),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 25,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(height: 16.0),

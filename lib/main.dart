@@ -15,6 +15,7 @@ import 'package:mindfulwalk/pages/Location.dart';
 import 'package:mindfulwalk/pages/MapPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mindfulwalk/pages/CameraPage.dart';
+import 'package:mindfulwalk/pages/UrbanVentures.dart';
 import 'firebase_options.dart';
 import 'package:camera/camera.dart';
 
@@ -36,7 +37,7 @@ Future<void> main() async {
     initialRoute: '/',
     routes: {
       '/': (context) => Explore(),
-      '/map': (context) => MapPage(),
+      '/map': (context) => UrbanVentures(),
     },
   ));
 }
