@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mindfulwalk/pages/Explore.dart';
 import 'package:mindfulwalk/pages/Login.dart';
+import 'package:mindfulwalk/pages/PhotoGallery.dart';
 import 'package:mindfulwalk/pages/SignUp.dart';
 import 'package:mindfulwalk/pages/BookmarksPage.dart';
 import 'package:mindfulwalk/pages/CreateProfile.dart';
@@ -13,12 +14,9 @@ import 'package:mindfulwalk/pages/StartingPage.dart';
 import 'package:mindfulwalk/pages/Location.dart';
 import 'package:mindfulwalk/pages/MapPage.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:mindfulwalk/pages/cameraScreen.dart';
+import 'package:mindfulwalk/pages/CameraPage.dart';
 import 'firebase_options.dart';
-import 'package:mindfulwalk/pages/PhotoGallery1.dart';
 import 'package:camera/camera.dart';
-
-List<CameraDescription> cameras = [];
 
 Future<void> main() async {
   try {

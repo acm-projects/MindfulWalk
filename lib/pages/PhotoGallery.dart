@@ -1,208 +1,140 @@
 import 'package:flutter/material.dart';
+import 'package:mindfulwalk/pages/CameraPage.dart';
 import 'MapPage.dart';
 import 'EditPhotoGallery.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:camera/camera.dart';
+import 'dart:io';
 
-class PhotoGallery extends StatelessWidget {
-  const PhotoGallery({Key? key}) : super(key: key);
+class PhotoGallery extends StatefulWidget {
+  const PhotoGallery({super.key});
 
   @override
+  State<PhotoGallery> createState() => _PhotoGalleryState();
+}
+
+class _PhotoGalleryState extends State<PhotoGallery> {
+  @override
   Widget build(BuildContext context) {
-    final double verticalPadding = 10.0;
-
-    void navigateToNextPage() {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => EditPhotoGallery(),
-        ),
-      );
-    }
-
-    // Use a Future.delayed to wait for 5 seconds before navigating to the next page
-    //Future.delayed(Duration(seconds: 5), navigateToNextPage);
-
     return Scaffold(
       backgroundColor: Color(0xFFFFFEF6),
-      body: Stack(
-        children: [
-          Positioned(
-              top: 40,
-              left: 20,
-              child:
-                  Image.asset('assets/backArrow.png', width: 40, height: 40)),
-          Positioned(
-            top: 80,
-            left: 30,
-            child: Text(
-              'Photo Gallery',
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                color: Color(0xFF406440),
-                fontWeight: FontWeight.w800,
-                fontSize: 45,
-              ),
-            ),
-          ),
-          // Positioned(
-          //   top: 50,
-          //   right: 30,
-          //   child: Image.asset(
-          //     // Positioned image
-          //     'assets/Trash.png',
-          //     width: 40,
-          //     height: 40,
-          //   ),
-          // ),
-          Transform.translate(
-            offset: Offset(0, 240),
-            child: SingleChildScrollView(
-                child: Center(
-              // Wrap the Column with Center
+      body: SafeArea(
+          child: Container(
+              padding: EdgeInsets.fromLTRB(16.0, 25, 16, 0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: Image.asset(
-                      'assets/trees.jpg',
-                    ),
-                  ),
-                  SizedBox(height: 10),
+                  Image.asset('assets/backArrow.png', width: 40, height: 40),
                   Text(
-                    '00/10/00',
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: Image.asset(
-                      'assets/trees.jpg',
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    '00/10/00',
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: Image.asset(
-                      'assets/trees.jpg',
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    '00/10/00',
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                    ),
-                  ),
-                  Transform.translate(
-                    offset: Offset(0, 240),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(20.0),
-                            child: Image.asset(
-                              'assets/trees.jpg',
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            '00/110/00',
-                            textAlign: TextAlign.right,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18,
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(20.0),
-                            child: Image.asset(
-                              'assets/trees.jpg',
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            '00/112/00',
-                            textAlign: TextAlign.right,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18,
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(20.0),
-                            child: Image.asset(
-                              'assets/trees.jpg',
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            '00/1=20/00',
-                            textAlign: TextAlign.right,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18,
-                            ),
-                          ),
-                        ],
+                    'Photo Gallery',
+                    style: GoogleFonts.raleway(
+                      textStyle: TextStyle(
+                        color: Color(0xFF406440),
+                        fontWeight: FontWeight.w800,
+                        fontSize: 45,
                       ),
                     ),
                   ),
-                ],
-              ),
-            )),
-          ),
-          Positioned(
-              top: 170,
-              child: Container(
-                height: 50.0,
-                decoration: BoxDecoration(
-                  color: Color(0xFFEDE9D7),
-                ),
-              )),
-          Positioned(
-            top: 160,
-            left: 70,
-            child: ElevatedButton(
-              onPressed: () {
-                // Add your button press logic here
-              },
-              style: ButtonStyle(
-                fixedSize: MaterialStateProperty.all(Size(270, 70)),
-                backgroundColor: MaterialStateProperty.all(Color(0xFF5B8C5A)),
-                foregroundColor: MaterialStateProperty.all(Colors.white),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
+                  SizedBox(height: 16),
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CameraScreen()),
+                        );
+                      },
+                      style: ButtonStyle(
+                        fixedSize: MaterialStateProperty.all(Size(270, 70)),
+                        backgroundColor:
+                            MaterialStateProperty.all(Color(0xFF5B8C5A)),
+                        foregroundColor:
+                            MaterialStateProperty.all(Colors.white),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                        ),
+                      ),
+                      child: Text(
+                        'Take Photo',
+                        style: TextStyle(
+                          fontSize: 24,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              child: Text(
-                'Take Photo',
-                style: TextStyle(
-                  fontSize: 24,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
+                  SizedBox(height: 16),
+                  Expanded(
+                    child: SingleChildScrollView(
+                        child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: Image.asset(
+                            'assets/trees.jpg',
+                          ),
+                        ),
+                        Text(
+                          '00/110/00',
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                          ),
+                        ),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: Image.asset(
+                            'assets/trees.jpg',
+                          ),
+                        ),
+                        Text(
+                          '00/110/00',
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                          ),
+                        ),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: Image.asset(
+                            'assets/trees.jpg',
+                          ),
+                        ),
+                        Text(
+                          '00/110/00',
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                          ),
+                        ),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: Image.asset(
+                            'assets/trees.jpg',
+                          ),
+                        ),
+                        Text(
+                          '00/110/00',
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
+                    )),
+                  ),
+                ],
+              ))),
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
           canvasColor: Color(0xFFFFA9A8),

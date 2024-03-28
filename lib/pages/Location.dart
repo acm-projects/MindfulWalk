@@ -9,6 +9,7 @@ import 'package:mindfulwalk/pages/MapPage.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 
 var geminiDescription;
+final List<String> photoUrlList = [];
 
 Future<String?> gemini(String locationName) async {
   // Access your API key as an environment variable (see "Set up your API key" above)
@@ -17,10 +18,11 @@ Future<String?> gemini(String locationName) async {
   final model = GenerativeModel(model: 'gemini-pro', apiKey: apiKey);
   final content = [
     Content.text('What is the $locationName place? 50-200 words.')
+    //Content.text('Make a list of 10 walking trails near 7315 Marigold Dr, Irving, TX.')
   ];
   final response = await model.generateContent(content);
-  print("Name: $locationName");
-  print("Gemini: ${response.text}");
+  //print("Name: $locationName");
+  //print("Gemini: ${response.text}");
   return response.text;
 }
 
@@ -46,6 +48,7 @@ class _LocationState extends State<LocationPage> {
     super.initState();
     // Call the textSearch function when the page is first built
     textSearch(widget.searchText);
+    photoUrlList.clear(); // Clear the list before adding new URLs
   }
 
   // Getting placeId, Name, Address, and Photo
@@ -57,7 +60,7 @@ class _LocationState extends State<LocationPage> {
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      print(data);
+      //print(data);
       setState(() {
         name = data['results'][0]['name'];
         placeId = data['results'][0]['place_id'];
@@ -67,26 +70,43 @@ class _LocationState extends State<LocationPage> {
         photoUrl =
             'https://maps.googleapis.com/maps/api/place/photo?maxwidth=${maxWidth}&maxheight=${maxHeight}&photoreference=${photoReference}&key=${apiKey}';
       });
-      print("Name: ${name} \n ID: ${placeId} \n PhotoUrl: ${photoUrl}");
       geminiDescription = gemini(name);
 
-      final urlDescription = Uri.https(
+      final urlPhotos = Uri.https(
         'maps.googleapis.com',
         '/maps/api/place/details/json',
         {
           'placeid': placeId,
-          'fields': 'formatted_address,name', // Specify desired fields
+          'fields': 'formatted_address,name,photos', // Specify desired fields
           'key': apiKey,
         },
       );
-
-      print(urlDescription);
-
-      final responseDescription = await http.get(urlDescription);
-
+      final responseDescription = await http.get(urlPhotos);
       if (responseDescription.statusCode == 200) {
         final dataDescription = jsonDecode(responseDescription.body);
-        print(dataDescription);
+        final photoData = dataDescription['result']['photos'];
+        print('PHOTO Data________________: $photoData');
+        String photoUrlx = '';
+        String photoReferencex = '';
+        String maxHeightx = '';
+        String maxWidthx = '';
+
+        for (int i = 0; i < photoData.length; i++) {
+          //print("Iteration PhotoUrlList: $photoUrlx");
+
+          photoReferencex = photoData[i]['photo_reference'];
+          print("Photoreferenx       :       $photoReferencex");
+          maxHeightx = photoData[i]['height'].toString();
+          maxWidthx = photoData[i]['width'].toString();
+          photoUrlx =
+              'https://maps.googleapis.com/maps/api/place/photo?maxwidth=${maxWidthx}&maxheight=${maxHeightx}&photoreference=${photoReferencex}&key=${apiKey}';
+
+          setState(() {});
+          photoUrlList.add(photoUrlx);
+        }
+
+        print("PhotoURLlist__________________________: $photoUrlList");
+
         final result = data['result'] as Map;
 
         if (result.containsKey('description')) {
@@ -108,40 +128,8 @@ class _LocationState extends State<LocationPage> {
     }
   }
 
-  //Getting a place description from placeId
-  Future<String> getPlaceDescription(String placeId) async {
-    final apiKey = GOOGLE_MAPS_API_KEY;
-    final urlDescription = Uri.https(
-      'maps.googleapis.com',
-      '/maps/api/place/details/json',
-      {
-        'placeid': placeId,
-        'fields':
-            'formatted_address,name,description', // Specify desired fields
-        'key': apiKey,
-      },
-    );
-
-    print(urlDescription);
-
-    final responseDescription = await http.get(urlDescription);
-
-    if (responseDescription.statusCode == 200) {
-      final data = jsonDecode(responseDescription.body);
-      final result = data['result'] as Map;
-
-      if (result.containsKey('description')) {
-        final description = result['description'] as String;
-        return description;
-        print(description);
-      } else {
-        print('Place description not found');
-        return ''; // Or a default message
-      }
-    } else {
-      print('Failed to get place details');
-      return '';
-    }
+  Future<String> _getImageUrl(i) async {
+    return photoUrlList[i]; // Replace with your actual image URL
   }
 
   @override
@@ -170,7 +158,7 @@ class _LocationState extends State<LocationPage> {
                       children: [
                         photoUrl.isNotEmpty
                             ? ClipRRect(
-                                borderRadius: BorderRadius.circular(20.0),
+                                borderRadius: BorderRadius.circular(30.0),
                                 child: Image.network(
                                   photoUrl,
                                   width: 340.0,
@@ -240,7 +228,7 @@ class _LocationState extends State<LocationPage> {
                                                 'Error: ${snapshot.error}');
                                           } else {
                                             // Handle other states, such as ConnectionState.done
-                                            return Text('No data');
+                                            return Text('Loading...');
                                           }
                                         }
                                       },
@@ -285,60 +273,125 @@ class _LocationState extends State<LocationPage> {
                                   ),
                                 ),
                               ),
-                              Padding(
-                                  padding: EdgeInsets.fromLTRB(0, 40, 8, 0),
-                                  child: Text(
-                                    'See more',
-                                    style: GoogleFonts.jost(
-                                      textStyle: TextStyle(
-                                        color: Colors.grey,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  )),
                             ]),
                         SizedBox(height: 16),
                         Row(
                           children: [
-                            ClipRRect(
-                                borderRadius: BorderRadius.circular(20.0),
-                                child: Image.asset('assets/walking-trail.jpg',
-                                    width:
-                                        MediaQuery.of(context).size.width / 2 -
-                                            35,
-                                    height: 130,
-                                    fit: BoxFit.fill)),
+                            _getImageUrl(1) != null
+                                ? FutureBuilder<String>(
+                                    future: _getImageUrl(1),
+                                    builder: (BuildContext context,
+                                        AsyncSnapshot<String> snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.waiting) {
+                                        // While the future is still in progress, display a loading indicator
+                                        return CircularProgressIndicator();
+                                      } else if (snapshot.hasError) {
+                                        // If there's an error fetching the image, display an error message
+                                        return Text('Error: ${snapshot.error}');
+                                      } else {
+                                        // If the image URL is fetched successfully, display the image using Image.network
+                                        return ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                          child: Image.network(snapshot.data!,
+                                              width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      2 -
+                                                  35,
+                                              height: 130,
+                                              fit: BoxFit.fill),
+                                        );
+                                      }
+                                    },
+                                  )
+                                : CircularProgressIndicator(),
                             SizedBox(width: 16),
-                            ClipRRect(
-                                borderRadius: BorderRadius.circular(20.0),
-                                child: Image.asset('assets/walking-trail.jpg',
-                                    width:
-                                        MediaQuery.of(context).size.width / 2 -
-                                            35,
-                                    height: 130,
-                                    fit: BoxFit.fill))
+                            FutureBuilder<String>(
+                              future: _getImageUrl(2),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<String> snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  // While the future is still in progress, display a loading indicator
+                                  return CircularProgressIndicator();
+                                } else if (snapshot.hasError) {
+                                  // If there's an error fetching the image, display an error message
+                                  return Text('Error: ${snapshot.error}');
+                                } else {
+                                  // If the image URL is fetched successfully, display the image using Image.network
+                                  return ClipRRect(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    child: Image.network(snapshot.data!,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                    2 -
+                                                35,
+                                        height: 130,
+                                        fit: BoxFit.fill),
+                                  );
+                                }
+                              },
+                            ),
                           ],
                         ),
                         SizedBox(height: 16),
                         Row(
                           children: [
-                            ClipRRect(
-                                borderRadius: BorderRadius.circular(20.0),
-                                child: Image.asset('assets/walking-trail.jpg',
-                                    width:
-                                        MediaQuery.of(context).size.width / 2 -
-                                            35,
-                                    height: 130,
-                                    fit: BoxFit.fill)),
+                            FutureBuilder<String>(
+                              future: _getImageUrl(3),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<String> snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  // While the future is still in progress, display a loading indicator
+                                  return CircularProgressIndicator();
+                                } else if (snapshot.hasError) {
+                                  // If there's an error fetching the image, display an error message
+                                  return Text('Error: ${snapshot.error}');
+                                } else {
+                                  // If the image URL is fetched successfully, display the image using Image.network
+                                  return ClipRRect(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    child: Image.network(snapshot.data!,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                    2 -
+                                                35,
+                                        height: 130,
+                                        fit: BoxFit.fill),
+                                  );
+                                }
+                              },
+                            ),
                             SizedBox(width: 16),
-                            ClipRRect(
-                                borderRadius: BorderRadius.circular(20.0),
-                                child: Image.asset('assets/walking-trail.jpg',
-                                    width:
-                                        MediaQuery.of(context).size.width / 2 -
-                                            35,
-                                    height: 130,
-                                    fit: BoxFit.fill))
+                            FutureBuilder<String>(
+                              future: _getImageUrl(4),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<String> snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  // While the future is still in progress, display a loading indicator
+                                  return CircularProgressIndicator();
+                                } else if (snapshot.hasError) {
+                                  // If there's an error fetching the image, display an error message
+                                  return Text('Error: ${snapshot.error}');
+                                } else {
+                                  // If the image URL is fetched successfully, display the image using Image.network
+                                  return ClipRRect(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    child: Image.network(snapshot.data!,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                    2 -
+                                                35,
+                                        height: 130,
+                                        fit: BoxFit.fill),
+                                  );
+                                }
+                              },
+                            ),
                           ],
                         ),
                         SizedBox(height: 16),
@@ -360,13 +413,26 @@ class _LocationState extends State<LocationPage> {
                                       12.0), // Rounded corners
                                 ),
                               ),
-                              child: Text(
-                                'Start Walk',
-                                style: GoogleFonts.raleway(
-                                  textStyle: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 24,
+                              child: GestureDetector(
+                                onTap: () {
+                                  // Navigate to the MapPage and pass necessary information as arguments
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => MapPage(
+                                        placeIdChosen: placeId,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Text(
+                                  'Start Walk',
+                                  style: GoogleFonts.raleway(
+                                    textStyle: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 24,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -439,17 +505,4 @@ class _LocationState extends State<LocationPage> {
       ),
     );
   }
-}
-
-class PlacePrediction {
-  final String placeId;
-  final String description;
-
-  PlacePrediction({required this.placeId, required this.description});
-
-  factory PlacePrediction.fromJson(Map<String, dynamic> json) =>
-      PlacePrediction(
-        placeId: json['place_id'],
-        description: json['description'],
-      );
 }

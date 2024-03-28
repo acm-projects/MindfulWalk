@@ -77,6 +77,17 @@ class _ExploreState extends State<Explore> {
                       child: Icon(Icons.search,
                           color: Color(0xFF406440), size: 35),
                     )),
+                onSubmitted: (String value) {
+                  String searchText = _textFieldController.text;
+                  print("Searchtext: ${searchText}");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          LocationPage(searchText: searchText),
+                    ),
+                  );
+                },
               ),
               SizedBox(height: 16.0),
               Expanded(
@@ -228,7 +239,7 @@ class _ExploreState extends State<Explore> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(20.0),
                               child: Image.asset(
-                                'assets/walking-trail.jpg',
+                                'assets/parks-and-preserves.jpg',
                                 width: 340.0,
                                 height: 120.0,
                                 fit: BoxFit.cover,
@@ -271,7 +282,7 @@ class _ExploreState extends State<Explore> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(20.0),
                               child: Image.asset(
-                                'assets/walking-trail.jpg',
+                                'assets/indoor-oasis.jpg',
                                 width: 340.0,
                                 height: 120.0,
                                 fit: BoxFit.cover,
@@ -314,7 +325,7 @@ class _ExploreState extends State<Explore> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(20.0),
                               child: Image.asset(
-                                'assets/walking-trail.jpg',
+                                'assets/street-restaurants.jpg',
                                 width: 340.0,
                                 height: 120.0,
                                 fit: BoxFit.cover,
@@ -341,6 +352,7 @@ class _ExploreState extends State<Explore> {
                         ],
                       ),
                     ),
+                    SizedBox(height: 16)
                   ],
                 )),
               )

@@ -27,7 +27,8 @@ class PlacePrediction {
 }
 
 class MapPage extends StatefulWidget {
-  const MapPage({super.key});
+  final String? placeIdChosen;
+  const MapPage({Key? key, this.placeIdChosen}) : super(key: key);
 
   @override
   State<MapPage> createState() => _MapPageState();
@@ -45,7 +46,8 @@ String maxHeight = '';
 String maxWidth = '';
 
 class _MapPageState extends State<MapPage> {
-  TextEditingController _searchController = TextEditingController();
+  TextEditingController _searchController =
+      TextEditingController(text: placeId);
   // Both of these will change when the search icon is clicked
   bool isSearchClicked = false;
   late String destinationString;
@@ -64,6 +66,10 @@ class _MapPageState extends State<MapPage> {
   void initState() {
     super.initState();
     getLocationUpdates();
+    placeId = widget.placeIdChosen ?? '';
+    print("\n\n\n\nPlaceID = $placeId\n\n\n\n");
+    // Set the initial text for the TextField
+    _searchController = TextEditingController(text: placeId);
   }
 
   Future<void> _cameraToPosition(LatLng pos) async {
@@ -216,6 +222,23 @@ class _MapPageState extends State<MapPage> {
     }
   }
 
+  // Get address from placeID given in Location page
+  Future<String?> getFormattedAddress(String placeId) async {
+    final apiKey = GOOGLE_MAPS_API_KEY;
+    final url =
+        'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&fields=formatted_address&key=$apiKey';
+
+    final response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      return data['result']['formatted_address'];
+    } else {
+      // Handle error
+      throw Exception('Failed to get formatted address');
+    }
+  }
+
   // Getting placeId, Name, Address, and Photo
   Future<List<PlacePrediction>> textSearch(String query) async {
     final apiKey = GOOGLE_MAPS_API_KEY;
@@ -339,34 +362,6 @@ class _MapPageState extends State<MapPage> {
                           },
                         ),
                       )),
-
-                  // Align(
-                  //   alignment: Alignment.centerLeft,
-                  //   child: Container(
-                  //       width: double.infinity,
-                  //       padding:
-                  //           EdgeInsets.symmetric(horizontal: 20, vertical: 6),
-                  //       decoration: BoxDecoration(
-                  //         color: Color(0xFFADC178), // Set the background color
-                  //         borderRadius:
-                  //             BorderRadius.circular(15.0), // Add curved corners
-                  //       ),
-                  //       child: Row(children: [
-                  //         Text(
-                  //           'Use my location',
-                  //           style: GoogleFonts.jost(
-                  //             textStyle: TextStyle(
-                  //               color: Colors.white,
-                  //               fontWeight: FontWeight.w600,
-                  //               fontSize: 24,
-                  //             ),
-                  //           ),
-                  //         ),
-                  //         Spacer(),
-                  //         Image.asset('assets/myLocationIcon.png',
-                  //             height: 35, width: 35)
-                  //       ])),
-                  // ),
                 ]),
               ),
       )
