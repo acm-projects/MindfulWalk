@@ -17,7 +17,8 @@ Future<String?> gemini(String locationName) async {
   // For text-only input, use the gemini-pro model
   final model = GenerativeModel(model: 'gemini-pro', apiKey: apiKey);
   final content = [
-    Content.text('What is the $locationName place? 50-200 words.')
+    Content.text(
+        'Write a one paragraph location description for $locationName. The description should be like the ones you see on google.')
     //Content.text('Make a list of 10 walking trails near 7315 Marigold Dr, Irving, TX.')
   ];
   final response = await model.generateContent(content);
@@ -163,7 +164,7 @@ class _LocationState extends State<LocationPage> {
                                   photoUrl,
                                   width: 340.0,
                                   height: 240.0,
-                                  fit: BoxFit.fitWidth,
+                                  fit: BoxFit.cover,
                                 ),
                               )
                             : Center(child: CircularProgressIndicator()),
@@ -189,7 +190,7 @@ class _LocationState extends State<LocationPage> {
                           width: 340,
                           decoration: BoxDecoration(
                             color: Color(0xFFEDE9D7),
-                            borderRadius: BorderRadius.circular(20.0),
+                            borderRadius: BorderRadius.circular(30.0),
                           ),
                           child: SingleChildScrollView(
                             child: Column(

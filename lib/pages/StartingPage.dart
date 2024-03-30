@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mindfulwalk/pages/CreateProfile.dart';
 import 'package:mindfulwalk/pages/Login.dart';
+import 'package:mindfulwalk/pages/LoginPage.dart';
 import 'package:mindfulwalk/pages/SignUp.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class StartingPage extends StatelessWidget {
   const StartingPage({Key? key}) : super(key: key);
@@ -26,37 +28,39 @@ class StartingPage extends StatelessWidget {
         children: [
           // Background Image
           FractionallySizedBox(
-            heightFactor: .5,
+            heightFactor: .6,
             alignment: Alignment.topCenter,
             child: Image.asset(
-              'build/app/intermediates/flutter/debug/flutter_assets/images/bg image.png', // Replace with your actual image path
+              'assets/startingPageBackground.png', // Replace with your actual image path
               fit: BoxFit.cover,
             ),
           ),
           Positioned(
-            top: 0,
+            top: 25,
             left: 0,
             right: 0,
             child: Image.asset(
-              'build/app/intermediates/flutter/debug/flutter_assets/images/overlay.png',
+              'assets/overlay.png',
               fit: BoxFit.cover,
             ),
           ),
           Positioned(
             top: 432,
-            left: 0,
+            left: 25,
             right: 70,
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(height: 5),
-                  const Text(
+                  Text(
                     "Step into peace,\nExplore your city's grace.",
-                    style: TextStyle(
-                      color: Color(0xFF8B6B55),
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                    style: GoogleFonts.comfortaa(
+                      textStyle: TextStyle(
+                        color: Color(0xFF8B6B55),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w900,
+                      ),
                     ),
                     textAlign: TextAlign.left,
                   ),
@@ -64,12 +68,12 @@ class StartingPage extends StatelessWidget {
               ),
             ),
           ),
-          Positioned (
+          Positioned(
             top: 470,
             left: 0,
             right: 0,
             child: Image.asset(
-              'build/app/intermediates/flutter/debug/flutter_assets/images/full logo.png',
+              'assets/fullLogo.png',
               height: 200,
               width: 300,
             ),
@@ -84,82 +88,16 @@ class StartingPage extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => Login(),
-                        ),
-                    );
-                    // Add your button press logic here
-                  },
-                  style: ButtonStyle(
-                    fixedSize: MaterialStateProperty.all(Size(300, 70)),
-                    backgroundColor: MaterialStateProperty.all(Color(0xFFFFA9A8)),
-                    foregroundColor: MaterialStateProperty.all(Colors.white),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                    ),
-                  ),
-                  child: Text(
-                    'Login',
-                    style: TextStyle(
-                      fontSize: 24,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            top: 690,
-            left: 0,
-            right: 0,
-            child: Column(
-              children: [
-                const SizedBox(height: 50),
-                ElevatedButton(
-                  onPressed: () {
-                    // Add your button press logic here
-                  },
-                  style: ButtonStyle(
-                    fixedSize: MaterialStateProperty.all(Size(300, 70)),
-                    backgroundColor: MaterialStateProperty.all(Color(0xFFADC178)),
-                    foregroundColor: MaterialStateProperty.all(Colors.white),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                    ),
-                  ),
-                  child: Text(
-                    'Sign up',
-                    style: TextStyle(
-                      fontSize: 24,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            top: 690,
-            left: 0,
-            right: 0,
-            child: Column(
-              children: [
-                const SizedBox(height: 50),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                        builder: (context) => SignUp(),
+                        builder: (context) => Login(),
                       ),
                     );
                     // Add your button press logic here
                   },
                   style: ButtonStyle(
                     fixedSize: MaterialStateProperty.all(Size(300, 70)),
-                    backgroundColor: MaterialStateProperty.all(Color(0xFFADC178)),
+                    backgroundColor:
+                        MaterialStateProperty.all(Color(0xFFFFA9A8)),
                     foregroundColor: MaterialStateProperty.all(Colors.white),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
@@ -167,13 +105,50 @@ class StartingPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  child: Text(
-                    'Sign up',
-                    style: TextStyle(
-                      fontSize: 24,
-                    ),
-                  ),
+                  child: Text('Login',
+                      style: GoogleFonts.jost(
+                        textStyle: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      )),
                 ),
+              ],
+            ),
+          ),
+
+          Positioned(
+            top: 690,
+            left: 0,
+            right: 0,
+            child: Column(
+              children: [
+                const SizedBox(height: 50),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => SignUp(),
+                        ),
+                      );
+                    },
+                    style: ButtonStyle(
+                      fixedSize: MaterialStateProperty.all(Size(300, 70)),
+                      backgroundColor:
+                          MaterialStateProperty.all(Color(0xFFADC178)),
+                      foregroundColor: MaterialStateProperty.all(Colors.white),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                      ),
+                    ),
+                    child: Text('Sign Up',
+                        style: GoogleFonts.jost(
+                            textStyle: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600,
+                        )))),
               ],
             ),
           ),

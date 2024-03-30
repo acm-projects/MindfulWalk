@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:mindfulwalk/pages/StartingPage.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoadingPage extends StatefulWidget {
   const LoadingPage({Key? key}) : super(key: key);
@@ -20,7 +21,7 @@ class _LoadingPageState extends State<LoadingPage> {
 
   // Function to transition to the StartingPage after 5 seconds
   void _transitionToStartingPage() {
-    Timer(Duration(seconds: 5), () {
+    Timer(Duration(seconds: 4), () {
       // Use Navigator to push the StartingPage onto the stack
       Navigator.pushReplacement(
         context,
@@ -36,52 +37,74 @@ class _LoadingPageState extends State<LoadingPage> {
         Container(
           decoration: const BoxDecoration(
             gradient: RadialGradient(
-              center: Alignment.center,
-              radius: 0.6,
-              transform: GradientRotation(1.5708),
+              center: Alignment(0, -0.3),
+              radius: 0.9,
+              transform: GradientRotation(0),
               colors: [
-                Color(0xFFFFFEF6),
-                Color(0xFFFCB7B6),
+                Color(0xFFFFA9A8),
+                Color(0xFFFFFCE7),
               ],
             ),
           ),
         ),
         Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            //mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 150),
+              SizedBox(height: 200),
               Container(
                 width: 600,
-                height: 250,
+                height: 290,
                 child: Image.asset(
-                  'build/app/intermediates/flutter/debug/flutter_assets/images/logo.png',
-                  width: 400,
-                  height: 300,
+                  'assets/mindful-walk.png',
+                  width: 500,
+                  height: 500,
                 ),
-              ),
-              SizedBox(height: 5),
-              Container(
-                width: 400,
-                height: 100,
-                child: Image.asset(
-                  'build/app/intermediates/flutter/debug/flutter_assets/images/Mindful Walk.png',
-                  width: 200,
-                  height: 100,
-                ),
-              ),
-              SizedBox(height: 5),
-              const Text(
-                "Step into peace,\nExplore your city's grace.",
-                style: TextStyle(
-                  color: Color(0xFF8B6B55),
-                  fontSize: 20,
-                ),
-                textAlign: TextAlign.center,
               ),
             ],
           ),
         ),
+        Positioned(
+          top: 460,
+          left: 75,
+          child: Text(
+            "Step into peace,\nExplore your city's grace.",
+            style: GoogleFonts.comfortaa(
+              textStyle: TextStyle(
+                color: Color(0xFF5B8C5A),
+                fontWeight: FontWeight.bold,
+                fontSize: 22,
+                decoration: TextDecoration.none,
+              ),
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        Positioned(
+            top: 600,
+            left: -10,
+            child: Row(children: [
+              Image.asset(
+                'assets/walking.gif',
+                height: 110,
+                width: 110,
+              ),
+              Image.asset(
+                'assets/walking.gif',
+                height: 110,
+                width: 110,
+              ),
+              Image.asset(
+                'assets/walking.gif',
+                height: 110,
+                width: 110,
+              ),
+              Image.asset(
+                'assets/walking.gif',
+                height: 110,
+                width: 110,
+              ),
+            ])),
       ],
     );
   }

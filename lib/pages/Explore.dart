@@ -2,9 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:mindfulwalk/main.dart';
-import 'package:mindfulwalk/pages/Location.dart';
+import 'package:mindfulwalk/pages/BottomNavBar.dart';
+import 'package:mindfulwalk/pages/LocationPage.dart';
 import 'package:mindfulwalk/pages/MapPage.dart';
 
 void main() {
@@ -31,7 +30,12 @@ class _ExploreState extends State<Explore> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Image.asset('assets/backArrow.png', width: 40, height: 40),
+              GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Image.asset('assets/backArrow.png',
+                      width: 40, height: 40)),
               Text(
                 'Explore',
                 style: GoogleFonts.raleway(
@@ -182,7 +186,9 @@ class _ExploreState extends State<Explore> {
                     ),
                     SizedBox(height: 16.0),
                     GestureDetector(
-                      onTap: ,
+                      onTap: () {
+                        Navigator.pushNamed(context, '/map');
+                      },
                       child: Container(
                         height: 200.0,
                         decoration: BoxDecoration(
@@ -194,7 +200,8 @@ class _ExploreState extends State<Explore> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 1.0, top: 5.0),
+                              padding:
+                                  const EdgeInsets.only(left: 1.0, top: 5.0),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20.0),
                                 child: Image.asset(
@@ -363,64 +370,7 @@ class _ExploreState extends State<Explore> {
           ),
         ),
       ),
-      bottomNavigationBar: Theme(
-        data: Theme.of(context).copyWith(
-          canvasColor: Color(0xFFFFA9A8),
-        ),
-        child: BottomNavigationBar(
-          currentIndex: 0,
-          selectedItemColor: Colors
-              .white, // we can change this if we want text under each icon
-          unselectedItemColor: Colors.grey,
-          items: [
-            BottomNavigationBarItem(
-              icon: Padding(
-                padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                child: Image.asset('assets/homeSelected.png',
-                    width: 45, height: 45),
-              ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                padding: EdgeInsets.fromLTRB(0, 8, 30, 0),
-                child: Image.asset('assets/diary.png', width: 50, height: 50),
-              ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                padding: EdgeInsets.fromLTRB(0, 0, 35, 0),
-                child: GestureDetector(
-                    onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => MapPage()),
-                        ),
-                    child:
-                        Image.asset('assets/map.png', width: 50, height: 50)),
-              ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                padding: EdgeInsets.fromLTRB(0, 5, 30, 0),
-                child: Image.asset('assets/health.png', width: 50, height: 50),
-              ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                padding: EdgeInsets.fromLTRB(0, 0, 30, 0),
-                child: Image.asset('assets/profile.png', width: 40, height: 40),
-              ),
-              label: '',
-            ),
-          ],
-          onTap: (index) {
-            // Handle button tap
-          },
-        ),
-      ),
+      bottomNavigationBar: BottomNavBar(),
     );
   }
 

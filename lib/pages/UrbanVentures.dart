@@ -1,7 +1,32 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+// ignore_for_file: prefer_const_constructors
+
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mindfulwalk/consts.dart';
+import 'package:mindfulwalk/pages/MapPage.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
+import 'package:location/location.dart';
+
+var currentLocation = '';
+
+Future<String?> gemini(String locationName) async {
+  // Access your API key as an environment variable (see "Set up your API key" above)
+  const apiKey = 'AIzaSyBh4EzZRZR7rCY7nFVsl94EY1xhA77cywE';
+  // For text-only input, use the gemini-pro model
+  final model = GenerativeModel(model: 'gemini-pro', apiKey: apiKey);
+  final content = [
+    Content.text(
+        'Make a list of 10 urban places that I can walk near $currentLocation')
+  ];
+  final response = await model.generateContent(content);
+  //print("Name: $locationName");
+  //print("Gemini: ${response.text}");
+  return response.text;
+}
 
 class UrbanVentures extends StatefulWidget {
   const UrbanVentures({super.key});
@@ -10,13 +35,42 @@ class UrbanVentures extends StatefulWidget {
   State<UrbanVentures> createState() => _UrbanVenturesState();
 }
 
+Future<String?> getCurrentAddress() async {
+  Location location = Location();
+  LocationData? currentLocation;
+
+  try {
+    currentLocation = await location.getLocation();
+    final latitude = currentLocation.latitude!;
+    final longitude = currentLocation.longitude!;
+    final apiKey = 'YOUR_API_KEY'; // Replace with your Google Maps API key
+    final url =
+        'https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=$apiKey';
+    final response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      if (data['status'] == 'OK') {
+        return data['results'][0]['formatted_address'];
+      } else {
+        return null;
+      }
+    } else {
+      throw Exception('Failed to fetch address');
+    }
+  } catch (e) {
+    print('Error: $e');
+    return null;
+  }
+}
+
 class _UrbanVenturesState extends State<UrbanVentures> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Image.asset('assets/BackArrow.png'),
+          icon: Image.asset('assets/backArrow.png'),
           onPressed: null, // Disabling the back button
         ),
       ),

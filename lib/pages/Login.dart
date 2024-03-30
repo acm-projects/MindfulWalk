@@ -55,7 +55,11 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                Image.asset('assets/logo.png', width: 50.0, height: 50.0,),
+                Image.asset(
+                  'assets/logo.png',
+                  width: 50.0,
+                  height: 50.0,
+                ),
               ],
             ),
           ),
@@ -83,7 +87,8 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
             isPassword: true,
           ),
           SizedBox(height: 10),
-          if (_errorMessage.isNotEmpty) // Step 2: Display the error message if it exists
+          if (_errorMessage
+              .isNotEmpty) // Step 2: Display the error message if it exists
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Text(
@@ -92,16 +97,16 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
               ),
             ),
           ElevatedButton(
-            onPressed: () async{
+            onPressed: () async {
               final FirebaseAuth _auth = FirebaseAuth.instance;
               String username = _usernameController.text;
               String password = _passwordController.text;
               try {
-                UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+                UserCredential userCredential =
+                    await _auth.signInWithEmailAndPassword(
                   email: username,
                   password: password,
                 );
-
 
                 if (userCredential.user != null) {
                   Navigator.pushReplacement(
@@ -112,7 +117,8 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
               } catch (e) {
                 // Handle login errors
                 setState(() {
-                  _errorMessage = 'Username of password is invalid'; // Step 3: Update the error message using setState
+                  _errorMessage =
+                      'Username of password is invalid'; // Step 3: Update the error message using setState
                 });
                 return;
               }
@@ -129,7 +135,10 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
             ),
             child: Text(
               'Login',
-              style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
             ),
           ),
           SizedBox(height: 25),
@@ -157,7 +166,7 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
                 color: Colors.black,
                 fontWeight: FontWeight.w500,
                 fontStyle: FontStyle.italic,
-                decoration: TextDecoration. underline,
+                decoration: TextDecoration.underline,
               ),
             ),
           ),
@@ -179,7 +188,10 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: Text(
             labelText,
-            style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black, fontSize: 28),
+            style: TextStyle(
+                fontWeight: FontWeight.normal,
+                color: Colors.black,
+                fontSize: 28),
           ),
         ),
         SizedBox(height: 8),
