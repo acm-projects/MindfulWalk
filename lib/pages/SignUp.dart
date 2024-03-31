@@ -1,8 +1,11 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:mindfulwalk/pages/CreateProfile.dart';
 import 'package:mindfulwalk/pages/Explore.dart';
 import 'package:mindfulwalk/pages/Login.dart';
 import 'dart:typed_data';
@@ -118,7 +121,21 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
                       password: password,
                     );
                     // Get the user's ID
-                    String userID = userCredential.user!.uid;
+                    userID = userCredential.user!.uid;
+                    await FirebaseFirestore.instance.collection('Users').doc(userID).set({
+                      'Name': "",
+                      'Username': "",
+                      "Bio": "",
+                      "Favorite Quote":"",
+                      'DateOfBirth': FieldValue.serverTimestamp(),
+                      "Gender":"",
+                      "Height":0,
+                      "HomeLocation": GeoPoint(37.4219983, -122.084),
+                      "ProfilePictureURL":"",
+                      "BodyWeight":0,
+                      "Username": "",
+                    // Add more fields as needed
+                    });
 
 // Create a reference to the directory inside the Images folder with the user's ID
                     Reference ref = FirebaseStorage.instance.ref('Images/$userID');
@@ -132,7 +149,7 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
                     print('Sign Up successful');
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Login()),
+                      MaterialPageRoute(builder: (context) => CreateProfile()),
                     );
                   } catch (e) {
                     setState(() {

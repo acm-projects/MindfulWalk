@@ -1,8 +1,15 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:async';
+import 'dart:html';
+import 'dart:js_util';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:mindfulwalk/pages/Login.dart';
 import 'package:mindfulwalk/pages/locationinfo.dart';
 
 import 'PhotoGallery.dart';
@@ -64,8 +71,22 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
+
     }); //setState()
   }// _incrementCounter()
+
+
+
+
+  String _userName = "";
+  Future _fetchUserData() async {
+
+    CollectionReference user = FirebaseFirestore.instance.collection('Users');
+    var data = await FirebaseFirestore.instance.collection("Users").doc(userID).get();
+    setState(() {
+      _userName = data["Name"];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +96,13 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+    _fetchUserData();
     final height = MediaQuery.of(context).size.height;
+
+
+
+// Assuming you have a document containing a date field named 'birthdate'
+
     return Scaffold(
       backgroundColor: const Color(0xffFFFEF6),
       body: SafeArea(
@@ -86,14 +113,11 @@ class _MyHomePageState extends State<MyHomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Row(
+
+
                 children: [
                   Text(
-                  /*String name = intent.getStringExtra("name");
-                  //int number = Integer.valueOf(intent.getStringExtra("number"));
-
-                  data.setText("Name is " + name );*/
-
-                  'Hi Sojung! ',
+                  'Hi $_userName! ',
                   style: GoogleFonts.raleway(
                     textStyle: TextStyle(
                       color: Color(0xFF406440),
@@ -107,24 +131,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
 
               SizedBox(height: 12.0),
-
-              /*Text(
-                /*String name = intent.getStringExtra("name");
-                  //int number = Integer.valueOf(intent.getStringExtra("number"));
-
-                  data.setText("Name is " + name );*/
-
-                'Your Record',
-                style: GoogleFonts.raleway(
-                  textStyle: TextStyle(
-                    color: Color(0xFF4B5563),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 24,
-                  ),
-                ),
-              ),*/
-
-
               Padding(
                 padding: const EdgeInsets.only(
                   bottom: 8,
@@ -683,6 +689,8 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+
 
 
 
