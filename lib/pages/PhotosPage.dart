@@ -1,9 +1,14 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
+import 'dart:io';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mindfulwalk/pages/BottomNavBar.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mindfulwalk/pages/MapPage.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mindfulwalk/pages/ProfilePage.dart';
+import 'package:path/path.dart' as Path;
 
 class PhotosPage extends StatefulWidget {
   @override
@@ -11,6 +16,10 @@ class PhotosPage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<PhotosPage> {
+  //File? selectedImage;
+  PlatformFile? pickedFile;
+  String imageUrl = '';
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -188,28 +197,111 @@ class _MyHomePageState extends State<PhotosPage> {
                       )),
                 ),
                 SizedBox(height: 16),
-                Center(
-                  child: ElevatedButton(
-                    onPressed: () {},
+                Row(children: [
+                  ElevatedButton(
+                    onPressed: () async {
+                      // Picking image
+                      ImagePicker imagePicker = ImagePicker();
+                      XFile? file = await imagePicker.pickImage(
+                          source: ImageSource.camera);
+                      print('${file?.path}');
+
+                      if (file == null) return;
+
+                      String uniqueFileName =
+                          DateTime.now().millisecondsSinceEpoch.toString();
+
+                      // Uploading to firebase storage
+                      Reference referenceRoot = FirebaseStorage.instance.ref();
+                      Reference referenceDirImages =
+                          referenceRoot.child('photos');
+
+                      //Create a reference for the image to be stored
+                      Reference referenceImageToUpload =
+                          referenceDirImages.child(uniqueFileName);
+
+                      // Handle errors
+                      try {
+                        // Store the file
+                        await referenceImageToUpload.putFile(File(file!.path));
+                        // Success: get the download URL
+                        imageUrl =
+                            await referenceImageToUpload.getDownloadURL();
+                      } catch (error) {
+                        print('photo storing to firebase error');
+                      }
+                    },
                     style: ElevatedButton.styleFrom(
-                      primary: const Color(0xffADC178),
+                      backgroundColor: const Color(0xffADC178),
                       padding: EdgeInsets.symmetric(
                         vertical: 10,
-                        horizontal: 100, // Adjust the width as needed
+                        horizontal: 30, // Adjust the width as needed
                       ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25.0),
                       ),
                     ),
                     child: Text(
-                      'Add Photo +',
+                      'Take Photo',
                       style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 22,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
                     ),
                   ),
-                ),
+                  Spacer(),
+                  ElevatedButton(
+                    onPressed: () async {
+                      // Picking image
+                      ImagePicker imagePicker = ImagePicker();
+                      XFile? file = await imagePicker.pickImage(
+                          source: ImageSource.gallery);
+                      print('${file?.path}');
+
+                      if (file == null) return;
+
+                      String uniqueFileName =
+                          DateTime.now().millisecondsSinceEpoch.toString();
+
+                      // Uploading to firebase storage
+                      Reference referenceRoot = FirebaseStorage.instance.ref();
+                      Reference referenceDirImages =
+                          referenceRoot.child('photos');
+
+                      //Create a reference for the image to be stored
+                      Reference referenceImageToUpload =
+                          referenceDirImages.child(uniqueFileName);
+
+                      // Handle errors
+                      try {
+                        // Store the file
+                        await referenceImageToUpload.putFile(File(file!.path));
+                        // Success: get the download URL
+                        imageUrl =
+                            await referenceImageToUpload.getDownloadURL();
+                      } catch (error) {
+                        print('photo storing to firebase error');
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xffADC178),
+                      padding: EdgeInsets.symmetric(
+                        vertical: 10,
+                        horizontal: 20, // Adjust the width as needed
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                      ),
+                    ),
+                    child: Text(
+                      'Upload Photo',
+                      style: TextStyle(
+                          fontSize: 22,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ]),
               ],
             ),
           ),
@@ -275,8 +367,14 @@ class _MyHomePageState extends State<PhotosPage> {
               BottomNavigationBarItem(
                 icon: Padding(
                   padding: EdgeInsets.fromLTRB(0, 0, 30, 0),
-                  child:
-                      Image.asset('assets/profile.png', width: 40, height: 40),
+                  child: GestureDetector(
+                      onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProfilePage()),
+                          ),
+                      child: Image.asset('assets/profile.png',
+                          width: 40, height: 40)),
                 ),
                 label: '',
               ),
@@ -287,4 +385,44 @@ class _MyHomePageState extends State<PhotosPage> {
           ),
         ));
   }
+
+  // Future _pickImageFromGallery() async {
+  //   final result = await FilePicker.platform.pickFiles();
+  //   if (result == null) return;
+  //
+  //   setState(() {
+  //     pickedFile = result.files.first;
+  //   });
+  //
+  //   // final returnedImage =
+  //   //     await ImagePicker().pickImage(source: ImageSource.gallery);
+  //   // if (returnedImage == null) return;
+  //   //
+  //   // setState(() {
+  //   //   selectedImage = File(returnedImage!.path);
+  //   // });
+  //
+  //   final fileName = pickedFile?.name;
+  //   final filePath = pickedFile?.path;
+  //
+  //   if (fileName == null || filePath == null) {
+  //     // Handle the case where either fileName or filePath is null
+  //     return;
+  //   }
+  //
+  //   final path = 'photos/$fileName';
+  //   final file = File(filePath);
+  //
+  //   final ref = FirebaseStorage.instance.ref().child(path);
+  //   ref.putFile(file);
+  // }
+  //
+  // Future _pickImageFromCamera() async {
+  //   // final returnedImage =
+  //   //     await ImagePicker().pickImage(source: ImageSource.camera);
+  //   // if (returnedImage == null) return;
+  //   // setState(() {
+  //   //   selectedImage = File(returnedImage!.path);
+  //   // });
+  // }
 }

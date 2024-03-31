@@ -6,26 +6,12 @@ import 'package:mindfulwalk/pages/Explore.dart';
 import 'package:mindfulwalk/pages/SignUp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-void main() {
-  runApp(Login());
-}
-
-class Login extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'MindfulWalk',
-      home: MindfulWalkPage(),
-    );
-  }
-}
-
-class MindfulWalkPage extends StatefulWidget {
+class Login extends StatefulWidget {
   @override
   _MindfulWalkPageState createState() => _MindfulWalkPageState();
 }
 
-class _MindfulWalkPageState extends State<MindfulWalkPage> {
+class _MindfulWalkPageState extends State<Login> {
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 

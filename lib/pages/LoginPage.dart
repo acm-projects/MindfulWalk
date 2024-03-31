@@ -15,13 +15,8 @@ class _MindfulWalkPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-          image: DecorationImage(
-        image: AssetImage("assets/Login.png"),
-      )),
       child: Scaffold(
-        //backgroundColor: const Color(0xffFFFEF6),
-        backgroundColor: Colors.transparent,
+        backgroundColor: const Color(0xffFFFEF6),
         body: Column(
           children: [
             SizedBox(height: 100),
@@ -39,7 +34,7 @@ class _MindfulWalkPageState extends State<LoginPage> {
                     textAlign: TextAlign.center,
                   ),
                   Image.asset(
-                    'assets/MindfulWalkLogo.png',
+                    'assets/logo.png',
                     width: 70.0,
                     height: 70.0,
                   ),

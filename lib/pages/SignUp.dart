@@ -6,30 +6,15 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mindfulwalk/pages/Explore.dart';
 import 'package:mindfulwalk/pages/Login.dart';
 
-void main() {
-  runApp(SignUp());
-}
-
-class SignUp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'MindfulWalk',
-      home: MindfulWalkPage(),
-    );
-  }
-}
-
-class MindfulWalkPage extends StatefulWidget {
+class SignUp extends StatefulWidget {
   @override
   _MindfulWalkPageState createState() => _MindfulWalkPageState();
 }
 
-class _MindfulWalkPageState extends State<MindfulWalkPage> {
+class _MindfulWalkPageState extends State<SignUp> {
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
-
 
   bool _isUsernameFocused = false;
   bool _isPasswordFocused = false;
@@ -58,7 +43,11 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                Image.asset('assets/logo.png', width: 70.0, height: 70.0,),
+                Image.asset(
+                  'assets/logo.png',
+                  width: 70.0,
+                  height: 70.0,
+                ),
               ],
             ),
           ),
@@ -90,10 +79,10 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
             controller: _confirmPasswordController,
             labelText: 'Confirm Password:',
             isFocused: _isConfirmPasswordFocused,
-
           ),
           SizedBox(height: 10),
-          if (_errorMessage.isNotEmpty) // Step 2: Display the error message if it exists
+          if (_errorMessage
+              .isNotEmpty) // Step 2: Display the error message if it exists
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Text(
@@ -109,8 +98,8 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
 
               if (password == confirmPassword && password.isNotEmpty) {
                 try {
-
-                  UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                  UserCredential userCredential = await FirebaseAuth.instance
+                      .createUserWithEmailAndPassword(
                     email: username,
                     password: password,
                   );
@@ -120,18 +109,17 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
                     context,
                     MaterialPageRoute(builder: (context) => Explore()),
                   );
-                }
-                 catch (e) {
+                } catch (e) {
                   setState(() {
-                  _errorMessage = e.toString(); // Step 3: Update the error message using setState
+                    _errorMessage = e
+                        .toString(); // Step 3: Update the error message using setState
                   });
                   return;
                 }
-
-
               } else {
                 setState(() {
-                  _errorMessage = 'Passwords do not match or fields are empty'; // Update the error message
+                  _errorMessage =
+                      'Passwords do not match or fields are empty'; // Update the error message
                 });
                 print('Passwords do not match or fields are empty');
               }
@@ -148,7 +136,10 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
             ),
             child: Text(
               'Sign up',
-              style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
             ),
           ),
           SizedBox(height: 35),
@@ -176,7 +167,7 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
                 color: Colors.black,
                 fontWeight: FontWeight.w500,
                 fontStyle: FontStyle.italic,
-                decoration: TextDecoration. underline,
+                decoration: TextDecoration.underline,
               ),
             ),
           ),
@@ -198,7 +189,10 @@ class _MindfulWalkPageState extends State<MindfulWalkPage> {
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: Text(
             labelText,
-            style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black, fontSize: 28),
+            style: TextStyle(
+                fontWeight: FontWeight.normal,
+                color: Colors.black,
+                fontSize: 28),
           ),
         ),
         SizedBox(height: 8),

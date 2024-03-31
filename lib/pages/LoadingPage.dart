@@ -38,7 +38,7 @@ class _LoadingPageState extends State<LoadingPage> {
           decoration: const BoxDecoration(
             gradient: RadialGradient(
               center: Alignment(0, -0.3),
-              radius: 0.9,
+              radius: 1.3,
               transform: GradientRotation(0),
               colors: [
                 Color(0xFFFFA9A8),
