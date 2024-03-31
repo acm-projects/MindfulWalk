@@ -4,6 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mindfulwalk/pages/HiName.dart';
 import 'package:mindfulwalk/pages/MapPage.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -322,7 +323,7 @@ class _MyHomePageState extends State<PhotosPage> {
                   child: GestureDetector(
                       onTap: () => Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => MapPage()),
+                            MaterialPageRoute(builder: (context) => HiName()),
                           ),
                       child: Image.asset('assets/home.png',
                           width: 45, height: 45)),
