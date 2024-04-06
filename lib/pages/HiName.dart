@@ -2,71 +2,88 @@
 
 import 'dart:async';
 
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:mindfulwalk/pages/Login.dart';
-import 'package:mindfulwalk/pages/MapPage.dart';
-import 'package:mindfulwalk/pages/PhotosPage.dart';
-import 'package:mindfulwalk/pages/ProfilePage.dart';
 import 'package:mindfulwalk/pages/locationinfo.dart';
 
-class HiName extends StatefulWidget {
-  const HiName({Key? key, this.title}) : super(key: key);
-  final String? title;
+import 'PhotoGallery.dart';
+
+void main() {
+  runApp(HiName());
+}
+
+class HiName extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        // This is the theme of your application.
+        //
+        // Try running your application with "flutter run". You'll see the
+        // application has a blue toolbar. Then, without quitting the app, try
+        // changing the primarySwatch below to Colors.green and then invoke
+        // "hot reload" (press "r" in the console where you ran "flutter run",
+        // or simply save your changes to "hot reload" in a Flutter IDE).
+        // Notice that the counter didn't reset back to zero; the application
+        // is not restarted.
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(title: ''),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  // This widget is the home page of your application. It is stateful, meaning
+  // that it has a State object (defined below) that contains fields that affect
+  // how it looks.
+
+  // This class is the configuration for the state. It holds the values (in this
+  // case the title) provided by the parent (in this case the App widget) and
+  // used by the build method of the State. Fields in a Widget subclass are
+  // always marked "final".
+
+  final String title;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<HiName> {
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
+  //final double height;
+  //const _MyHomePageState(this.height) : super(key);
+  void _incrementCounter() {
+    setState(() {
+      // This call to setState tells the Flutter framework that something has
+      // changed in this State, which causes it to rerun the build method below
+      // so that the display can reflect the updated values. If we changed
+      // _counter without calling setState(), then the build method would not be
+      // called again, and so nothing would appear to happen.
+      _counter++;
+
+    }); //setState()
+  }// _incrementCounter()
+
+
+
+
   String _userName = "";
-  String quoteOTD = '';
-
-  @override
-  void initState() {
-    super.initState();
-    getQuotes();
-  }
-
-  Future<void> getQuotes() async {
-    final String apiUrl = "https://zenquotes.io/api/random/";
-
-    try {
-      final response = await http.get(Uri.parse(apiUrl));
-
-      if (response.statusCode == 200) {
-        final List<dynamic> data = json.decode(response.body);
-
-        if (data.isNotEmpty) {
-          // Check if the data list is not empty
-          setState(() {
-            quoteOTD = data[0]['q']; // Update quoteOTD with the first quote
-          });
-
-          print('QUOTE: $quoteOTD'); // Print the quoteOTD
-        } else {
-          print('Empty quote list received'); // Handle empty quote list
-        }
-      } else {
-        // Handle error
-        print('Failed to load quotes. Status code: ${response.statusCode}');
-      }
-    } catch (e) {
-      // Handle error
-      print('Error fetching quotes: $e');
-    }
-  }
-
   Future _fetchUserData() async {
+
     CollectionReference user = FirebaseFirestore.instance.collection('Users');
-    // var data =
-    //     await FirebaseFirestore.instance.collection("Users").doc(userID).get();
-    // setState(() {
-    //   _userName = data["Name"];
-    // });
+    var data = await FirebaseFirestore.instance.collection("Users").doc(userID).get();
+    setState(() {
+      _userName = data["Name"];
+    });
   }
 
   @override
@@ -80,6 +97,8 @@ class _MyHomePageState extends State<HiName> {
     _fetchUserData();
     final height = MediaQuery.of(context).size.height;
 
+
+
 // Assuming you have a document containing a date field named 'birthdate'
 
     return Scaffold(
@@ -91,20 +110,24 @@ class _MyHomePageState extends State<HiName> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Row(children: [
-                Text(
-                  'Hi $_userName! ',
-                  style: GoogleFonts.raleway(
-                    textStyle: TextStyle(
-                      color: Color(0xFF406440),
-                      fontWeight: FontWeight.w800,
-                      fontSize: 36,
+              Row(
+
+
+                  children: [
+                    Text(
+                      'Hi $_userName! ',
+                      style: GoogleFonts.raleway(
+                        textStyle: TextStyle(
+                          color: Color(0xFF406440),
+                          fontWeight: FontWeight.w800,
+                          fontSize: 36,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                Image.asset('assets/wavingHand.png')
-              ] // children
-                  ),
+                    Image.asset('assets/waving-hand.jpg')
+                  ] // children
+              ),
+
               SizedBox(height: 12.0),
               Padding(
                   padding: const EdgeInsets.only(
@@ -115,17 +138,16 @@ class _MyHomePageState extends State<HiName> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+
                       Text(
                         "Where to next?",
-                        style: const TextStyle(
-                            color: Color(0xFF4B5563),
-                            fontSize: 24,
-                            fontWeight: FontWeight.w500),
+                        style: const TextStyle(color: Color(0xFF4B5563), fontSize: 24, fontWeight: FontWeight.w500),
                       ),
                       TextButton(
                         child: Text("See more"),
                         style: TextButton.styleFrom(
                           foregroundColor: Color(0xFF7B9E87),
+
                         ),
                         onPressed: () {
                           /*Navigator.push(
@@ -135,7 +157,9 @@ class _MyHomePageState extends State<HiName> {
                         },
                       ),
                     ],
-                  )),
+
+                  )
+              ),
               Expanded(
                 //height: height*0.6,
                 child: SingleChildScrollView(
@@ -153,7 +177,11 @@ class _MyHomePageState extends State<HiName> {
                   ),
                 ),
               ),
+
               SizedBox(height: 12.0),
+
+
+
               Padding(
                   padding: const EdgeInsets.only(
                     bottom: 8,
@@ -163,12 +191,10 @@ class _MyHomePageState extends State<HiName> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+
                       Text(
                         "Your Record",
-                        style: const TextStyle(
-                            color: Color(0xFF4B5563),
-                            fontSize: 24,
-                            fontWeight: FontWeight.w500),
+                        style: const TextStyle(color: Color(0xFF4B5563), fontSize: 24, fontWeight: FontWeight.w500),
                       ),
                       TextButton(
                         child: Text("See more"),
@@ -183,7 +209,9 @@ class _MyHomePageState extends State<HiName> {
                         },
                       ),
                     ],
-                  )),
+
+                  )
+              ),
               Expanded(
                 //height: height*0.6,
                 child: SingleChildScrollView(
@@ -201,12 +229,17 @@ class _MyHomePageState extends State<HiName> {
                   ),
                 ),
               ),
+
               Padding(
                   padding: const EdgeInsets.only(
-                bottom: 8,
-                left: 16,
-                right: 16,
-              )),
+                    bottom: 8,
+                    left: 16,
+                    right: 16,
+                  )
+              ),
+
+
+
               Container(
                 padding: const EdgeInsets.only(
                   bottom: 8,
@@ -220,6 +253,7 @@ class _MyHomePageState extends State<HiName> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+
                     SizedBox(
                       width: 380,
                       height: 30,
@@ -237,48 +271,53 @@ class _MyHomePageState extends State<HiName> {
                       ),
                     ),
                     Container(
-                      width: 330,
-                      height: 60,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFFFFFFF),
-                        borderRadius: BorderRadius.circular(25),
-                        border: Border.all(
-                          color: Color(0xFF5B8C5A), // Border color
-                          width: 2.0, // Border width
+                      width: 380,
+                      height: 70,
+                      decoration: ShapeDecoration(
+                        color: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(width: 3, color: Color(0xFFADC178)),
+                          borderRadius: BorderRadius.circular(30),
                         ),
                       ),
-                      padding: EdgeInsets.fromLTRB(
-                          5, 0, 5, 0), // Padding around the text
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.vertical,
-                        child: Padding(
-                          padding:
-                              const EdgeInsets.all(8.0), // Add padding here
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                '$quoteOTD',
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            left: 20,
+                            top: 16,
+                            child: SizedBox(
+                              width: 300,
+                              child: Text(
+                                'Insert a random mindful mindful quote for the day ',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  fontSize: 16, // Font size
-                                  color: Color(0xFF8B6B55), // Text color
+                                  color: Color(0xFF8B6B55),
+                                  fontSize: 16,
+                                  fontFamily: 'Lato',
+                                  fontWeight: FontWeight.w500,
+                                  height: 0,
                                 ),
                               ),
-                            ],
+                            ),
                           ),
-                        ),
+
+
+
+                        ],
                       ),
                     ),
+
+
                     Padding(
                       padding: const EdgeInsets.only(
                         bottom: 8,
                         left: 16,
                         right: 16,
                       ),
+
                     ),
-                    Container(
-                      //level box
+
+                    Container(//level box
                       width: 326,
                       height: 62,
                       child: Stack(
@@ -324,8 +363,7 @@ class _MyHomePageState extends State<HiName> {
                                   side: BorderSide(
                                     width: 4,
                                     strokeAlign: BorderSide.strokeAlignOutside,
-                                    color: Colors.white
-                                        .withOpacity(0.20000000298023224),
+                                    color: Colors.white.withOpacity(0.20000000298023224),
                                   ),
                                   borderRadius: BorderRadius.circular(32),
                                 ),
@@ -363,9 +401,7 @@ class _MyHomePageState extends State<HiName> {
                                       decoration: ShapeDecoration(
                                         color: Color(0xFFFDFBF7),
                                         shape: OvalBorder(
-                                          side: BorderSide(
-                                              width: 1,
-                                              color: Color(0xFFFFC600)),
+                                          side: BorderSide(width: 1, color: Color(0xFFFFC600)),
                                         ),
                                       ),
                                     ),
@@ -392,9 +428,7 @@ class _MyHomePageState extends State<HiName> {
                                                     child: Container(
                                                       width: 14.98,
                                                       height: 21.02,
-                                                      decoration: BoxDecoration(
-                                                          color: Color(
-                                                              0xFF5B8C5A)),
+                                                      decoration: BoxDecoration(color: Color(0xFF5B8C5A)),
                                                     ),
                                                   ),
                                                   Positioned(
@@ -403,9 +437,7 @@ class _MyHomePageState extends State<HiName> {
                                                     child: Container(
                                                       width: 14.98,
                                                       height: 1.78,
-                                                      decoration: BoxDecoration(
-                                                          color: Color(
-                                                              0xFFADC178)),
+                                                      decoration: BoxDecoration(color: Color(0xFFADC178)),
                                                     ),
                                                   ),
                                                   Positioned(
@@ -414,9 +446,7 @@ class _MyHomePageState extends State<HiName> {
                                                     child: Container(
                                                       width: 14.98,
                                                       height: 1.78,
-                                                      decoration: BoxDecoration(
-                                                          color: Color(
-                                                              0xFFADC178)),
+                                                      decoration: BoxDecoration(color: Color(0xFFADC178)),
                                                     ),
                                                   ),
                                                   Positioned(
@@ -425,9 +455,7 @@ class _MyHomePageState extends State<HiName> {
                                                     child: Container(
                                                       width: 14.98,
                                                       height: 1.78,
-                                                      decoration: BoxDecoration(
-                                                          color: Color(
-                                                              0xFFADC178)),
+                                                      decoration: BoxDecoration(color: Color(0xFFADC178)),
                                                     ),
                                                   ),
                                                   Positioned(
@@ -436,9 +464,7 @@ class _MyHomePageState extends State<HiName> {
                                                     child: Container(
                                                       width: 14.98,
                                                       height: 1.78,
-                                                      decoration: BoxDecoration(
-                                                          color: Color(
-                                                              0xFFADC178)),
+                                                      decoration: BoxDecoration(color: Color(0xFFADC178)),
                                                     ),
                                                   ),
                                                   Positioned(
@@ -447,9 +473,7 @@ class _MyHomePageState extends State<HiName> {
                                                     child: Container(
                                                       width: 4.18,
                                                       height: 11.04,
-                                                      decoration: BoxDecoration(
-                                                          color: Color(
-                                                              0xFFD28800)),
+                                                      decoration: BoxDecoration(color: Color(0xFFD28800)),
                                                     ),
                                                   ),
                                                   Positioned(
@@ -458,9 +482,7 @@ class _MyHomePageState extends State<HiName> {
                                                     child: Container(
                                                       width: 2.79,
                                                       height: 9.26,
-                                                      decoration: BoxDecoration(
-                                                          color: Color(
-                                                              0xFFD28800)),
+                                                      decoration: BoxDecoration(color: Color(0xFFD28800)),
                                                     ),
                                                   ),
                                                   Positioned(
@@ -469,9 +491,7 @@ class _MyHomePageState extends State<HiName> {
                                                     child: Container(
                                                       width: 4.18,
                                                       height: 11.04,
-                                                      decoration: BoxDecoration(
-                                                          color: Color(
-                                                              0xFFD28800)),
+                                                      decoration: BoxDecoration(color: Color(0xFFD28800)),
                                                     ),
                                                   ),
                                                   Positioned(
@@ -480,9 +500,7 @@ class _MyHomePageState extends State<HiName> {
                                                     child: Container(
                                                       width: 2.79,
                                                       height: 9.26,
-                                                      decoration: BoxDecoration(
-                                                          color: Color(
-                                                              0xFFD28800)),
+                                                      decoration: BoxDecoration(color: Color(0xFFD28800)),
                                                     ),
                                                   ),
                                                   Positioned(
@@ -491,9 +509,7 @@ class _MyHomePageState extends State<HiName> {
                                                     child: Container(
                                                       width: 15.33,
                                                       height: 2.14,
-                                                      decoration: BoxDecoration(
-                                                          color: Color(
-                                                              0xFFFBB502)),
+                                                      decoration: BoxDecoration(color: Color(0xFFFBB502)),
                                                     ),
                                                   ),
                                                   Positioned(
@@ -504,8 +520,7 @@ class _MyHomePageState extends State<HiName> {
                                                       height: 37.41,
                                                       decoration: BoxDecoration(
                                                         image: DecorationImage(
-                                                          image: NetworkImage(
-                                                              "https://via.placeholder.com/11x37"),
+                                                          image: NetworkImage("https://via.placeholder.com/11x37"),
                                                           fit: BoxFit.fill,
                                                         ),
                                                       ),
@@ -519,8 +534,7 @@ class _MyHomePageState extends State<HiName> {
                                                       height: 37.41,
                                                       decoration: BoxDecoration(
                                                         image: DecorationImage(
-                                                          image: NetworkImage(
-                                                              "https://via.placeholder.com/12x37"),
+                                                          image: NetworkImage("https://via.placeholder.com/12x37"),
                                                           fit: BoxFit.fill,
                                                         ),
                                                       ),
@@ -538,10 +552,7 @@ class _MyHomePageState extends State<HiName> {
                                               height: 7.48,
                                               decoration: ShapeDecoration(
                                                 color: Color(0xFFFBCF04),
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4)),
+                                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
                                               ),
                                             ),
                                           ),
@@ -591,53 +602,59 @@ class _MyHomePageState extends State<HiName> {
                         ],
                       ),
                     )
+
+
+
                   ],
                 ),
               ),
+
+
+
+
+
+
+
+
             ],
+
+
+
+
+
           ),
         ),
       ),
+
+
+
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
           canvasColor: Color(0xFFFFA9A8),
         ),
         child: BottomNavigationBar(
           currentIndex: 0,
-          selectedItemColor: Colors
-              .white, // we can change this if we want text under each icon
+          selectedItemColor: Colors.white, // we can change this if we want text under each icon
           unselectedItemColor: Colors.grey,
           items: [
             BottomNavigationBarItem(
               icon: Padding(
-                  padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                  child: Image.asset('assets/homeSelected.png',
-                      width: 45, height: 45)),
+                padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                child: Image.asset('assets/home.png', width: 45, height: 45),
+              ),
               label: '',
             ),
             BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.fromLTRB(0, 8, 30, 0),
-                child: GestureDetector(
-                    onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => PhotosPage()),
-                        ),
-                    child: Image.asset('assets/photoIcon.png',
-                        width: 50, height: 50)),
+                child: Image.asset('assets/diary.png', width: 50, height: 50),
               ),
               label: '',
             ),
             BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.fromLTRB(0, 0, 35, 0),
-                child: GestureDetector(
-                    onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => MapPage()),
-                        ),
-                    child:
-                        Image.asset('assets/map.png', width: 50, height: 50)),
+                child: Image.asset('assets/mapSelected.png', width: 50, height: 50),
               ),
               label: '',
             ),
@@ -651,20 +668,19 @@ class _MyHomePageState extends State<HiName> {
             BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.fromLTRB(0, 0, 30, 0),
-                child: GestureDetector(
-                    onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ProfilePage()),
-                        ),
-                    child: Image.asset('assets/profile.png',
-                        width: 40, height: 40)),
+                child: Image.asset('assets/profile.png', width: 40, height: 40),
               ),
               label: '',
             ),
           ],
           onTap: (index) {
             // Handle button tap
+            if (index == 1) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PhotoGallery()),
+              );
+            }
           },
         ),
       ),
@@ -672,14 +688,19 @@ class _MyHomePageState extends State<HiName> {
   }
 }
 
+
+
+
+
 class _LocationCard extends StatelessWidget {
   final Location location;
 
-  const _LocationCard({Key? key, required this.location}) : super(key: key);
+  const _LocationCard({ Key? key, required this.location}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
+
       margin: const EdgeInsets.only(
         right: 20,
         bottom: 10,
@@ -691,8 +712,9 @@ class _LocationCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
+
             Flexible(
-              flex: 3,
+              flex:3,
               fit: FlexFit.tight,
               child: ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -703,6 +725,8 @@ class _LocationCard extends StatelessWidget {
                   fit: BoxFit.fill,
                 ),
               ),
+
+
 
               /*child: OpenContainer(
                 closedShape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -727,10 +751,14 @@ class _LocationCard extends StatelessWidget {
                 },
               ),*/
             ),
+
             Flexible(
-              flex: 2,
+              flex:2,
+
+
               fit: FlexFit.tight,
               child: Padding(
+
                 padding: const EdgeInsets.only(left: 12.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -791,5 +819,12 @@ class _LocationCard extends StatelessWidget {
         ),
       ),
     );
+
+
+
+
+
+
+
   }
 }

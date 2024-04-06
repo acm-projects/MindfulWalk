@@ -3,21 +3,38 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mindfulwalk/pages/Explore.dart';
+import 'package:mindfulwalk/pages/HiName.dart';
+import 'package:mindfulwalk/pages/PhotoGallery.dart';
 import 'package:mindfulwalk/pages/SignUp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+String userID = "";
+void main() {
+  runApp(Login());
+}
 
-class Login extends StatefulWidget {
+class Login extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'MindfulWalk',
+      home: MindfulWalkPage(),
+    );
+  }
+}
+
+class MindfulWalkPage extends StatefulWidget {
   @override
   _MindfulWalkPageState createState() => _MindfulWalkPageState();
 }
 
-class _MindfulWalkPageState extends State<Login> {
+class _MindfulWalkPageState extends State<MindfulWalkPage> {
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
   bool _isUsernameFocused = false;
   bool _isPasswordFocused = false;
   String _errorMessage = '';
+  String _userID = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,11 +58,7 @@ class _MindfulWalkPageState extends State<Login> {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                Image.asset(
-                  'assets/logo.png',
-                  width: 50.0,
-                  height: 50.0,
-                ),
+                Image.asset('assets/logo.png', width: 50.0, height: 50.0,),
               ],
             ),
           ),
@@ -73,8 +86,7 @@ class _MindfulWalkPageState extends State<Login> {
             isPassword: true,
           ),
           SizedBox(height: 10),
-          if (_errorMessage
-              .isNotEmpty) // Step 2: Display the error message if it exists
+          if (_errorMessage.isNotEmpty) // Step 2: Display the error message if it exists
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Text(
@@ -83,28 +95,28 @@ class _MindfulWalkPageState extends State<Login> {
               ),
             ),
           ElevatedButton(
-            onPressed: () async {
+            onPressed: () async{
               final FirebaseAuth _auth = FirebaseAuth.instance;
               String username = _usernameController.text;
               String password = _passwordController.text;
               try {
-                UserCredential userCredential =
-                    await _auth.signInWithEmailAndPassword(
+                UserCredential userCredential = await _auth.signInWithEmailAndPassword(
                   email: username,
                   password: password,
                 );
 
+
                 if (userCredential.user != null) {
+                  userID = userCredential.user!.uid;
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => Explore()),
+                    MaterialPageRoute(builder: (context) => HiName()),
                   );
                 }
               } catch (e) {
                 // Handle login errors
                 setState(() {
-                  _errorMessage =
-                      'Username of password is invalid'; // Step 3: Update the error message using setState
+                  _errorMessage = 'Username of password is invalid'; // Step 3: Update the error message using setState
                 });
                 return;
               }
@@ -121,10 +133,7 @@ class _MindfulWalkPageState extends State<Login> {
             ),
             child: Text(
               'Login',
-              style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
             ),
           ),
           SizedBox(height: 25),
@@ -152,7 +161,7 @@ class _MindfulWalkPageState extends State<Login> {
                 color: Colors.black,
                 fontWeight: FontWeight.w500,
                 fontStyle: FontStyle.italic,
-                decoration: TextDecoration.underline,
+                decoration: TextDecoration. underline,
               ),
             ),
           ),
@@ -174,10 +183,7 @@ class _MindfulWalkPageState extends State<Login> {
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: Text(
             labelText,
-            style: TextStyle(
-                fontWeight: FontWeight.normal,
-                color: Colors.black,
-                fontSize: 28),
+            style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black, fontSize: 28),
           ),
         ),
         SizedBox(height: 8),
