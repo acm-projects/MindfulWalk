@@ -21,7 +21,7 @@ class _LoadingPageState extends State<LoadingPage> {
 
   // Function to transition to the StartingPage after 5 seconds
   void _transitionToStartingPage() {
-    Timer(Duration(seconds: 4), () {
+    Timer(Duration(seconds: 3), () {
       // Use Navigator to push the StartingPage onto the stack
       Navigator.pushReplacement(
         context,

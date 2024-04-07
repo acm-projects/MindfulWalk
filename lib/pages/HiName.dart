@@ -7,6 +7,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mindfulwalk/pages/Explore.dart';
 import 'package:mindfulwalk/pages/Login.dart';
 import 'package:mindfulwalk/pages/MapPage.dart';
 import 'package:mindfulwalk/pages/PhotosPage.dart';
@@ -128,10 +129,10 @@ class _MyHomePageState extends State<HiName> {
                           foregroundColor: Color(0xFF7B9E87),
                         ),
                         onPressed: () {
-                          /*Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => SecondScreen()),
-                        );*/
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Explore()),
+                          );
                         },
                       ),
                     ],

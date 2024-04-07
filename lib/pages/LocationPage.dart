@@ -7,6 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mindfulwalk/consts.dart';
 import 'package:mindfulwalk/pages/MapPage.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
+import 'package:mindfulwalk/pages/PhotosPage.dart';
+import 'package:mindfulwalk/pages/ProfilePage.dart';
 
 var geminiDescription;
 final List<String> photoUrlList = [];
@@ -467,7 +469,13 @@ class _LocationState extends State<LocationPage> {
             BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.fromLTRB(0, 8, 30, 0),
-                child: Image.asset('assets/diary.png', width: 50, height: 50),
+                child: GestureDetector(
+                    onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => PhotosPage()),
+                        ),
+                    child: Image.asset('assets/photoIcon.png',
+                        width: 50, height: 50)),
               ),
               label: '',
             ),
@@ -494,7 +502,14 @@ class _LocationState extends State<LocationPage> {
             BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.fromLTRB(0, 0, 30, 0),
-                child: Image.asset('assets/profile.png', width: 40, height: 40),
+                child: GestureDetector(
+                    onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProfilePage()),
+                        ),
+                    child: Image.asset('assets/profile.png',
+                        width: 40, height: 40)),
               ),
               label: '',
             ),

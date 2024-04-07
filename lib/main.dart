@@ -32,7 +32,8 @@ Future<void> main() async {
     debugShowCheckedModeBanner: false,
     initialRoute: '/',
     routes: {
-      '/': (context) => HiName(),
+      '/': (context) => PhotosPage(),
+      '/home': (context) => HiName(),
       '/login': (context) => Login(),
       '/signup': (context) => SignUp(),
       '/photos': (context) => PhotosPage(),

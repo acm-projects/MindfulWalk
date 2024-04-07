@@ -7,9 +7,12 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mindfulwalk/consts.dart';
+import 'package:mindfulwalk/pages/HiName.dart';
 import 'package:mindfulwalk/pages/MapPage.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:location/location.dart';
+import 'package:mindfulwalk/pages/PhotosPage.dart';
+import 'package:mindfulwalk/pages/ProfilePage.dart';
 
 var currentLocation = '';
 
@@ -87,7 +90,7 @@ class _UrbanVenturesState extends State<UrbanVentures> {
                   textStyle: TextStyle(
                     color: Color(0xFF406440),
                     fontWeight: FontWeight.w800,
-                    fontSize: 55,
+                    fontSize: 40,
                   ),
                 ),
               ),
@@ -257,35 +260,61 @@ class _UrbanVenturesState extends State<UrbanVentures> {
             BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                child: Image.asset('assets/Home.png', width: 45, height: 45),
+                child: GestureDetector(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HiName()),
+                  ),
+                  child: Image.asset('assets/homeSelected.png',
+                      width: 45, height: 45),
+                ),
               ),
               label: '',
             ),
             BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.fromLTRB(0, 8, 30, 0),
-                child: Image.asset('assets/Photo.png', width: 50, height: 50),
+                child: GestureDetector(
+                    onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => PhotosPage()),
+                        ),
+                    child: Image.asset('assets/photoIcon.png',
+                        width: 50, height: 50)),
               ),
               label: '',
             ),
             BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.fromLTRB(0, 0, 35, 0),
-                child: Image.asset('assets/Map.png', width: 50, height: 50),
+                child: GestureDetector(
+                    onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => MapPage()),
+                        ),
+                    child:
+                        Image.asset('assets/map.png', width: 50, height: 50)),
               ),
               label: '',
             ),
             BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.fromLTRB(0, 5, 30, 0),
-                child: Image.asset('assets/Health.png', width: 50, height: 50),
+                child: Image.asset('assets/health.png', width: 50, height: 50),
               ),
               label: '',
             ),
             BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.fromLTRB(0, 0, 30, 0),
-                child: Image.asset('assets/Profile.png', width: 40, height: 40),
+                child: GestureDetector(
+                    onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProfilePage()),
+                        ),
+                    child: Image.asset('assets/profile.png',
+                        width: 40, height: 40)),
               ),
               label: '',
             ),
