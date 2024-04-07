@@ -81,7 +81,7 @@ class _MindfulWalkPageState extends State<LoginPage> {
                 }
               },
               style: ElevatedButton.styleFrom(
-                primary: const Color(0xffFFA9A8),
+                backgroundColor: const Color(0xffFFA9A8),
                 padding: EdgeInsets.symmetric(
                   vertical: 20,
                   horizontal: 145, // Adjust the width as needed

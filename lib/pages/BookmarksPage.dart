@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
+import 'package:mindfulwalk/pages/Locations.dart';
 
 import 'package:mindfulwalk/pages/ProfilePage.dart';
+
+import 'NotesPage.dart';
 
 class BookmarksPage extends StatelessWidget {
   const BookmarksPage({Key? key}) : super(key: key);
@@ -17,7 +21,7 @@ class BookmarksPage extends StatelessWidget {
     }
 
     // Use a Future.delayed to wait for 5 seconds before navigating to the next page
-    Future.delayed(Duration(seconds: 1), navigateToNextPage);
+    //Future.delayed(Duration(seconds: 1), navigateToNextPage);
 
 
     return Scaffold(
@@ -118,6 +122,10 @@ class BookmarksPage extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       // Add your button press logic here
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Locations()),
+                      );
                     },
                     style: ButtonStyle(
                       fixedSize: MaterialStateProperty.all(Size(270, 70)),
@@ -139,9 +147,44 @@ class BookmarksPage extends StatelessWidget {
                 ],
               ),
             ),
+            Positioned(
+              top: 425,
+              left: 0,
+              right: 0,
+              child: Column(
+                children: [
+                  const SizedBox(height: 50),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Add your button press logic here
+
+                    },
+                    style: ButtonStyle(
+                      fixedSize: MaterialStateProperty.all(Size(270, 70)),
+                      backgroundColor: MaterialStateProperty.all(Color(0xFFADC178)),
+                      foregroundColor: MaterialStateProperty.all(Colors.white),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                      ),
+                    ),
+                    child: Text(
+                      'Your Reviews',
+                      style: TextStyle(
+                        fontSize: 24,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
+
       ),
+
+
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
           canvasColor: Color(0xFFFFA9A8),
