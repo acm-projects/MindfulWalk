@@ -5,6 +5,7 @@ import 'package:mindfulwalk/pages/HiName.dart';
 import 'package:mindfulwalk/pages/Locations.dart';
 import 'package:mindfulwalk/pages/Login.dart';
 import 'package:mindfulwalk/pages/NotificationsPage.dart';
+import 'package:mindfulwalk/pages/PedometerPage.dart';
 import 'package:mindfulwalk/pages/PhotosPage.dart';
 import 'package:mindfulwalk/pages/SettingsPage.dart';
 import 'package:mindfulwalk/pages/SignUp.dart';
@@ -32,7 +33,7 @@ Future<void> main() async {
     debugShowCheckedModeBanner: false,
     initialRoute: '/',
     routes: {
-      '/': (context) => PhotosPage(),
+      '/': (context) => LoadingPage(),
       '/home': (context) => HiName(),
       '/login': (context) => Login(),
       '/signup': (context) => SignUp(),

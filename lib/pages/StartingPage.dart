@@ -89,7 +89,7 @@ class StartingPage extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                        builder: (context) => LoginPage(),
+                        builder: (context) => Login(),
                       ),
                     );
                     // Add your button press logic here

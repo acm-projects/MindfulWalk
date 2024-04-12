@@ -15,110 +15,112 @@ class _MindfulWalkPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Scaffold(
-        backgroundColor: const Color(0xffFFFEF6),
-        body: Column(
-          children: [
-            SizedBox(height: 100),
-            Container(
-              height: 100,
-              child: Row(
-                children: [
-                  Text(
-                    'MindfulWalk',
-                    style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold,
-                      color: const Color(0xff727C90),
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: const Color(0xffFFFEF6),
+          body: Column(
+            children: [
+              SizedBox(height: 100),
+              Container(
+                height: 100,
+                child: Row(
+                  children: [
+                    Text(
+                      'MindfulWalk',
+                      style: TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                        color: const Color(0xff727C90),
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                  Image.asset(
-                    'assets/logo.png',
-                    width: 70.0,
-                    height: 70.0,
-                  ),
-                ],
-                mainAxisAlignment: MainAxisAlignment.center,
-              ),
-              color: const Color(0x7fDAD5B5),
-              alignment: Alignment.center,
-            ),
-            SizedBox(height: 175),
-            Text(
-              'Please log in to continue:',
-              style: TextStyle(
-                fontSize: 20,
-                color: const Color(0xff5B8C5A),
-                fontStyle: FontStyle.italic,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            SizedBox(height: 55),
-            buildTextFieldWithLabel(
-              controller: _usernameController,
-              labelText: 'Email:',
-              isFocused: _isUsernameFocused,
-            ),
-            SizedBox(height: 20),
-            buildTextFieldWithLabel(
-              controller: _passwordController,
-              labelText: 'Password:',
-              isFocused: _isPasswordFocused,
-              isPassword: true,
-            ),
-            SizedBox(height: 55),
-            ElevatedButton(
-              onPressed: () {
-                String username = _usernameController.text;
-                String password = _passwordController.text;
-
-                // Validate credentials (this is a simple example, do not use in production)
-                if (username == 'user' && password == 'password') {
-                  print('Login successful');
-                } else {
-                  print('Login failed');
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xffFFA9A8),
-                padding: EdgeInsets.symmetric(
-                  vertical: 20,
-                  horizontal: 145, // Adjust the width as needed
+                    Image.asset(
+                      'assets/logo.png',
+                      width: 70.0,
+                      height: 70.0,
+                    ),
+                  ],
+                  mainAxisAlignment: MainAxisAlignment.center,
                 ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25.0),
-                ),
+                color: const Color(0x7fDAD5B5),
+                alignment: Alignment.center,
               ),
-              child: Text(
-                'Login',
+              SizedBox(height: 175),
+              Text(
+                'Please log in to continue:',
                 style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
+                  fontSize: 20,
+                  color: const Color(0xff5B8C5A),
+                  fontStyle: FontStyle.italic,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
-            ),
-            SizedBox(height: 25),
-            Text(
-              "Don't have an account?",
-              style: TextStyle(
-                fontSize: 22,
-                color: const Color(0xff7B9E87),
-                fontStyle: FontStyle.normal,
+              SizedBox(height: 55),
+              buildTextFieldWithLabel(
+                controller: _usernameController,
+                labelText: 'Email:',
+                isFocused: _isUsernameFocused,
               ),
-            ),
-            SizedBox(height: 7),
-            Text(
-              "Sign up here",
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.black,
-                fontWeight: FontWeight.w500,
-                fontStyle: FontStyle.italic,
-                decoration: TextDecoration.underline,
+              SizedBox(height: 20),
+              buildTextFieldWithLabel(
+                controller: _passwordController,
+                labelText: 'Password:',
+                isFocused: _isPasswordFocused,
+                isPassword: true,
               ),
-            ),
-          ],
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  String username = _usernameController.text;
+                  String password = _passwordController.text;
+
+                  // Validate credentials (this is a simple example, do not use in production)
+                  if (username == 'user' && password == 'password') {
+                    print('Login successful');
+                  } else {
+                    print('Login failed');
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xffFFA9A8),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 20,
+                    horizontal: 145, // Adjust the width as needed
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
+                ),
+                child: Text(
+                  'Login',
+                  style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              SizedBox(height: 25),
+              Text(
+                "Don't have an account?",
+                style: TextStyle(
+                  fontSize: 22,
+                  color: const Color(0xff7B9E87),
+                  fontStyle: FontStyle.normal,
+                ),
+              ),
+              SizedBox(height: 7),
+              Text(
+                "Sign up here",
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
+                  fontStyle: FontStyle.italic,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

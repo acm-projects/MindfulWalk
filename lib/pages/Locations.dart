@@ -210,7 +210,6 @@ class _BookmarkState extends State<Bookmark> {
     return IconButton(
       icon: Icon(
         _isBookmarked ? Icons.bookmark : Icons.bookmark_border,
-        color: const Color(0xff8B6B55),
         size: 45,
       ),
       onPressed: () {

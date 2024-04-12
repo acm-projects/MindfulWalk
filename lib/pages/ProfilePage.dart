@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mindfulwalk/pages/HiName.dart';
+import 'package:mindfulwalk/pages/Locations.dart';
 import 'package:mindfulwalk/pages/MapPage.dart';
 import 'package:mindfulwalk/pages/PhotosPage.dart';
 import 'package:http/http.dart' as http;
@@ -343,37 +344,44 @@ class _ProfilePageState extends State<ProfilePage> {
           Positioned(
             top: 540,
             left: 30,
-            child: Container(
-              width: 80,
-              height: 140, // Adjusted height to accommodate both image and text
-              decoration: BoxDecoration(
-                color: Color(0xFFFFFFFF),
-                borderRadius: BorderRadius.circular(15),
-                border: Border.all(
-                  color: Color(0xFFEDE9D7), // Border color
-                  width: 2.0, // Border width
-                ),
+            child: GestureDetector(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => NotesPage()),
               ),
-              padding: EdgeInsets.all(10.0), // Padding around the text
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'build/app/intermediates/flutter/debug/flutter_assets/images/notesicon.png', // Replace with your image path
-                    width: 50, // Adjust the width of the image
-                    height: 50, // Adjust the height of the image
+              child: Container(
+                width: 80,
+                height:
+                    140, // Adjusted height to accommodate both image and text
+                decoration: BoxDecoration(
+                  color: Color(0xFFFFFFFF),
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(
+                    color: Color(0xFFEDE9D7), // Border color
+                    width: 2.0, // Border width
                   ),
-                  SizedBox(
-                      height:
-                          10), // Add some space between the image and the text
-                  Text(
-                    'Notes',
-                    style: TextStyle(
-                      fontSize: 16, // Font size
-                      color: Color(0xFF8B6B55), // Text color
+                ),
+                padding: EdgeInsets.all(10.0), // Padding around the text
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/NotesIcon.png', // Replace with your image path
+                      width: 50, // Adjust the width of the image
+                      height: 50, // Adjust the height of the image
                     ),
-                  ),
-                ],
+                    SizedBox(
+                        height:
+                            10), // Add some space between the image and the text
+                    Text(
+                      'Notes',
+                      style: TextStyle(
+                        fontSize: 16, // Font size
+                        color: Color(0xFF8B6B55), // Text color
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -396,7 +404,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'build/app/intermediates/flutter/debug/flutter_assets/images/achievementsicon.png', // Replace with your image path
+                    'assets/AchievmentsIcon.png', // Replace with your image path
                     width: 50, // Adjust the width of the image
                     height: 50, // Adjust the height of the image
                   ),
@@ -433,7 +441,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'build/app/intermediates/flutter/debug/flutter_assets/images/achievementsicon.png', // Replace with your image path
+                    'assets/AchievmentsIcon.png', // Replace with your image path
                     width: 50, // Adjust the width of the image
                     height: 50, // Adjust the height of the image
                   ),

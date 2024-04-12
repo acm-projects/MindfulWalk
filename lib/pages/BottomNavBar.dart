@@ -6,6 +6,7 @@ import 'package:mindfulwalk/main.dart';
 import 'package:mindfulwalk/pages/LocationPage.dart';
 import 'package:mindfulwalk/pages/MapPage.dart';
 import 'package:mindfulwalk/pages/PhotosPage.dart';
+import 'package:mindfulwalk/pages/ProfilePage.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
@@ -75,7 +76,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
           BottomNavigationBarItem(
             icon: Padding(
               padding: EdgeInsets.fromLTRB(0, 0, 30, 0),
-              child: Image.asset('assets/profile.png', width: 40, height: 40),
+              child: GestureDetector(
+                  onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ProfilePage()),
+                      ),
+                  child:
+                      Image.asset('assets/profile.png', width: 40, height: 40)),
             ),
             label: '',
           ),
