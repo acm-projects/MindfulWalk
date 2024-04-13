@@ -3,6 +3,10 @@ import 'package:mindfulwalk/pages/HiName.dart';
 import 'package:mindfulwalk/pages/Locations.dart';
 import 'package:mindfulwalk/pages/MapPage.dart';
 import 'package:mindfulwalk/pages/PhotosPage.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mindfulwalk/pages/Login.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -50,11 +54,21 @@ class _ProfilePageState extends State<ProfilePage> {
       print('Error fetching quotes: $e');
     }
   }
+  String _userName = "";
+  String _userBio = "";
+  Future _fetchUserData() async {
 
+    CollectionReference user = FirebaseFirestore.instance.collection('Users');
+    var data = await FirebaseFirestore.instance.collection("Users").doc(userID).get();
+    setState(() {
+      _userName = data["Name"];
+      _userBio = data["Bio"];
+    });
+  }
   @override
   Widget build(BuildContext context) {
     final double verticalPadding = 20.0;
-
+    _fetchUserData();
     return Scaffold(
       backgroundColor: Color(0xFFFFFEF6), // Set the background color here
       body: Stack(
@@ -139,7 +153,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: SizedBox(
                 width: 200, // Adjust the width as needed
                 child: Text(
-                  'Your Name',
+                  '$_userName',
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     color: Color(0xFF406440),
@@ -158,11 +172,11 @@ class _ProfilePageState extends State<ProfilePage> {
                 width: 200, // Adjust the width as needed
                 child: Tooltip(
                   message:
-                      'User Bio: Lorem ipsum dolor sit amet, consectetur adipiscing',
+                      '$_userBio',
                   child: SingleChildScrollView(
                     scrollDirection: Axis.vertical,
                     child: Text(
-                      'User Bio: Lorem ipsum dolor sit amet, consectetur adipiscing',
+                      '$_userBio',
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         color: Color(0xFF406440),
