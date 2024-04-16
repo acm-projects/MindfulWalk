@@ -1,8 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+//import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'dart:math';
 import 'dart:async';
@@ -12,6 +13,21 @@ import 'package:geocoding/geocoding.dart' as gc;
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:intl/intl.dart';
+
+// class MapPage extends StatefulWidget {
+//   final String? placeIdChosen;
+//   const MapPage({Key? key, this.placeIdChosen}) : super(key: key);
+//
+//   @override
+//   State<MapPage> createState() => _MapPageState();
+// }
+//
+// class _MapPageState extends State<MapPage> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return const Placeholder();
+//   }
+// }
 
 class PlacePrediction {
   final String placeId;

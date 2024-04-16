@@ -4,6 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mindfulwalk/pages/Health.dart';
 import 'package:mindfulwalk/pages/HiName.dart';
 import 'package:mindfulwalk/pages/MapPage.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -38,7 +39,7 @@ class _MyHomePageState extends State<PhotosPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  'Photo Gallery',
+                  'Memories',
                   style: GoogleFonts.raleway(
                     textStyle: TextStyle(
                       color: Color(0xFF406440),
@@ -360,8 +361,13 @@ class _MyHomePageState extends State<PhotosPage> {
               BottomNavigationBarItem(
                 icon: Padding(
                   padding: EdgeInsets.fromLTRB(0, 5, 30, 0),
-                  child:
-                      Image.asset('assets/health.png', width: 50, height: 50),
+                  child: GestureDetector(
+                      onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Health()),
+                          ),
+                      child: Image.asset('assets/health.png',
+                          width: 50, height: 50)),
                 ),
                 label: '',
               ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mindfulwalk/pages/CreateProfile.dart';
 import 'package:mindfulwalk/pages/Login.dart';
-import 'package:mindfulwalk/pages/LoginPage.dart';
 import 'package:mindfulwalk/pages/SignUp.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -45,16 +44,15 @@ class StartingPage extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 432,
+            top: 420,
             left: 25,
             right: 70,
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(height: 5),
                   Text(
-                    "Step into peace,\nExplore your city's grace.",
+                    "Step into peace.\nFind your pace.\nExplore your city's grace.",
                     style: GoogleFonts.comfortaa(
                       textStyle: TextStyle(
                         color: Color(0xFF8B6B55),

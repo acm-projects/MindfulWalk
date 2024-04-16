@@ -67,18 +67,16 @@ class _LoadingPageState extends State<LoadingPage> {
         Positioned(
           top: 460,
           left: 75,
-          child: Text(
-            "Step into peace,\nExplore your city's grace.",
-            style: GoogleFonts.comfortaa(
-              textStyle: TextStyle(
-                color: Color(0xFF5B8C5A),
-                fontWeight: FontWeight.bold,
-                fontSize: 22,
-                decoration: TextDecoration.none,
+          child: Text("Step into peace.\nExplore your city's grace.",
+              style: GoogleFonts.comfortaa(
+                textStyle: TextStyle(
+                  color: Color(0xFF5B8C5A),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22,
+                  decoration: TextDecoration.none,
+                ),
               ),
-            ),
-            textAlign: TextAlign.center,
-          ),
+              textAlign: TextAlign.center),
         ),
         Positioned(
             top: 600,

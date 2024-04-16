@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mindfulwalk/pages/Health.dart';
 import 'package:mindfulwalk/pages/HiName.dart';
 import 'package:mindfulwalk/pages/Locations.dart';
 import 'package:mindfulwalk/pages/MapPage.dart';
+import 'package:mindfulwalk/pages/PhotoGallery.dart';
 import 'package:mindfulwalk/pages/PhotosPage.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -9,6 +11,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mindfulwalk/pages/Login.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:mindfulwalk/pages/SettingsPage.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -54,17 +58,19 @@ class _ProfilePageState extends State<ProfilePage> {
       print('Error fetching quotes: $e');
     }
   }
+
   String _userName = "";
   String _userBio = "";
   Future _fetchUserData() async {
-
     CollectionReference user = FirebaseFirestore.instance.collection('Users');
-    var data = await FirebaseFirestore.instance.collection("Users").doc(userID).get();
+    var data =
+        await FirebaseFirestore.instance.collection("Users").doc(userID).get();
     setState(() {
       _userName = data["Name"];
       _userBio = data["Bio"];
     });
   }
+
   @override
   Widget build(BuildContext context) {
     final double verticalPadding = 20.0;
@@ -117,10 +123,17 @@ class _ProfilePageState extends State<ProfilePage> {
             left: 350,
             child: GestureDetector(
               onTap: () {},
-              child: Image.asset(
-                'assets/settingsIcon.png',
-                width: 40,
-                height: 40,
+              child: GestureDetector(
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SettingsPage(),
+                    )),
+                child: Image.asset(
+                  'assets/settingsIcon.png',
+                  width: 40,
+                  height: 40,
+                ),
               ),
             ),
           ),
@@ -171,8 +184,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: SizedBox(
                 width: 200, // Adjust the width as needed
                 child: Tooltip(
-                  message:
-                      '$_userBio',
+                  message: '$_userBio',
                   child: SingleChildScrollView(
                     scrollDirection: Axis.vertical,
                     child: Text(
@@ -541,7 +553,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: GestureDetector(
                     onTap: () => Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => PhotosPage()),
+                          MaterialPageRoute(
+                              builder: (context) => PhotoGallery()),
                         ),
                     child: Image.asset('assets/photoIcon.png',
                         width: 50, height: 50)),
@@ -564,7 +577,13 @@ class _ProfilePageState extends State<ProfilePage> {
             BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.fromLTRB(0, 5, 30, 0),
-                child: Image.asset('assets/health.png', width: 50, height: 50),
+                child: GestureDetector(
+                    onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Health()),
+                        ),
+                    child: Image.asset('assets/health.png',
+                        width: 50, height: 50)),
               ),
               label: '',
             ),

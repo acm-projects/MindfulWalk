@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mindfulwalk/pages/Explore.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:mindfulwalk/pages/Health.dart';
 import 'package:mindfulwalk/pages/Login.dart';
 import 'package:mindfulwalk/pages/MapPage.dart';
 import 'package:mindfulwalk/pages/PhotosPage.dart';
@@ -153,15 +154,29 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontWeight: FontWeight.w500),
                         ),
                         TextButton(
-                          child: Text("See more"),
+                          child: Text(
+                            "Explore",
+                            style: TextStyle(
+                              fontSize: 15, // Adjust the font size as needed
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                           style: TextButton.styleFrom(
                             foregroundColor: Color(0xFF7B9E87),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0),
+                              side: BorderSide(
+                                  color: Color(0xFF7B9E87),
+                                  width:
+                                      2), // Adjust the border radius as needed
+                            ),
                           ),
                           onPressed: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Explore()),
+                                builder: (context) => Explore(),
+                              ),
                             );
                           },
                         ),
@@ -176,9 +191,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         SizedBox(
                           width: 16,
                         ),
-                        for (int i = 0; i < locations.length; i++)
+                        for (int i = 0; i < futureLocations.length; i++)
                           _LocationCard(
-                            location: locations[i],
+                            location: futureLocations[i],
                           ),
                       ],
                     ),
@@ -195,23 +210,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Your Record",
+                          "Past Walks",
                           style: const TextStyle(
                               color: Color(0xFF4B5563),
                               fontSize: 24,
                               fontWeight: FontWeight.w500),
-                        ),
-                        TextButton(
-                          child: Text("See more"),
-                          style: TextButton.styleFrom(
-                            foregroundColor: Color(0xFF7B9E87),
-                          ),
-                          onPressed: () {
-                            /*Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => SecondScreen()),
-                        );*/
-                          },
                         ),
                       ],
                     )),
@@ -224,20 +227,23 @@ class _MyHomePageState extends State<MyHomePage> {
                         SizedBox(
                           width: 16,
                         ),
-                        for (int i = 0; i < locations.length; i++)
+                        Container(
+                            child: Column(
+                          children: [
+                            Text('No Walk History'),
+                            Image.asset('assets/walking.gif',
+                                width: 100, height: 100),
+                          ],
+                        )),
+                        for (int i = 0; i < pastLocations.length; i++)
                           _LocationCard(
-                            location: locations[i],
+                            location: pastLocations[i],
                           ),
                       ],
                     ),
                   ),
                 ),
-                Padding(
-                    padding: const EdgeInsets.only(
-                  bottom: 8,
-                  left: 16,
-                  right: 16,
-                )),
+                SizedBox(height: 16),
                 Container(
                   padding: const EdgeInsets.only(
                     bottom: 8,
@@ -253,7 +259,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: [
                       Container(
                         width: 330,
-                        height: 100,
+                        height: 80,
                         decoration: BoxDecoration(
                           color: Color(0xFFFFFFFF),
                           borderRadius: BorderRadius.circular(15),
@@ -263,7 +269,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ),
                         padding: EdgeInsets.fromLTRB(
-                            5, 0, 5, 0), // Padding around the text
+                            10, 0, 10, 0), // Padding around the text
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -272,7 +278,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 16, // Font size
-                                color: Color(0xFF8B6B55), // Text color
+                                color: Colors.black, // Text color
                               ),
                             ),
                           ],
@@ -651,7 +657,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       onTap: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => PhotosPage()),
+                                builder: (context) => PhotoGallery()),
                           ),
                       child: Image.asset('assets/photoIcon.png',
                           width: 50, height: 50)),
@@ -674,8 +680,13 @@ class _MyHomePageState extends State<MyHomePage> {
               BottomNavigationBarItem(
                 icon: Padding(
                   padding: EdgeInsets.fromLTRB(0, 5, 30, 0),
-                  child:
-                      Image.asset('assets/health.png', width: 50, height: 50),
+                  child: GestureDetector(
+                      onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Health()),
+                          ),
+                      child: Image.asset('assets/health.png',
+                          width: 50, height: 50)),
                 ),
                 label: '',
               ),

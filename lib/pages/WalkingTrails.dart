@@ -31,16 +31,16 @@ Future<String?> gemini(String locationName) async {
   return response.text;
 }
 
-class LocationPage extends StatefulWidget {
+class WalkingTrails extends StatefulWidget {
   final String searchText;
 
-  const LocationPage({Key? key, required this.searchText}) : super(key: key);
+  const WalkingTrails({Key? key, required this.searchText}) : super(key: key);
 
   @override
   _LocationState createState() => _LocationState();
 }
 
-class _LocationState extends State<LocationPage> {
+class _LocationState extends State<WalkingTrails> {
   String name = '';
   String placeId = '';
   String photoReference = '';

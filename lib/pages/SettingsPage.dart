@@ -8,7 +8,12 @@ class SettingsPage extends StatelessWidget {
       bottomNavigationBar: BottomNavBar(),
       appBar: AppBar(
         leading: IconButton(
-          icon: Image.asset('assets/backArrow.png'),
+          icon: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child:
+                  Image.asset('assets/backArrow.png', width: 40, height: 40)),
           onPressed: null, // Disabling the back button
         ),
         title: Text('\nSettings',
