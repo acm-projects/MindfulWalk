@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mindfulwalk/pages/Health.dart';
 import 'package:mindfulwalk/pages/HiName.dart';
-import 'package:mindfulwalk/pages/Locations.dart';
 import 'package:mindfulwalk/pages/MapPage.dart';
+import 'package:mindfulwalk/pages/NotesPage.dart';
 import 'package:mindfulwalk/pages/PhotoGallery.dart';
 import 'package:mindfulwalk/pages/PhotosPage.dart';
 import 'package:firebase_database/firebase_database.dart';

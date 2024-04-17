@@ -1,21 +1,5 @@
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Notes App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: NotesPage(),
-    );
-  }
-}
+import 'package:google_fonts/google_fonts.dart';
 
 class NotesPage extends StatefulWidget {
   @override
@@ -54,43 +38,65 @@ class _NotesPageState extends State<NotesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Image.asset('assets/BackArrow.png'),
-          onPressed: null, // Disabling the back button
-        ),
-        title: Text(
-          '\nNotes',
-          style: TextStyle(
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-            color: Color(0xFF406440), // 406440 color
-          ),
-        ),
-        centerTitle: false,
-      ),
-      body: SingleChildScrollView(
+      body: SafeArea(
         child: Column(
           children: [
-            ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: notes.length,
-              itemBuilder: (context, index) {
-                return NoteBox(
-                  note: notes[index],
-                  onDelete: () {
-                    setState(() {
-                      notes.removeAt(index);
-                    });
-                  },
-                  onRatingChanged: (newRating) {
-                    setState(() {
-                      notes[index].rating = newRating;
-                    });
-                  },
-                );
-              },
+            SizedBox(height: 16),
+            Padding(
+              padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Image.asset('assets/backArrow.png',
+                        width: 40, height: 40)),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Notes',
+                  style: GoogleFonts.raleway(
+                    textStyle: TextStyle(
+                      color: Color(0xFF406440),
+                      fontWeight: FontWeight.w800,
+                      fontSize: 45,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: notes.length,
+                      itemBuilder: (context, index) {
+                        return NoteBox(
+                          note: notes[index],
+                          onDelete: () {
+                            setState(() {
+                              notes.removeAt(index);
+                            });
+                          },
+                          onRatingChanged: (newRating) {
+                            setState(() {
+                              notes[index].rating = newRating;
+                            });
+                          },
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
             ),
           ],
         ),
