@@ -227,14 +227,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         SizedBox(
                           width: 16,
                         ),
-                        Container(
-                            child: Column(
-                          children: [
-                            Text('No Walk History'),
-                            Image.asset('assets/walking.gif',
-                                width: 100, height: 100),
-                          ],
-                        )),
                         for (int i = 0; i < pastLocations.length; i++)
                           _LocationCard(
                             location: pastLocations[i],
@@ -301,7 +293,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 224,
                               top: 48,
                               child: Text(
-                                'Goal 10,000',
+                                'Goal 500',
                                 textAlign: TextAlign.right,
                                 style: TextStyle(
                                   color: Color(0xFF867676),
@@ -316,7 +308,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 0,
                               top: 48,
                               child: Text(
-                                '8,312 steps done',
+                                '234 steps done',
                                 style: TextStyle(
                                   color: Color(0xFF867676),
                                   fontSize: 12,
@@ -351,7 +343,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 0,
                               top: 29,
                               child: Container(
-                                width: 214,
+                                width: 150,
                                 height: 11,
                                 decoration: ShapeDecoration(
                                   color: Color(0xFF23B774),
@@ -602,7 +594,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text: ' 5',
+                                        text: ' 1',
                                         style: TextStyle(
                                           color: Color(0xFF7B9E87),
                                           fontSize: 18,

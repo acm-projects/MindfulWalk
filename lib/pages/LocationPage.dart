@@ -1,6 +1,7 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'dart:convert';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -112,7 +113,7 @@ class _LocationState extends State<LocationPage> {
 
         print("PhotoURLlist__________________________: $photoUrlList");
 
-        final result = data['result'] as Map;
+        final result = data['result'];
 
         if (result.containsKey('description')) {
           final description = result['description'] as String;
@@ -155,9 +156,9 @@ class _LocationState extends State<LocationPage> {
                       width: 40, height: 40)),
               SizedBox(height: 10),
               Expanded(
-                  child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                  child: Padding(
+                padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                child: SingleChildScrollView(
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -212,7 +213,16 @@ class _LocationState extends State<LocationPage> {
                                         if (snapshot.connectionState ==
                                             ConnectionState.waiting) {
                                           // Display a loading indicator while waiting for the future to complete
-                                          return CircularProgressIndicator();
+                                          return Column(
+                                            children: [
+                                              SizedBox(height: 100),
+                                              Align(
+                                                  alignment:
+                                                      Alignment.bottomCenter,
+                                                  child:
+                                                      CircularProgressIndicator()),
+                                            ],
+                                          );
                                         } else {
                                           if (snapshot.hasData) {
                                             // If the future completed successfully, display the data
@@ -227,10 +237,6 @@ class _LocationState extends State<LocationPage> {
                                                 ),
                                               ),
                                             );
-                                          } else if (snapshot.hasError) {
-                                            // If there was an error in fetching the data, display an error message
-                                            return Text(
-                                                'Error: ${snapshot.error}');
                                           } else {
                                             // Handle other states, such as ConnectionState.done
                                             return Text('Loading...');
@@ -245,10 +251,10 @@ class _LocationState extends State<LocationPage> {
                           ),
                         ),
                         SizedBox(height: 16),
-                        Row(
-                          children: [
-                            _getImageUrl(1) != null
-                                ? FutureBuilder<String>(
+                        photoUrlList.isNotEmpty
+                            ? Row(
+                                children: [
+                                  FutureBuilder<String>(
                                     future: _getImageUrl(1),
                                     builder: (BuildContext context,
                                         AsyncSnapshot<String> snapshot) {
@@ -256,9 +262,6 @@ class _LocationState extends State<LocationPage> {
                                           ConnectionState.waiting) {
                                         // While the future is still in progress, display a loading indicator
                                         return CircularProgressIndicator();
-                                      } else if (snapshot.hasError) {
-                                        // If there's an error fetching the image, display an error message
-                                        return Text('Error: ${snapshot.error}');
                                       } else {
                                         // If the image URL is fetched successfully, display the image using Image.network
                                         return ClipRRect(
@@ -275,37 +278,36 @@ class _LocationState extends State<LocationPage> {
                                         );
                                       }
                                     },
-                                  )
-                                : CircularProgressIndicator(),
-                            SizedBox(width: 16),
-                            FutureBuilder<String>(
-                              future: _getImageUrl(2),
-                              builder: (BuildContext context,
-                                  AsyncSnapshot<String> snapshot) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.waiting) {
-                                  // While the future is still in progress, display a loading indicator
-                                  return CircularProgressIndicator();
-                                } else if (snapshot.hasError) {
-                                  // If there's an error fetching the image, display an error message
-                                  return Text('Error: ${snapshot.error}');
-                                } else {
-                                  // If the image URL is fetched successfully, display the image using Image.network
-                                  return ClipRRect(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    child: Image.network(snapshot.data!,
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                    2 -
-                                                35,
-                                        height: 130,
-                                        fit: BoxFit.fill),
-                                  );
-                                }
-                              },
-                            ),
-                          ],
-                        ),
+                                  ),
+                                  SizedBox(width: 16),
+                                  FutureBuilder<String>(
+                                    future: _getImageUrl(2),
+                                    builder: (BuildContext context,
+                                        AsyncSnapshot<String> snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.waiting) {
+                                        // While the future is still in progress, display a loading indicator
+                                        return CircularProgressIndicator();
+                                      } else {
+                                        // If the image URL is fetched successfully, display the image using Image.network
+                                        return ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                          child: Image.network(snapshot.data!,
+                                              width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      2 -
+                                                  35,
+                                              height: 130,
+                                              fit: BoxFit.fill),
+                                        );
+                                      }
+                                    },
+                                  ),
+                                ],
+                              )
+                            : SizedBox(height: 500),
                         SizedBox(height: 16),
                         Row(
                           children: [
@@ -317,9 +319,6 @@ class _LocationState extends State<LocationPage> {
                                     ConnectionState.waiting) {
                                   // While the future is still in progress, display a loading indicator
                                   return CircularProgressIndicator();
-                                } else if (snapshot.hasError) {
-                                  // If there's an error fetching the image, display an error message
-                                  return Text('Error: ${snapshot.error}');
                                 } else {
                                   // If the image URL is fetched successfully, display the image using Image.network
                                   return ClipRRect(
@@ -344,9 +343,6 @@ class _LocationState extends State<LocationPage> {
                                     ConnectionState.waiting) {
                                   // While the future is still in progress, display a loading indicator
                                   return CircularProgressIndicator();
-                                } else if (snapshot.hasError) {
-                                  // If there's an error fetching the image, display an error message
-                                  return Text('Error: ${snapshot.error}');
                                 } else {
                                   // If the image URL is fetched successfully, display the image using Image.network
                                   return ClipRRect(

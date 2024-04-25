@@ -43,14 +43,14 @@ List<String> parseLocations(String text) {
   return locations;
 }
 
-class WalkingTrails extends StatefulWidget {
-  const WalkingTrails({super.key});
+class IndoorOasis extends StatefulWidget {
+  const IndoorOasis({super.key});
 
   @override
-  State<WalkingTrails> createState() => _WalkingTrailsState();
+  State<IndoorOasis> createState() => _IndoorOasisState();
 }
 
-class _WalkingTrailsState extends State<WalkingTrails> {
+class _IndoorOasisState extends State<IndoorOasis> {
   String name = '';
   String placeId = '';
   String photoReference = '';
@@ -72,7 +72,7 @@ class _WalkingTrailsState extends State<WalkingTrails> {
     final model = GenerativeModel(model: 'gemini-pro', apiKey: apiKey);
     final content = [
       Content.text(
-          'Make a numbered list of 5 scenic trails near me. My current location is $locationName. Do not use any syntax or markdown. I only want names of places and the city.')
+          'Make a numbered list of 5 indoor malls/libraries/offices near me. My current location is $locationName. Do not use any syntax or markdown. I only want names of places and the city.')
     ];
     final response = await model.generateContent(content);
     //print("Gemini: ${response.text}");
@@ -184,7 +184,7 @@ class _WalkingTrailsState extends State<WalkingTrails> {
                   child: Image.asset('assets/backArrow.png',
                       width: 40, height: 40)),
               Text(
-                'Walking Trails',
+                'Indoor Oasis',
                 style: GoogleFonts.raleway(
                   textStyle: TextStyle(
                     color: Color(0xFF406440),
@@ -217,11 +217,12 @@ class _WalkingTrailsState extends State<WalkingTrails> {
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 1.0, top: 5.0),
+                            padding:
+                                const EdgeInsets.only(left: 1.0, top: 25.0),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(20.0),
                               child: imagesList.isNotEmpty
@@ -252,7 +253,7 @@ class _WalkingTrailsState extends State<WalkingTrails> {
                                       overflow: TextOverflow
                                           .ellipsis, // Truncate text with an ellipsis if it overflows
                                     )
-                                  : CircularProgressIndicator(),
+                                  : Text(' '),
                             ),
                           ),
                         ],
@@ -266,11 +267,12 @@ class _WalkingTrailsState extends State<WalkingTrails> {
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 1.0, top: 5.0),
+                            padding:
+                                const EdgeInsets.only(left: 1.0, top: 25.0),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(20.0),
                               child: imagesList.isNotEmpty
@@ -301,7 +303,7 @@ class _WalkingTrailsState extends State<WalkingTrails> {
                                       overflow: TextOverflow
                                           .ellipsis, // Truncate text with an ellipsis if it overflows
                                     )
-                                  : CircularProgressIndicator(),
+                                  : Text(' '),
                             ),
                           ),
                         ],
@@ -315,11 +317,12 @@ class _WalkingTrailsState extends State<WalkingTrails> {
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 1.0, top: 5.0),
+                            padding:
+                                const EdgeInsets.only(left: 1.0, top: 25.0),
                             child: Expanded(
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20.0),
@@ -352,7 +355,7 @@ class _WalkingTrailsState extends State<WalkingTrails> {
                                       overflow: TextOverflow
                                           .ellipsis, // Truncate text with an ellipsis if it overflows
                                     )
-                                  : CircularProgressIndicator(),
+                                  : Text(' '),
                             ),
                           ),
                         ],
@@ -366,11 +369,12 @@ class _WalkingTrailsState extends State<WalkingTrails> {
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 1.0, top: 5.0),
+                            padding:
+                                const EdgeInsets.only(left: 1.0, top: 25.0),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(20.0),
                               child: imagesList.isNotEmpty
@@ -401,7 +405,7 @@ class _WalkingTrailsState extends State<WalkingTrails> {
                                       overflow: TextOverflow
                                           .ellipsis, // Truncate text with an ellipsis if it overflows
                                     )
-                                  : CircularProgressIndicator(),
+                                  : Text(' '),
                             ),
                           ),
                         ],
@@ -415,11 +419,12 @@ class _WalkingTrailsState extends State<WalkingTrails> {
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 1.0, top: 5.0),
+                            padding:
+                                const EdgeInsets.only(left: 1.0, top: 25.0),
                             child: Expanded(
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20.0),
@@ -452,7 +457,7 @@ class _WalkingTrailsState extends State<WalkingTrails> {
                                       overflow: TextOverflow
                                           .ellipsis, // Truncate text with an ellipsis if it overflows
                                     )
-                                  : CircularProgressIndicator(),
+                                  : Text(' '),
                             ),
                           ),
                         ],

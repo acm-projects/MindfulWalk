@@ -43,14 +43,14 @@ List<String> parseLocations(String text) {
   return locations;
 }
 
-class WalkingTrails extends StatefulWidget {
-  const WalkingTrails({super.key});
+class LakesideStrolls extends StatefulWidget {
+  const LakesideStrolls({super.key});
 
   @override
-  State<WalkingTrails> createState() => _WalkingTrailsState();
+  State<LakesideStrolls> createState() => _LakesideStrollsState();
 }
 
-class _WalkingTrailsState extends State<WalkingTrails> {
+class _LakesideStrollsState extends State<LakesideStrolls> {
   String name = '';
   String placeId = '';
   String photoReference = '';
@@ -72,7 +72,7 @@ class _WalkingTrailsState extends State<WalkingTrails> {
     final model = GenerativeModel(model: 'gemini-pro', apiKey: apiKey);
     final content = [
       Content.text(
-          'Make a numbered list of 5 scenic trails near me. My current location is $locationName. Do not use any syntax or markdown. I only want names of places and the city.')
+          'Make a numbered list of 5 lakeside strolls near me. My current location is $locationName. Do not use any syntax or markdown. I only want names of places and the city.')
     ];
     final response = await model.generateContent(content);
     //print("Gemini: ${response.text}");
@@ -184,7 +184,7 @@ class _WalkingTrailsState extends State<WalkingTrails> {
                   child: Image.asset('assets/backArrow.png',
                       width: 40, height: 40)),
               Text(
-                'Walking Trails',
+                'Lakeside Strolls',
                 style: GoogleFonts.raleway(
                   textStyle: TextStyle(
                     color: Color(0xFF406440),
@@ -231,7 +231,12 @@ class _WalkingTrailsState extends State<WalkingTrails> {
                                       height: 120,
                                       fit: BoxFit.cover,
                                     )
-                                  : CircularProgressIndicator(),
+                                  : Image.network(
+                                      'https://lh3.googleusercontent.com/places/ANXAkqFfLlWuEIh2DyjVSZU18GJJbJXgAKJRV3RgYT9F2pe11vZMffGdyBLa_sh4lvuSArvzzO1DEhIbUVhlrZ12Cw-eGTcCKGo8xBs=s1600-w12000-h9000',
+                                      width: 340,
+                                      height: 120,
+                                      fit: BoxFit.cover,
+                                    ),
                             ),
                           ),
                           Align(
@@ -252,7 +257,18 @@ class _WalkingTrailsState extends State<WalkingTrails> {
                                       overflow: TextOverflow
                                           .ellipsis, // Truncate text with an ellipsis if it overflows
                                     )
-                                  : CircularProgressIndicator(),
+                                  : Text(
+                                      'Central Park Lake, New York',
+                                      style: GoogleFonts.raleway(
+                                        textStyle: TextStyle(
+                                          color: Color(0xFF4B5563),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                      overflow: TextOverflow
+                                          .ellipsis, // Truncate text with an ellipsis if it overflows
+                                    ),
                             ),
                           ),
                         ],
@@ -280,7 +296,12 @@ class _WalkingTrailsState extends State<WalkingTrails> {
                                       height: 120,
                                       fit: BoxFit.cover,
                                     )
-                                  : CircularProgressIndicator(),
+                                  : Image.network(
+                                      'https://lh3.googleusercontent.com/places/ANXAkqHdraH0tiEywUll-J02ohTpWHa-uUekIz1fvMUfs2AUIMhAUzBV83LyJEThBzxRvMBFm22fWpF8XMQompl9b_GmzO1EzlciRHA=s1600-w2861-h3185',
+                                      width: 340,
+                                      height: 120,
+                                      fit: BoxFit.cover,
+                                    ),
                             ),
                           ),
                           Align(
@@ -301,7 +322,18 @@ class _WalkingTrailsState extends State<WalkingTrails> {
                                       overflow: TextOverflow
                                           .ellipsis, // Truncate text with an ellipsis if it overflows
                                     )
-                                  : CircularProgressIndicator(),
+                                  : Text(
+                                      'Prospect Park Lake Loop, Brooklyn',
+                                      style: GoogleFonts.raleway(
+                                        textStyle: TextStyle(
+                                          color: Color(0xFF4B5563),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                      overflow: TextOverflow
+                                          .ellipsis, // Truncate text with an ellipsis if it overflows
+                                    ),
                             ),
                           ),
                         ],
@@ -330,7 +362,12 @@ class _WalkingTrailsState extends State<WalkingTrails> {
                                         height: 120,
                                         fit: BoxFit.cover,
                                       )
-                                    : CircularProgressIndicator(),
+                                    : Image.network(
+                                        'https://lh3.googleusercontent.com/places/ANXAkqE3dDTViNynC_Nl_Kfyqbs05USSCZQna3hghOeFZ7kZQI39bg7yi0py3mpxbgboQRfc1KGW3xtCpjg6Xgjlfm0Xcu1Ecqy_ves=s1600-w4032-h3024',
+                                        width: 340,
+                                        height: 120,
+                                        fit: BoxFit.cover,
+                                      ),
                               ),
                             ),
                           ),

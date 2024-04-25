@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mindfulwalk/pages/BottomNavBar.dart';
 import 'package:mindfulwalk/pages/Health.dart';
 import 'package:mindfulwalk/pages/HiName.dart';
+import 'package:mindfulwalk/pages/IndoorOasis.dart';
+import 'package:mindfulwalk/pages/LakesideStrolls.dart';
 import 'package:mindfulwalk/pages/LocationPage.dart';
 import 'package:mindfulwalk/pages/MapPage.dart';
 import 'package:mindfulwalk/pages/PhotoGallery.dart';
@@ -115,8 +117,7 @@ class _ExploreState extends State<Explore> {
                       onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                WalkingTrails(searchText: getSearchText())),
+                            builder: (context) => WalkingTrails()),
                       ),
                       child: Container(
                         height: 200.0,
@@ -163,46 +164,54 @@ class _ExploreState extends State<Explore> {
                       ),
                     ),
                     SizedBox(height: 16.0),
-                    Container(
-                      height: 200.0,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFEDE9D7),
-                        borderRadius: BorderRadius.circular(20.0),
+                    GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LakesideStrolls()),
                       ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 1.0, top: 5.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20.0),
-                              child: Image.asset(
-                                'assets/lakeside-stroll.jpg',
-                                width: 340.0,
-                                height: 120.0,
-                                fit: BoxFit.cover,
+                      child: Container(
+                        height: 200.0,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFEDE9D7),
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 1.0, top: 5.0),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20.0),
+                                child: Image.asset(
+                                  'assets/lakeside-stroll.jpg',
+                                  width: 340.0,
+                                  height: 120.0,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(
-                                  16.0, 8, 16.0, 16.0),
-                              child: Text(
-                                'Lakeside Strolls',
-                                style: GoogleFonts.raleway(
-                                  textStyle: TextStyle(
-                                    color: Color(0xFF4B5563),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25,
+                            Align(
+                              alignment: Alignment.bottomLeft,
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(
+                                    16.0, 8, 16.0, 16.0),
+                                child: Text(
+                                  'Lakeside Strolls',
+                                  style: GoogleFonts.raleway(
+                                    textStyle: TextStyle(
+                                      color: Color(0xFF4B5563),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 25,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(height: 16.0),
@@ -257,89 +266,53 @@ class _ExploreState extends State<Explore> {
                       ),
                     ),
                     SizedBox(height: 16.0),
-                    Container(
-                      height: 200.0,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFEDE9D7),
-                        borderRadius: BorderRadius.circular(20.0),
+                    GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => IndoorOasis()),
                       ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 1.0, top: 5.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20.0),
-                              child: Image.asset(
-                                'assets/parks-and-preserves.jpg',
-                                width: 340.0,
-                                height: 120.0,
-                                fit: BoxFit.cover,
+                      child: Container(
+                        height: 200.0,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFEDE9D7),
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 1.0, top: 5.0),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20.0),
+                                child: Image.asset(
+                                  'assets/indoor-oasis.jpg',
+                                  width: 340.0,
+                                  height: 120.0,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(
-                                  16.0, 8, 16.0, 16.0),
-                              child: Text(
-                                'Parks and Preserves',
-                                style: GoogleFonts.raleway(
-                                  textStyle: TextStyle(
-                                    color: Color(0xFF4B5563),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25,
+                            Align(
+                              alignment: Alignment.bottomLeft,
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(
+                                    16.0, 8, 16.0, 16.0),
+                                child: Text(
+                                  'Indoor Oasis',
+                                  style: GoogleFonts.raleway(
+                                    textStyle: TextStyle(
+                                      color: Color(0xFF4B5563),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 25,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 16.0),
-                    Container(
-                      height: 200.0,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFEDE9D7),
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 1.0, top: 5.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20.0),
-                              child: Image.asset(
-                                'assets/indoor-oasis.jpg',
-                                width: 340.0,
-                                height: 120.0,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(
-                                  16.0, 8, 16.0, 16.0),
-                              child: Text(
-                                'Indoor Oasis',
-                                style: GoogleFonts.raleway(
-                                  textStyle: TextStyle(
-                                    color: Color(0xFF4B5563),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(height: 16.0),

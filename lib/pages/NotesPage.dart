@@ -10,27 +10,27 @@ class _NotesPageState extends State<NotesPage> {
   List<Note> notes = [
     Note(
         title:
-            'Description of the location Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+            'Today was a good day. I saw a lot of trees on my walk and it started off great. Towards the end of the walk it got really hot outside and made me tired.',
         rating: 3),
     Note(
         title:
-            'Description of the location Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
+            'I really enjoyed my walk today! I went to a new lake and saw so many ducks and squirrels. I was able to feel more life. ',
         rating: 4),
     Note(
         title:
-            'Description of the location Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
+            'This was the best walk I went on in a while. I said good morning to everyone I walked past and they reciprocated. I felt appreciated. ',
         rating: 5),
     Note(
         title:
-            'Description of the location Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
+            'I thought a lot about my future during this walk. When I walked by this poster about a play near me, inspiration hit. I realized I should go back to school to study animation. ',
         rating: 5),
     Note(
         title:
-            'Description of the location Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
-        rating: 5),
+            'This walk could have been better. In the middle of my walk I stepped in some mud and ruined my brand new shoes. But I know I should not be angry and that these things happen.',
+        rating: 1),
     Note(
         title:
-            'Description of the location Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
+            'I ran into someone I knew from a long time ago. We caught up with each other and I loved its! ',
         rating: 5),
     // Add more notes as needed
   ];

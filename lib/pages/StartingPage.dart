@@ -44,7 +44,7 @@ class StartingPage extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 420,
+            top: 370,
             left: 25,
             right: 70,
             child: Center(
@@ -67,7 +67,7 @@ class StartingPage extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 470,
+            top: 420,
             left: 0,
             right: 0,
             child: Image.asset(
@@ -77,7 +77,7 @@ class StartingPage extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 600,
+            top: 550,
             left: 0,
             right: 0,
             child: Column(
@@ -116,7 +116,7 @@ class StartingPage extends StatelessWidget {
           ),
 
           Positioned(
-            top: 690,
+            top: 640,
             left: 0,
             right: 0,
             child: Column(

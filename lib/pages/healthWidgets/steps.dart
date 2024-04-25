@@ -40,7 +40,7 @@ class Steps extends StatelessWidget {
                       child: Column(
                         children: [
                           Text(
-                            steps,
+                            '--',
                             style: const TextStyle(
                               color: Colors.white,
                               fontFamily: 'Jost',

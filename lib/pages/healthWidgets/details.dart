@@ -1,3 +1,4 @@
+import 'package:mindfulwalk/pages/HiName.dart';
 import 'package:mindfulwalk/pages/MapPage.dart';
 import 'package:mindfulwalk/pages/PhotosPage.dart';
 import 'package:mindfulwalk/pages/ProfilePage.dart';
@@ -117,7 +118,7 @@ class DetailsPage extends StatelessWidget {
                 child: GestureDetector(
                     onTap: () => Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => MapPage()),
+                          MaterialPageRoute(builder: (context) => HiName()),
                         ),
                     child:
                         Image.asset('assets/home.png', width: 45, height: 45)),

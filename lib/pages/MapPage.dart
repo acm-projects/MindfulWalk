@@ -585,7 +585,7 @@ class _ETAinfoState extends State<ETAinfo> {
           Image.asset('assets/milesRemaining.png', width: 40, height: 40),
           SizedBox(height: 8),
           Text(
-            '$distance',
+            '${distance}',
             style: GoogleFonts.jost(
               textStyle: TextStyle(
                 color: Color(0xFF8B6B55),

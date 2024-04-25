@@ -14,10 +14,10 @@ import 'package:mindfulwalk/pages/ProfilePage.dart';
 
 var geminiLocationList;
 var currentLocation = '';
-List<String> photoUrlList = [];
 String photo1 = '';
-List<String> locationNames = [];
+List<String> locationNames = ['', '', '', '', ''];
 List<String> addresses = [];
+List<String> imagesList = [];
 
 List<String> parseLocations(String text) {
   List<String> locations = [];
@@ -60,11 +60,12 @@ class _UrbanVenturesState extends State<UrbanVentures> {
 
   void fetchLocationAndGemini() async {
     await getCurrentAddress(); // Wait for current address to be fetched
-    photoUrlList.clear(); // Clear the list before adding new URLs
+    //photoUrlList.clear(); // Clear the list before adding new URLs
     //print("\n\n\nGEMINILOCATIONLIST: ${geminiLocationList}");
   }
 
   Future<String?> gemini(String locationName) async {
+    List<String> photoUrlList = [];
     // Access your API key as an environment variable (see "Set up your API key" above)
     const apiKey = 'AIzaSyBh4EzZRZR7rCY7nFVsl94EY1xhA77cywE';
     // For text-only input, use the gemini-pro model
@@ -79,18 +80,21 @@ class _UrbanVenturesState extends State<UrbanVentures> {
     addresses = parseLocations(geminiLocationList);
     print("ADDRESSES: ${addresses}");
     print("Length: ${addresses.length}");
-    print("Address 4: ${addresses[3]}");
     for (int i = 0; i < addresses.length; i++) {
-      await textSearch(addresses[i], i);
-      print("Place: ${locationNames[i]}");
+      String url = await textSearch(addresses[i], i);
+      print("URL: ${url}");
+      photoUrlList.add(url);
       print("Photo: ${photoUrlList[i]}");
     }
+    setState(() {
+      imagesList = photoUrlList;
+    });
 
     return response.text;
   }
 
 // Getting placeId, Name, Address, and Photo
-  Future<void> textSearch(String query, int i) async {
+  Future<String> textSearch(String query, int i) async {
     final apiKey = GOOGLE_MAPS_API_KEY;
     final url =
         'https://maps.googleapis.com/maps/api/place/textsearch/json?query=$query&key=$apiKey';
@@ -108,11 +112,12 @@ class _UrbanVenturesState extends State<UrbanVentures> {
 
       //print("\n\n\nName: ${name}");
       //print("PHOTOURL: ${photoUrl}\n\n\n");
-      setState(() {
-        //photoUrlList[i] = photoUrl;
-        photoUrlList.add(photoUrl);
-        locationNames.add(name);
-      });
+      // setState(() {
+      //   //photoUrlList[i] = photoUrl;
+      //   photoUrlList.add(photoUrl);
+      //   locationNames.add(name);
+      // });
+      return photoUrl;
     } else {
       // Handle error
       throw Exception('Failed to get place predictions');
@@ -219,9 +224,9 @@ class _UrbanVenturesState extends State<UrbanVentures> {
                             padding: const EdgeInsets.only(left: 1.0, top: 5.0),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(20.0),
-                              child: photoUrlList.isNotEmpty
+                              child: imagesList.isNotEmpty
                                   ? Image.network(
-                                      photoUrlList[0],
+                                      imagesList[0],
                                       width: 340,
                                       height: 120,
                                       fit: BoxFit.cover,
@@ -234,16 +239,18 @@ class _UrbanVenturesState extends State<UrbanVentures> {
                             child: Padding(
                               padding: const EdgeInsets.fromLTRB(
                                   16.0, 8, 16.0, 16.0),
-                              child: locationNames.isNotEmpty
+                              child: addresses.isNotEmpty
                                   ? Text(
-                                      '${locationNames[0]}',
+                                      '${addresses[0].length <= 35 ? addresses[0] : addresses[0].substring(0, 35) + '...'}',
                                       style: GoogleFonts.raleway(
                                         textStyle: TextStyle(
                                           color: Color(0xFF4B5563),
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 25,
+                                          fontSize: 20,
                                         ),
                                       ),
+                                      overflow: TextOverflow
+                                          .ellipsis, // Truncate text with an ellipsis if it overflows
                                     )
                                   : CircularProgressIndicator(),
                             ),
@@ -266,12 +273,14 @@ class _UrbanVenturesState extends State<UrbanVentures> {
                             padding: const EdgeInsets.only(left: 1.0, top: 5.0),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(20.0),
-                              child: Image.asset(
-                                'assets/BishopArts.jpeg',
-                                width: 340.0,
-                                height: 120.0,
-                                fit: BoxFit.cover,
-                              ),
+                              child: imagesList.isNotEmpty
+                                  ? Image.network(
+                                      imagesList[1],
+                                      width: 340,
+                                      height: 120,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : CircularProgressIndicator(),
                             ),
                           ),
                           Align(
@@ -279,16 +288,20 @@ class _UrbanVenturesState extends State<UrbanVentures> {
                             child: Padding(
                               padding: const EdgeInsets.fromLTRB(
                                   16.0, 8, 16.0, 16.0),
-                              child: Text(
-                                'Bishop Arts',
-                                style: GoogleFonts.raleway(
-                                  textStyle: TextStyle(
-                                    color: Color(0xFF4B5563),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25,
-                                  ),
-                                ),
-                              ),
+                              child: addresses.isNotEmpty
+                                  ? Text(
+                                      '${addresses[1].length <= 35 ? addresses[1] : addresses[1].substring(0, 35) + '...'}',
+                                      style: GoogleFonts.raleway(
+                                        textStyle: TextStyle(
+                                          color: Color(0xFF4B5563),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                      overflow: TextOverflow
+                                          .ellipsis, // Truncate text with an ellipsis if it overflows
+                                    )
+                                  : CircularProgressIndicator(),
                             ),
                           ),
                         ],
@@ -307,13 +320,17 @@ class _UrbanVenturesState extends State<UrbanVentures> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(left: 1.0, top: 5.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20.0),
-                              child: Image.asset(
-                                'assets/OakLawn.jpeg',
-                                width: 340.0,
-                                height: 120.0,
-                                fit: BoxFit.cover,
+                            child: Expanded(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20.0),
+                                child: imagesList.isNotEmpty
+                                    ? Image.network(
+                                        imagesList[2],
+                                        width: 340,
+                                        height: 120,
+                                        fit: BoxFit.cover,
+                                      )
+                                    : CircularProgressIndicator(),
                               ),
                             ),
                           ),
@@ -322,16 +339,120 @@ class _UrbanVenturesState extends State<UrbanVentures> {
                             child: Padding(
                               padding: const EdgeInsets.fromLTRB(
                                   16.0, 8, 16.0, 16.0),
-                              child: Text(
-                                'Oak Lawn',
-                                style: GoogleFonts.raleway(
-                                  textStyle: TextStyle(
-                                    color: Color(0xFF4B5563),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25,
-                                  ),
-                                ),
+                              child: addresses.isNotEmpty
+                                  ? Text(
+                                      '${addresses[2].length <= 35 ? addresses[2] : addresses[2].substring(0, 35) + '...'}',
+                                      style: GoogleFonts.raleway(
+                                        textStyle: TextStyle(
+                                          color: Color(0xFF4B5563),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                      overflow: TextOverflow
+                                          .ellipsis, // Truncate text with an ellipsis if it overflows
+                                    )
+                                  : CircularProgressIndicator(),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 16),
+                    Container(
+                      height: 200.0,
+                      decoration: BoxDecoration(
+                        color: Color(0xFFEDE9D7),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 1.0, top: 5.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20.0),
+                              child: imagesList.isNotEmpty
+                                  ? Image.network(
+                                      imagesList[3],
+                                      width: 340,
+                                      height: 120,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : CircularProgressIndicator(),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(
+                                  16.0, 8, 16.0, 16.0),
+                              child: addresses.isNotEmpty
+                                  ? Text(
+                                      '${addresses[3].length <= 35 ? addresses[3] : addresses[3].substring(0, 35) + '...'}',
+                                      style: GoogleFonts.raleway(
+                                        textStyle: TextStyle(
+                                          color: Color(0xFF4B5563),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                      overflow: TextOverflow
+                                          .ellipsis, // Truncate text with an ellipsis if it overflows
+                                    )
+                                  : CircularProgressIndicator(),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 16),
+                    Container(
+                      height: 200.0,
+                      decoration: BoxDecoration(
+                        color: Color(0xFFEDE9D7),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 1.0, top: 5.0),
+                            child: Expanded(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20.0),
+                                child: imagesList.isNotEmpty
+                                    ? Image.network(
+                                        imagesList[4],
+                                        width: 340,
+                                        height: 120,
+                                        fit: BoxFit.cover,
+                                      )
+                                    : CircularProgressIndicator(),
                               ),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(
+                                  16.0, 8, 16.0, 16.0),
+                              child: addresses.isNotEmpty
+                                  ? Text(
+                                      '${addresses[4].length <= 35 ? addresses[4] : addresses[4].substring(0, 35) + '...'}',
+                                      style: GoogleFonts.raleway(
+                                        textStyle: TextStyle(
+                                          color: Color(0xFF4B5563),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                      overflow: TextOverflow
+                                          .ellipsis, // Truncate text with an ellipsis if it overflows
+                                    )
+                                  : CircularProgressIndicator(),
                             ),
                           ),
                         ],

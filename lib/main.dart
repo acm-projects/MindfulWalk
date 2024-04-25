@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mindfulwalk/pages/Explore.dart';
 import 'package:mindfulwalk/pages/Health.dart';
 import 'package:mindfulwalk/pages/HiName.dart';
+import 'package:mindfulwalk/pages/LakesideStrolls.dart';
 //import 'package:mindfulwalk/pages/Locations.dart';
 import 'package:mindfulwalk/pages/Login.dart';
 import 'package:mindfulwalk/pages/NotesPage.dart';
@@ -38,7 +39,7 @@ Future<void> main() async {
     debugShowCheckedModeBanner: false,
     initialRoute: '/',
     routes: {
-      '/': (context) => ProfilePage(),
+      '/': (context) => LoadingPage(),
     },
   ));
 }

@@ -13,6 +13,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:mindfulwalk/pages/SettingsPage.dart';
+import 'package:mindfulwalk/pages/StartingPage.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -313,7 +314,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                       Text(
-                        '47.723',
+                        '0.117',
                         style: TextStyle(
                           fontSize: 18, // Font size
                           color: Color(0xFF8B6B55), // Text color
@@ -354,7 +355,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                       Text(
-                        '303,457',
+                        '234',
                         style: TextStyle(
                           fontSize: 18, // Font size
                           color: Color(0xFF8B6B55), // Text color
@@ -414,37 +415,44 @@ class _ProfilePageState extends State<ProfilePage> {
           Positioned(
             top: 540,
             left: 130,
-            child: Container(
-              width: 130,
-              height: 140, // Adjusted height to accommodate both image and text
-              decoration: BoxDecoration(
-                color: Color(0xFFFFFFFF),
-                borderRadius: BorderRadius.circular(15),
-                border: Border.all(
-                  color: Color(0xFFEDE9D7), // Border color
-                  width: 2.0, // Border width
-                ),
+            child: GestureDetector(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => StartingPage()),
               ),
-              padding: EdgeInsets.all(10.0), // Padding around the text
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/AchievmentsIcon.png', // Replace with your image path
-                    width: 50, // Adjust the width of the image
-                    height: 50, // Adjust the height of the image
+              child: Container(
+                width: 130,
+                height:
+                    140, // Adjusted height to accommodate both image and text
+                decoration: BoxDecoration(
+                  color: Color(0xFFFFFFFF),
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(
+                    color: Color(0xFFEDE9D7), // Border color
+                    width: 2.0, // Border width
                   ),
-                  SizedBox(
-                      height:
-                          10), // Add some space between the image and the text
-                  Text(
-                    'Achievements',
-                    style: TextStyle(
-                      fontSize: 16, // Font size
-                      color: Color(0xFF8B6B55), // Text color
+                ),
+                padding: EdgeInsets.all(10.0), // Padding around the text
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/AchievmentsIcon.png', // Replace with your image path
+                      width: 50, // Adjust the width of the image
+                      height: 50, // Adjust the height of the image
                     ),
-                  ),
-                ],
+                    SizedBox(
+                        height:
+                            10), // Add some space between the image and the text
+                    Text(
+                      'Achievements',
+                      style: TextStyle(
+                        fontSize: 16, // Font size
+                        color: Color(0xFF8B6B55), // Text color
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -487,7 +495,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           Positioned(
             top:
-                700, // Adjusted top position to move the text above the progress bar
+                690, // Adjusted top position to move the text above the progress bar
             left: 0,
             right: 0,
             child: Center(
@@ -501,7 +509,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
           Positioned(
-            top: 710 + verticalPadding, // Adjusted top position
+            top: 700 + verticalPadding, // Adjusted top position
             child: Stack(
               children: [
                 Container(
@@ -513,7 +521,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   child: LinearProgressIndicator(
                     value:
-                        0.7, // Set the value of the progress indicator (between 0 and 1)
+                        0.73, // Set the value of the progress indicator (between 0 and 1)
                     backgroundColor: Color(
                         0xFF727C90), // Background color of the progress bar
                     valueColor: AlwaysStoppedAnimation<Color>(

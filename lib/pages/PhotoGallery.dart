@@ -41,6 +41,7 @@ class _PhotoGalleryState extends State<PhotoGallery> {
       }));
       setState(() {
         imagesData = data;
+        print(imagesData);
       });
     } catch (e) {
       print('Error fetching images: $e');
@@ -126,7 +127,7 @@ class _PhotoGalleryState extends State<PhotoGallery> {
               ),
             ),
             Positioned(
-              top: 635,
+              top: 565,
               left: 20,
               right: 20,
               child: Column(
@@ -149,7 +150,7 @@ class _PhotoGalleryState extends State<PhotoGallery> {
                         child: Text(
                           'Take Photo',
                           style: TextStyle(
-                              fontSize: 22,
+                              fontSize: 20,
                               color: Colors.white,
                               fontWeight: FontWeight.bold),
                         ),
@@ -178,7 +179,7 @@ class _PhotoGalleryState extends State<PhotoGallery> {
                         child: Text(
                           'Upload Photo',
                           style: TextStyle(
-                              fontSize: 22,
+                              fontSize: 20,
                               color: Colors.white,
                               fontWeight: FontWeight.bold),
                         ),
@@ -189,44 +190,38 @@ class _PhotoGalleryState extends State<PhotoGallery> {
               ),
             ),
             Positioned(
-              top: 90,
-              left: -75,
-              right: 40,
-              bottom: 80,
-              child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 1,
-                  crossAxisSpacing: 0.0,
-                  mainAxisSpacing: 16.0,
-                ),
-                itemCount: imagesData.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Stack(
-                    alignment: Alignment.topRight,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(
-                            10.0), // Adjust the value as needed
-                        child: Image.network(
-                          imagesData[index]['url'],
-                          fit: BoxFit.cover,
+                top: 90,
+                left: 50,
+                right: 0,
+                bottom: 90,
+                child: ListView.builder(
+                  itemCount: imagesData.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10.0),
+                            child: Image.network(
+                              imagesData[index]['url'],
+                              width: 270, // Adjust the width as needed
+                              height: 480, // Adjust the height as needed
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
-                      ),
-                      IconButton(
-                        icon: Image.asset(
-                          'assets/deleteImage.png',
-                          width: 28,
-                          height: 28,
+                        IconButton(
+                          icon: Icon(Icons
+                              .delete), // You can change the icon as needed
+                          onPressed: () {
+                            _deleteImageFromFirebase(index);
+                          },
                         ),
-                        onPressed: () {
-                          _deleteImageFromFirebase(index);
-                        },
-                      ),
-                    ],
-                  );
-                },
-              ),
-            ),
+                      ],
+                    );
+                  },
+                )),
           ],
         ),
         bottomNavigationBar: Theme(
@@ -259,7 +254,7 @@ class _PhotoGalleryState extends State<PhotoGallery> {
                       onTap: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => PhotosPage()),
+                                builder: (context) => PhotoGallery()),
                           ),
                       child: Image.asset('assets/photoIconSelected.png',
                           width: 50, height: 50)),
